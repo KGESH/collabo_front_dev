@@ -7,7 +7,6 @@ import type { HomeProps } from 'types/Props';
 
 const AppRouter = ({ isLoggedIn }: HomeProps) => (
   <>
-    <Navbar />
     <Switch>
       {AppRoutes.map((route, key) => (
         <Route
@@ -19,6 +18,7 @@ const AppRouter = ({ isLoggedIn }: HomeProps) => (
       ))}
       <Route component={Error404} />
     </Switch>
+    <Navbar />
   </>
 );
 
