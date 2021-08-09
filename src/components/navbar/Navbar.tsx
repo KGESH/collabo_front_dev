@@ -1,10 +1,7 @@
 import React from 'react';
-import type { NavbarProps } from 'types/Props';
 /**
  * Navbar
  */
-const Navbar = () => {
-  return <></>;
-};
+const Navbar = () => <></>;
 
 export default Navbar;

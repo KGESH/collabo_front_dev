@@ -1,6 +1,5 @@
 import { gql } from 'apollo-boost';
-import { Query } from 'react-apollo';
-import { useQuery, useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/react-hooks';
 
 const KAKAO_LOGIN_MUTATION = gql`
   mutation KakaoLoginMutation($kakaoAuthCode: String) {

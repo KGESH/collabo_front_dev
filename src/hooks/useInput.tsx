@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from 'react';
 
 /**
  * Input Tag에서 입력받은 값의 유효성을 검증
@@ -12,7 +12,6 @@ const useInput = (initialValue: any, validator: (value: any) => boolean) => {
       target: { value },
     } = event;
     const willUpdate = validator(value);
-    
 
     if (willUpdate) {
       setValue(value);

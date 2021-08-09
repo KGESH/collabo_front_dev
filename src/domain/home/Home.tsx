@@ -13,13 +13,10 @@ const GET_USER = gql`
 `;
 
 const Home = () => {
-  const { loading, data, error } = useQuery(GET_USER);
+  const { data } = useQuery(GET_USER);
   /**
    * 로그인 성공하면 로그인에 대한 상태 설정필요
    */
-
-  if (error) {
-  }
 
   if (data?.authUser) {
     console.log(`id: ${data.authUser.id}`);

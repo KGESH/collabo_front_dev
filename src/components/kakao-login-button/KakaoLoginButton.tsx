@@ -10,6 +10,7 @@ const KakaoLoginButton = () => {
   }, []);
   return (
     <button
+      className='kakao__login_button'
       onClick={() => {
         window.Kakao.Auth.authorize({
           redirectUri,
