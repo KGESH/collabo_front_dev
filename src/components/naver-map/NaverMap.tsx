@@ -45,6 +45,10 @@ const NaverMap = () => {
         });
         const cafeMarkers: naver.maps.Marker[] = [];
         const cafeInfomations: naver.maps.InfoWindow[] = [];
+
+        /**
+         * cafeList를 받아와 지도에 표시
+         */
         cafeList.map((cafe: mapProps) => {
           /*
           현재 위치 & 카페 위치를 기반으로 한 작업
