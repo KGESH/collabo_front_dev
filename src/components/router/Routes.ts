@@ -6,6 +6,8 @@ import KakaoCallback from 'domain/login/kakao-callback/KakaoCallback';
 import MyPage from 'domain/my-page/MyPage';
 import CafeTour from 'domain/cafe-tour/CafeTour';
 import QRcheck from 'domain/qrcheck/QRcheck';
+import Map from 'domain/map/Map';
+
 /**
  * 새로운 페이지를 라우터에 연결할 때
  * 이곳에 추가
@@ -46,6 +48,11 @@ const AppRoutes: Routes[] = [
     path: '/qrcheck/:cafe/:code',
     exact: true,
     component: QRcheck,
+  },
+  {
+    path: '/map',
+    exact: true,
+    component: Map,
   }
 ];
 

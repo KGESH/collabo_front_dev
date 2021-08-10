@@ -1,0 +1,12 @@
+.map_box {
+  display: fix;
+  width: 100vw;
+  height: 75vh;
+}
+
+#map {
+  display: fix;
+  width: 100vw;
+  height: 92vh;
+  z-index: 0;
+}

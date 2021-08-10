@@ -11,7 +11,11 @@ const App = () => {
     setIsLoggedIn(false);
   });
 
-  return <>{isInit ? <AppRouter isLoggedIn={isLoggedIn} /> : <Loading />}</>;
+  return (
+    <div className='page'>
+      {isInit ? <AppRouter isLoggedIn={isLoggedIn} /> : <Loading />}
+    </div>
+  );
 };
 
 export default App;
