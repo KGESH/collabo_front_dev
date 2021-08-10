@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-import { client } from 'services/apllo-client/apllo';
+import { client } from 'services/apollo-client/apollo';
 import { ApolloProvider } from '@apollo/react-hooks';
 import App from './App';
 

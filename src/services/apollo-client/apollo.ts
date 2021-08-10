@@ -1,4 +1,9 @@
-import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
+import {
+  ApolloClient,
+  createHttpLink,
+  InMemoryCache,
+  NormalizedCacheObject,
+} from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 
 const GRAPHQL_SERVER_URL = `http://localhost:4010`;
@@ -17,7 +22,7 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
-export const client = new ApolloClient({
+export const client: any = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });

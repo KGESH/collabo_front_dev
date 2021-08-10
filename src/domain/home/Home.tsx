@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { gql } from 'apollo-boost';
+import { useQuery } from '@apollo/react-hooks';
 import QRCode from 'qrcode';
 import 'domain/home/style/Home.css';
 
@@ -14,10 +15,7 @@ const GET_USER = gql`
 `;
 
 const Home = () => {
-  /*const { loading, data, error } = useQuery(GET_USER);
-  /!**
-   * 로그인 성공하면 로그인에 대한 상태 설정필요
-   *!/
+  const { loading, data, error } = useQuery(GET_USER);
 
   if (error) {
   }
@@ -28,7 +26,7 @@ const Home = () => {
     console.log(`id: ${data.authUser.id}`);
     console.log(`name: ${data.authUser.name}`);
     console.log(`email: ${data.authUser.email}`);
-  }*/
+  }
 
   // 모달창 생성을 위한 hook
   const [handler, sethandler] = useState(false);
