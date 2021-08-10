@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import 'components/naver-map/style/NaverMap.css';
 import { cafeList } from 'components/naver-map/CafeList';
 import type { mapProps } from 'components/naver-map/CafeList';
-import { stringify } from 'query-string';
-import { disconnect } from 'process';
 
 type position = {
   latitude: number;
@@ -48,13 +46,11 @@ const NaverMap = () => {
         const cafeMarkers: naver.maps.Marker[] = [];
         const cafeInfomations: naver.maps.InfoWindow[] = [];
         cafeList.map((cafe: mapProps) => {
-          cafeMarkers.push(
-            new naver.maps.Marker({
-              position: cafe.mapPos,
-              map: map,
-            }),
-          );
-
+          /*
+          현재 위치 & 카페 위치를 기반으로 한 작업
+          1. 거리 구하기 (경도, 위도 좌표값을 통한 계산)
+          2. 경로 구하기 (카카오맵 앱 URL SCHEME)
+          */
           const currentLatitude: number = +currentPosition.latitude;
           const currentLongitude: number = +currentPosition.longitude;
           const cafeLatitude: number = +cafe.latitude;
@@ -81,8 +77,16 @@ const NaverMap = () => {
             distance= distance* 1.609344;
           }
 
-          const kakaoScheme: string = `kakaomap://route?sp=${currentLatitude},${currentLongitude}&ep=${cafe.latitude},${cafe.longitude}&by=CAR`;
+          const kakaoScheme: string = `kakaomap://route?sp=${currentLatitude},${currentLongitude}&ep=${cafeLatitude},${cafeLongitude}&by=CAR`;
           const distaceString: string = distance.toFixed(2);
+
+
+          cafeMarkers.push(
+            new naver.maps.Marker({
+              position: cafe.mapPos,
+              map: map,
+            }),
+          );
 
           var contentString = [
             '<div class="iw_inner">',
