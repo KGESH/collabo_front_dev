@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
-import "components/naver-map/style/NaverMap.css";
-import { cafeList } from "components/naver-map/CafeList";
-import type { mapProps } from "components/naver-map/CafeList";
+import React, { useEffect, useState } from 'react';
+import 'components/naver-map/style/NaverMap.css';
+import { cafeList } from 'components/naver-map/CafeList';
+import type { mapProps } from 'components/naver-map/CafeList';
+import { stringify } from 'query-string';
+import { disconnect } from 'process';
 
 type position = {
   latitude: number;
@@ -9,7 +11,7 @@ type position = {
   isMap: boolean;
 };
 
-const MapD = () => {
+const NaverMap = () => {
   const [currentPosition, setCurrentPosition] = useState<position>({
     latitude: 0,
     longitude: 0,
@@ -21,8 +23,11 @@ const MapD = () => {
       if (currentPosition.latitude === 0) return;
       if (currentPosition.isMap === false) {
         currentPosition.isMap = true;
-        const map = new naver.maps.Map("map", {
-          center: new naver.maps.LatLng(currentPosition.latitude, currentPosition.longitude), //지도의 초기 중심 좌표
+        const map = new naver.maps.Map('map', {
+          center: new naver.maps.LatLng(
+            currentPosition.latitude,
+            currentPosition.longitude,
+          ), //지도의 초기 중심 좌표
           zoom: 19, //지도의 초기 줌 레벨
           minZoom: 10, //지도의 최소 줌 레벨
           maxZoom: 21,
@@ -34,7 +39,10 @@ const MapD = () => {
           disableKineticPan: false,
         });
         const currentMarker = new naver.maps.Marker({
-          position: new naver.maps.LatLng(currentPosition.latitude, currentPosition.longitude),
+          position: new naver.maps.LatLng(
+            currentPosition.latitude,
+            currentPosition.longitude,
+          ),
           map: map,
         });
         const cafeMarkers: naver.maps.Marker[] = [];
@@ -44,18 +52,55 @@ const MapD = () => {
             new naver.maps.Marker({
               position: cafe.mapPos,
               map: map,
-            })
+            }),
           );
-          var contentString = ['<div class="iw_inner">', "   <h3>" + cafe.name + "</h3>", "</div>"].join("");
+
+          const currentLatitude: number = +currentPosition.latitude;
+          const currentLongitude: number = +currentPosition.longitude;
+          const cafeLatitude: number = +cafe.latitude;
+          const cafeLongitude: number = +cafe.longitude;
+
+          var distance: number = 0;
+          if (
+            currentLatitude !== cafeLatitude ||
+            currentLongitude !== cafeLongitude
+          ) {
+            var radlat1 = (Math.PI * currentLatitude) / 180;
+            var radlat2 = (Math.PI * cafeLatitude) / 180;
+            var theta = currentLongitude - cafeLongitude;
+            var radtheta = (Math.PI * theta) / 180;
+            var distance =
+              Math.sin(radlat1) * Math.sin(radlat2) +
+              Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+            if (distance > 1) {
+              distance= 1;
+            }
+            distance= Math.acos(distance);
+            distance= (distance* 180) / Math.PI;
+            distance= distance* 60 * 1.1515;
+            distance= distance* 1.609344;
+          }
+
+          const kakaoScheme: string = `kakaomap://route?sp=${currentLatitude},${currentLongitude}&ep=${cafe.latitude},${cafe.longitude}&by=CAR`;
+          const distaceString: string = distance.toFixed(2);
+
+          var contentString = [
+            '<div class="iw_inner">',
+            '   <h3>' + cafe.name + '</h3>',
+            '   <p>거리 : ' + distaceString + 'km<br />',
+            '       <a href=' + kakaoScheme + ' target="_blank">카카오맵</a>',
+            '   </p>',
+            '</div>',
+          ].join('');
           cafeInfomations.push(
             new naver.maps.InfoWindow({
               content: contentString,
               borderWidth: 5,
-            })
+            }),
           );
 
           const i = cafeMarkers.length - 1;
-          naver.maps.Event.addListener(cafeMarkers[i], "click", () => {
+          naver.maps.Event.addListener(cafeMarkers[i], 'click', () => {
             var marker: naver.maps.Marker = cafeMarkers[i],
               infoWindow: naver.maps.InfoWindow = cafeInfomations[i];
             if (infoWindow.getMap()) {
@@ -67,7 +112,10 @@ const MapD = () => {
           return 0;
         });
         currentMarker.setOptions({
-          position: new naver.maps.LatLng(currentPosition.latitude, currentPosition.longitude),
+          position: new naver.maps.LatLng(
+            currentPosition.latitude,
+            currentPosition.longitude,
+          ),
         });
       }
     };
@@ -87,26 +135,23 @@ const MapD = () => {
         longitude: position.coords.longitude,
         isMap: currentPosition.isMap,
       });
-      console.log(`${currentPosition.latitude},${currentPosition.longitude},${currentPosition.isMap}`);
+      console.log(
+        `${currentPosition.latitude},${currentPosition.longitude},${currentPosition.isMap}`,
+      );
     },
     (error: GeolocationPositionError) => {
       console.error(error.message);
     },
-    options
+    options,
   );
 
   return (
     <>
       <React.Fragment>
-        <div id="map"></div>
+        <div id='map'></div>
       </React.Fragment>
-      <div className="move_to_next_pos">
-        <button type="button" onClick={() => window.open("kakaomap://route?sp=&ep=37.49739247636679,127.024500411214&by=CAR", "_blank")}>
-          12334
-        </button>
-      </div>
     </>
   );
 };
 
-export default MapD;
+export default NaverMap;
