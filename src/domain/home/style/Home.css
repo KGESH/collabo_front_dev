@@ -148,7 +148,7 @@ h1, h2, h3, h4, div, body {
         justify-content: center;
         width: 100vw;
         height: 100vh;
-        background-color: #F1F4F6;
+        background-color: #ffffff;
     }
 
     .home__logo {
@@ -159,7 +159,7 @@ h1, h2, h3, h4, div, body {
         display: flex;
         justify-content: center;
         align-items: center;
-        font-family: Cursive;
+        font-family: fantasy;
     }
 
     .point_group {
@@ -193,7 +193,7 @@ h1, h2, h3, h4, div, body {
         position: relative;
         margin-top: 4vh;
         border-radius: 5px;
-
+        box-shadow: 0 0 13px rgba(0, 0, 0, 0.6);
     }
 
     .wallet_inner::-webkit-scrollbar {
@@ -201,11 +201,11 @@ h1, h2, h3, h4, div, body {
     }
 
     .wallet__card {
-        font-size: 1em;
+        font-size: 1.2em;
         width: 99.4%;
         height: 200px;
         border: solid 1px;
-        background-color: #dcdcdc;
+        background-color: #ffffff;
         border-radius: 5px;
         margin-bottom: -170px;
         padding-top: 2%;
@@ -217,6 +217,10 @@ h1, h2, h3, h4, div, body {
         margin-left: 10%;
     }
 
+    .cafe_info {
+        margin-top: 5%;
+        margin-left: 5%;
+    }
 
     .modal_group {
         position: absolute;
