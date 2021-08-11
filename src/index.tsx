@@ -10,14 +10,14 @@ ReactDOM.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
       <BrowserRouter>
-        {/* dev용 네비, 배포 전 제거 */}
+        {/* 개발용 NavBar. 배포 전 제거 (추가 21-08-12:유성현) */}
         <div className="exclusive_use_of_dev">
           <Link to="/">홈</Link>
           <Link to="/login">로그인</Link>
           <Link to="/mypage">마이페이지</Link>
           <Link to="/CafeTour">카페투어</Link>
         </div>
-        {/* -------------------- */}
+        {/* --------------------------------------- */}
         <App />
       </BrowserRouter>
     </ApolloProvider>

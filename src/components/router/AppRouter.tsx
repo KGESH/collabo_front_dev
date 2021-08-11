@@ -18,6 +18,7 @@ const AppRouter = ({ isLoggedIn }: HomeProps) => (
       ))}
       <Route component={Error404} />
     </Switch>
+    {/* 네브바 ( 네브바를 AppRouter에 위치시킬지 각각의 domain에 위치시킬지 결정됬을 때 주석 해제 (주석처리 21-08-12:유성현)) */}
     {/*<Navbar />*/}
   </>
 );
