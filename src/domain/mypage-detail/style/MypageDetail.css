@@ -1,26 +1,25 @@
-.hash_tag {
+.detail__cafe_name {
     width: 100vw;
-    height: 10vh;
+    height: 30vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: beige;
+}
+
+.detail__cafe_info {
+    width: 100vw;
+    height: 30vh;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.main_img {
+.detail__been_info {
     width: 100vw;
-    height: 50vh;
-    background-color: #e7e7e7;
+    height: 30vh;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.thingthing {
-    width: 100vw;
-    height: 10vh;
-    background-color: #9a9a9a;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    background-color: beige;
 }

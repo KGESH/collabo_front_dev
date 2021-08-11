@@ -1,14 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Link } from 'react-router-dom';
 import { client } from 'services/apollo-client/apollo';
 import { ApolloProvider } from '@apollo/react-hooks';
 import App from './App';
+import './index.css';
 
 ReactDOM.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
       <BrowserRouter>
+        {/* dev용 네비, 배포 전 제거 */}
+        <div className="exclusive_use_of_dev">
+          <Link to="/">홈</Link>
+          <Link to="/login">로그인</Link>
+          <Link to="/mypage">마이페이지</Link>
+          <Link to="/CafeTour">카페투어</Link>
+        </div>
+        {/* -------------------- */}
         <App />
       </BrowserRouter>
     </ApolloProvider>
