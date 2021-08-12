@@ -9,7 +9,7 @@
 
 .main_img {
     width: 100vw;
-    height: 50vh;
+    height: 40vh;
     background-color: #e7e7e7;
     display: flex;
     justify-content: center;
@@ -18,7 +18,7 @@
 
 .thingthing {
     width: 100vw;
-    height: 10vh;
+    height: 9vh;
     background-color: #9a9a9a;
     display: flex;
     justify-content: center;
