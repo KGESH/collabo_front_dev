@@ -16,7 +16,7 @@ const GET_USER = gql`
 
 const MyPage = () => {
   let db_qr_list: string[] = [];
-  let item_name: string[] = [];
+  let cafe_names: string[] = [];
 
   const { loading, data, error } = useQuery(GET_USER, {
     variables: { id: 11700/* 불러올 아이디 */ },
@@ -28,7 +28,7 @@ const MyPage = () => {
   if (!loading && data) {
     db_qr_list = data.getUserById.qr_list;
     db_qr_list.map(qr => {
-      item_name.push(qr.split('/:')[1]);
+      cafe_names.push(qr.split('/:')[1]);
     });
   }
 
@@ -45,8 +45,7 @@ const MyPage = () => {
             <em>
               {!loading && data && (
                 <strong id='point__value'>{data.getUserById.point.toLocaleString()}</strong>
-              )}
-              원
+              )}원
             </em>
           </div>
         </div>
@@ -54,7 +53,7 @@ const MyPage = () => {
 
       <div className='wallet_group'>
         <div className='wallet_inner'>
-          {!loading && data && item_name.map((cafe_name, index) => (
+          {!loading && data && cafe_names.map((cafe_name, index) => (
             <Link key={index} to={`/Detail/${cafe_name}`}>
               <div className='wallet__card'>
                 <div className='margin_left'>{cafe_name}</div>

@@ -16,8 +16,9 @@ ReactDOM.render(
           <Link to="/login">로그인</Link>
           <Link to="/mypage">마이페이지</Link>
           <Link to="/CafeTour">카페투어</Link>
+          <Link to="/QRcheck/백다방/code">카드등록</Link>
         </div>
-        {/* --------------------------------------- */}
+        {/* ------------------------------------------- */}
         <App />
       </BrowserRouter>
     </ApolloProvider>
