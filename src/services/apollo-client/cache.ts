@@ -8,7 +8,6 @@ export const GET_CURRENT_USER = gql`
     me @client
   }
 `;
-
 export const cache = new InMemoryCache({
   typePolicies: {
     Query: {
