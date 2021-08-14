@@ -1,7 +1,3 @@
-h1, h2, h3, h4, div, body {
-    margin: 0;
-    padding: 0;
-}
 
 @media (orientation: portrait) {
     /* Portrait 모드일 때 적용할 CSS */
@@ -14,7 +10,6 @@ h1, h2, h3, h4, div, body {
         background-color: white;
     }
 
-
     .home__logo {
         width: 100vw;
         height: 6vh;
@@ -24,14 +19,13 @@ h1, h2, h3, h4, div, body {
         justify-content: center;
         align-items: center;
         border-bottom: solid 1px #b2b2b2;
-        font-family: fantasy;
         background-color: white;
     }
 
     .point_group {
         font-size: 1.1em;
         width: 100vw;
-        height: 11vh;
+        height: 10vh;
         display: flex;
         flex-direction: column;
         justify-content: center;

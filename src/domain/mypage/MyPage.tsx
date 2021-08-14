@@ -3,6 +3,7 @@ import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
 import 'domain/mypage/style/MyPage.css';
 import { Link } from 'react-router-dom';
+import Menu from 'components/menu/Menu';
 
 const GET_USER = gql`
   query GETUSER($id: Int!) {
@@ -34,8 +35,10 @@ const MyPage = () => {
 
   return (
     <div className='home_special'>
+      <Menu/>
       <div className='blank'>
-        <div className='home__logo'>Collabo</div>
+        <div className='home__logo'>Collabo
+        </div>
         <div className='point_group'>
           <div>{data?.getUserById?.name}님</div>
           <div className='point_group_inner'>
@@ -54,7 +57,7 @@ const MyPage = () => {
         <div className='wallet_inner'>
           {!loading &&
           data &&
-          item_name.map((cafe_name, index) => (
+          item_name?.map((cafe_name, index) => (
             <Link key={index} to={`/Detail/${cafe_name}`}>
               <div className='wallet__card'>
                 <div className='margin_left'>{cafe_name}</div>
