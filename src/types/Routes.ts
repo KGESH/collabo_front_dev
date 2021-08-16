@@ -1,7 +1,5 @@
-type Routes = {
-    path: string;
-    exact: boolean;
-    component: any;
-};
-
-export type { Routes };
+export interface IRoutes {
+  path: string;
+  exact: boolean;
+  component: any;
+}

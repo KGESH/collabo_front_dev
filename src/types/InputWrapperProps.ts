@@ -1,6 +1,4 @@
-type InputWrapperProps = {
+export interface IInputWrapperProps {
   className: string;
   type?: string;
-};
-
-export type { InputWrapperProps }
+}
