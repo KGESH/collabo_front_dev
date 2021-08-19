@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import type { EmailSignUpFormValues } from 'types/FormValues';
+import { IEmailSignUpFormValues } from 'types/FormValues';
 import 'components/email-sign-up-form/style/EmailSignUpForm.css';
 
 const EmailSignUpForm = () => {
@@ -12,9 +12,9 @@ const EmailSignUpForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<EmailSignUpFormValues>();
+  } = useForm<IEmailSignUpFormValues>();
 
-  const [data, setData] = useState<EmailSignUpFormValues>({
+  const [data, setData] = useState<IEmailSignUpFormValues>({
     id: '',
     pw: '',
     pwConfirm: '',
@@ -23,7 +23,7 @@ const EmailSignUpForm = () => {
     age: 0,
   });
 
-  const onSubmit = (formData: EmailSignUpFormValues) => {};
+  const onSubmit = (formData: IEmailSignUpFormValues) => {};
 
   return (
     <>

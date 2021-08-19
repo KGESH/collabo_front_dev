@@ -1,5 +1,5 @@
 import React from 'react';
 
-const Initializing = () => <div className='initializing'>Initializing...</div>;
+const LoadingPage = () => <div className='loading_page'>Initializing...</div>;
 
-export default Initializing;
+export default LoadingPage;

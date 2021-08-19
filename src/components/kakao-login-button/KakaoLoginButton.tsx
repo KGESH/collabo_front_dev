@@ -1,15 +1,12 @@
-import React, { useEffect } from 'react';
-import KakaoSdkInit from 'services/kakao/KakaoSdkInit';
+import React from 'react';
 
 const KakaoLoginButton = () => {
   const redirectUri = `http://localhost:4010/auth/kakao/KakaoCallback`;
   const state = 'KakaoAuth';
 
-  useEffect(() => {
-    KakaoSdkInit();
-  }, []);
   return (
     <button
+      type='button'
       className='kakao__login_button'
       onClick={() => {
         window.Kakao.Auth.authorize({
