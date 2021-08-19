@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Link } from 'react-router-dom';
 import { client } from 'services/apollo-client/Apollo';
 import { ApolloProvider } from '@apollo/react-hooks';
-import LogoutButton from 'components/logout-button/LogoutButton';
 import App from './App';
 import './index.css';
 
