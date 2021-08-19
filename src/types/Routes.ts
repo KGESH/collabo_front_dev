@@ -4,7 +4,7 @@ export interface IRoutes {
   component: any;
 }
 
-export type MenuList = {
+export interface IMenuList {
   path: string;
   label: string;
-};
+}

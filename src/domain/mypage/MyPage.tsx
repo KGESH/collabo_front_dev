@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
 import 'domain/mypage/style/MyPage.css';
-import { Link } from 'react-router-dom';
 import Camera from 'components/header/camera/Camera';
 import Navbar from 'components/navbar/Navbar';
 import QRCode from 'qrcode.react';
