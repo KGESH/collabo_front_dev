@@ -4,17 +4,21 @@ import { mapProps } from 'components/naver-map/CafeList';
 import { makeVar } from '@apollo/client';
 import 'components/naver-map/style/NaverMap.css';
 import { useReactiveVar } from '@apollo/client';
-import { mapVar, markerVar, currentPositionVar } from 'components/naver-map/LocalState';
+import {
+  mapVar,
+  currentMarkerVar,
+  currentPositionVar,
+} from 'components/naver-map/LocalState';
 import img from 'resources/images/currentPosition/currentPosition.png';
 
-
-
-const initMap = (currentPosition: position, setCenter: () => void) => {
+const initMap = () => {
   /**
    * 지도 생성
    * 현재 위치 받아서 가운데 놓기
    * 전역 변수에 저장
    */
+
+  const currentPosition = currentPositionVar();
 
   const map = new naver.maps.Map('map', {
     useStyleMap: true,
@@ -25,7 +29,6 @@ const initMap = (currentPosition: position, setCenter: () => void) => {
     zoom: 19, //지도의 초기 줌 레벨
     disableKineticPan: false,
   });
-  mapVar(map);
 
   /**
    * 현재 위치로 지도를 옮기는 버튼 생성
@@ -42,7 +45,18 @@ const initMap = (currentPosition: position, setCenter: () => void) => {
     const domEventListener = naver.maps.Event.addDOMListener(
       customControl.getElement(),
       'click',
-      setCenter,
+      () => {
+        const map = mapVar();
+        const currentPosition = currentPositionVar();
+        if (map) {
+          map.setCenter(
+            new naver.maps.LatLng(
+              currentPosition.latitude,
+              currentPosition.longitude,
+            ),
+          );
+        }
+      },
     );
   });
 
@@ -57,7 +71,6 @@ const initMap = (currentPosition: position, setCenter: () => void) => {
     ),
     map: map,
   });
-  markerVar(currentMarker);
 
   /**
    * cafeList를 받아와 지도에 표시
@@ -154,6 +167,12 @@ const initMap = (currentPosition: position, setCenter: () => void) => {
       }),
     );
   });
+
+  /**
+   * map, currentMarker 전역변수 저장
+   */
+  mapVar(map);
+  currentMarkerVar(currentMarker);
 };
 
 export default initMap;

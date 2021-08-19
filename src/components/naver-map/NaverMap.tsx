@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import 'components/naver-map/style/NaverMap.css';
 import initMap from 'components/naver-map/InitMap';
 import useGeolocation from 'react-hook-geolocation';
-import { mapVar, markerVar, currentPositionVar } from 'components/naver-map/LocalState';
+import { mapVar, currentMarkerVar, currentPositionVar } from 'components/naver-map/LocalState';
 import { useReactiveVar } from '@apollo/client';
 
 export interface position {
@@ -24,19 +24,6 @@ const NaverMap = () => {
     maximumAge: 0,
   });
 
-  const setCenter = () => {
-    const map = mapVar();
-    const currentPosition = currentPositionVar();
-    if (map) {
-      map.setCenter(
-        new naver.maps.LatLng(
-          currentPosition.latitude,
-          currentPosition.longitude,
-        ),
-      );
-    }
-  };
-
   /**
    * 지도가 이미 생성되어 있거나 (0, 0) 좌표이면 지도를 생성하지 않음
    * 지도가 이미 생성되어 있으면 현재 위치의 마커 현재 위치로
@@ -54,10 +41,10 @@ const NaverMap = () => {
       });
       const currentPosition = currentPositionVar();
       if (!isMapExist && currentPosition.latitude) {
-        initMap(currentPosition, setCenter);
+        initMap();
         setIsMapExist(true);
       } else if (isMapExist) {
-        const currentMarker = markerVar();
+        const currentMarker = currentMarkerVar();
         if (currentMarker) {
           currentMarker.setOptions({
             position: new naver.maps.LatLng(
