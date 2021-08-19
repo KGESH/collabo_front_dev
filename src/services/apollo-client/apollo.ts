@@ -8,6 +8,7 @@ const httpLink = createHttpLink({
 
 const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem('jwt');
+  console.log(`call auth link`);
 
   return {
     headers: {

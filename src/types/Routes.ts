@@ -3,3 +3,8 @@ export interface IRoutes {
   exact: boolean;
   component: any;
 }
+
+export interface IMenuList {
+  path: string;
+  label: string;
+}

@@ -1,25 +1,57 @@
-.detail__cafe_name {
-    width: 100vw;
-    height: 30vh;
+.detail__special {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    background-color: beige;
+    font-size: 13px;
+    color: #363636;
 }
 
-.detail__cafe_info {
-    width: 100vw;
-    height: 30vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.detail__first_block {
+    margin-top: 20px;
 }
 
-.detail__been_info {
-    width: 100vw;
-    height: 30vh;
+.de_first__card_img {
+    width: 85vw;
+    height: 55vw;
+}
+
+#detail_card_img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(136, 136, 136, 0.92);
+}
+
+.de_first__cafe_name {
+    font-size: 2em;
+    letter-spacing: 5px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.detail__second_block {
+    width: 150px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+}
+
+.d_s_border {
+    width: 40px;
+    height: 16px;
+    font-size: 0.7em;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: beige;
+    border: solid 1px #B0B2B2;
+    border-radius: 10px;
+}
+
+input[type="radio"] {
+    visibility: hidden;
+    position: absolute;
+}
+
+input[type="radio"]:checked + label div {
+    background-color: #E7E6E6;
 }

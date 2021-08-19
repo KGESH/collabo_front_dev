@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Link } from 'react-router-dom';
 import { client } from 'services/apollo-client/Apollo';
 import { ApolloProvider } from '@apollo/react-hooks';
-import LogoutButton from 'components/logout-button/LogoutButton';
 import App from './App';
 import './index.css';
 
@@ -17,7 +16,7 @@ ReactDOM.render(
           <Link to='/login'>로그인</Link>
           <Link to='/mypage'>마이페이지</Link>
           <Link to='/CafeTour'>카페투어</Link>
-          <LogoutButton />
+          <Link to='/Detail/스타벅스'>디테일</Link>
         </div>
         {/* --------------------------------------- */}
         <App />
