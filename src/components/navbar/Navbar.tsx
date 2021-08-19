@@ -1,28 +1,18 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import 'components/navbar/style/Navbar.css';
 
 const Navbar = () => {
   return (
     <div className='nav_group'>
       <div className='nav_box'>
-        <Link to='/'>
-          <img src='nav/sign-in-alt-solid.svg' alt='' className='img' />
-        </Link>
+        <img src="nav/sign-in-alt-solid.svg" alt='' className='nav_img' />
+        <i className="fas fa-home"></i>
       </div>
       <div className='nav_box'>
-        <Link to='/map'>
-          <img src='nav/map-marked-alt-solid.svg' alt='' className='img' />
-        </Link>
+        <img src='nav/map-marked-alt-solid.svg' alt='' className='nav_img' />
       </div>
       <div className='nav_box'>
-        <img src='nav/money-check-alt-solid.svg' alt='' className='img' />
-      </div>
-      <div className='nav_box'>
-        <img src='nav/user-circle-regular.svg' alt='' className='img' />
-      </div>
-      <div className='nav_box'>
-        <img src='nav/user-circle-regular.svg' alt='' className='img' />
+        <img src='nav/map-marked-alt-solid.svg' alt='' className='nav_img' />
       </div>
     </div>
   );

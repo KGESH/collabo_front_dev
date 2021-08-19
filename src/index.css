@@ -1,0 +1,27 @@
+h1, h2, h3, h4, div, body {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+
+}
+
+.exclusive_use_of_dev {
+    font-size: 12px;
+    background-color: white;
+    border: solid 1px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 60vh;
+    z-index: 999;
+}

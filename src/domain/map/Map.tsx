@@ -1,5 +1,4 @@
 import React from 'react';
-import type { HomeProps } from 'types/Props';
 import 'domain/map/style/Map.css';
 import NaverMap from 'components/naver-map/NaverMap';
 

@@ -5,9 +5,6 @@ const KakaoLoginButton = () => {
   const redirectUri = `http://localhost:4010/auth/kakao/KakaoCallback`;
   const state = 'KakaoAuth';
 
-  useEffect(() => {
-    KakaoSdkInit();
-  }, []);
   return (
     <button
       className='kakao__login_button'

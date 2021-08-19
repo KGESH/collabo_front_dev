@@ -1,0 +1,22 @@
+.plus-btn {
+    position: absolute;
+    top: 13px;
+    left: 18px;
+}
+
+#fucking_stick_1 {
+    width: 2px;
+    height: 25px;
+    background-color: #777777;
+    position: absolute;
+    left: 12px;
+
+}
+
+#fucking_stick_2 {
+    width: 25px;
+    height: 2px;
+    background-color: #777777;
+    position: absolute;
+    top: 12px;
+}

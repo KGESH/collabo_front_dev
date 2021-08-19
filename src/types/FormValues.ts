@@ -1,15 +1,13 @@
-type LoginFormValues = {
+export interface ILoginFormValues {
   id: string;
   pw: string;
-};
+}
 
-type EmailSignUpFormValues = {
+export interface IEmailSignUpFormValues {
   id: string;
   pw: string;
   pwConfirm: string;
   name: string;
   email: string;
   age: number;
-};
-
-export type { LoginFormValues, EmailSignUpFormValues };
+}
