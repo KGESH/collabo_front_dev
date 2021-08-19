@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import type { LoginFormValues } from 'types/FormValues';
+import type { ILoginFormValues } from 'types/FormValues';
 import 'components/login-form/style/LoginForm.css';
 
 const LoginForm = () => {
@@ -12,14 +12,14 @@ const LoginForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginFormValues>();
+  } = useForm<ILoginFormValues>();
 
-  const [data, setData] = useState<LoginFormValues>({
+  const [data, setData] = useState<ILoginFormValues>({
     id: '',
     pw: '',
   });
 
-  const onSubmit = (formData: LoginFormValues) => {
+  const onSubmit = (formData: ILoginFormValues) => {
     setData(formData);
   };
 

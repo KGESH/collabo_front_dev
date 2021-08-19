@@ -1,4 +1,4 @@
-import type { Routes } from 'types/Routes';
+import type { IRoutes } from 'types/Routes';
 import Home from 'domain/home/Home';
 import Login from 'domain/login/Login';
 import EmailSignUp from 'domain/email-sign-up/EmailSignUp';
@@ -13,7 +13,7 @@ import QRscan from '../../domain/qr-scan/QRscan';
  * 이곳에 추가
  */
 
-const AppRoutes: Routes[] = [
+const AppRoutes: IRoutes[] = [
   {
     path: '/',
     exact: true,

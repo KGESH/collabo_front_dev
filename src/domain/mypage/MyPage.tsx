@@ -43,9 +43,6 @@ const MyPage = () => {
       <div className='my_group'>
         <Header menu={true} />
         <Camera />
-        <div onClick={()=> {
-          console.log(document.getElementsByClassName('my_qr_code')[5].scrollTop);
-        }}>버튼</div>
         <div>
           <div className='my_point_group'>
             <em>

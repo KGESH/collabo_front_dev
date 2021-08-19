@@ -1,12 +1,10 @@
-type Routes = {
-    path: string;
-    exact: boolean;
-    component: any;
-};
+export interface IRoutes {
+  path: string;
+  exact: boolean;
+  component: any;
+}
 
-export type { Routes };
-
-export type MenuList = {
-    path: string;
-    label: string;
+export interface IMenuList {
+  path: string;
+  label: string;
 }

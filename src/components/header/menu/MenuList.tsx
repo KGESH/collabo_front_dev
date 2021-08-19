@@ -1,9 +1,9 @@
-import type { MenuList } from 'types/Routes';
+import type { IMenuList } from 'types/Routes';
 /**
  * menu 리스트를 등록할 때 사용
  */
 
-const Menu_list: MenuList[] = [
+const Menu_list: IMenuList[] = [
   {
     path: '/',
     label: '홈페이지',

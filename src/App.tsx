@@ -39,7 +39,6 @@ const App = () => {
       isLoggedInVar(true);
     }
     isInitVar(true);
-    console.log(isInitVar);
   }, [loading]);
 
   useEffect(() => {

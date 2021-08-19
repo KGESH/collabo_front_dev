@@ -1,11 +1,8 @@
-type NavbarProps = {
+export interface INavbarProps {
   itemName: string;
   url: string;
-};
+}
 
-type HomeProps = {
-  isLoggedIn: boolean;
+export interface IHomeProps {
   isInit?: boolean;
-};
-
-export type { NavbarProps, HomeProps };
+}
