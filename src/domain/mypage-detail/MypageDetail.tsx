@@ -30,15 +30,15 @@ const MypageDetail = () => {
         <div className='de_first__cafe_name'>STARBUCKS</div>
       </div>
       <div className='detail__second_block'>
-        <input type='radio' id='visit' name='radios' onClick={fnc} />
+        <input type='radio' id='visit' name='radios' onClick={fnc} checked={click === 'visit'}/>
         <label htmlFor='visit'>
           <div id='visit' className='de_second__visit d_s_border'>방문</div>
         </label>
-        <input type='radio' id='review' name='radios' onClick={fnc} />
+        <input type='radio' id='review' name='radios' onClick={fnc} checked={click === 'review'}/>
         <label htmlFor='review'>
           <div id='review' className='de_second__review d_s_border' >리뷰</div>
         </label>
-        <input type='radio' id='beans' name='radios'  onClick={fnc}/>
+        <input type='radio' id='beans' name='radios'  onClick={fnc} checked={click === 'beans'}/>
         <label htmlFor='beans'>
           <div id='beans' className='de_second__beans d_s_border'>원두</div>
         </label>

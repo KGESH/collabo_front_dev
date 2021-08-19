@@ -20,10 +20,9 @@ const QRcheck = () => {
   let cafeNames: string[] = [];
   let codeList: string[] = [];
 
-  const { loading, data, error } = useQuery(GET_USER, {
+  const { loading, data } = useQuery(GET_USER, {
     variables: { id: 11700/* 불러올 아이디 */ },
   });
-  error ? console.log(error) : '';
 
   if (data) {
     // db에 있는 코드를 불러온다.

@@ -36,17 +36,14 @@
 
     .my_wallet_inner {
         width: 80vw;
-        height: 30vh;
+        height: 5vh;
         overflow: auto;
         scroll-snap-type: y mandatory;
         display: flex;
         flex-direction: column;
         align-items: center;
-    }
-
-    .my_wallet_inner:nth-child(1) {
-        padding-top: 25vw;
-        padding-bottom: 25vw;
+        padding-top: 42vw;
+        padding-bottom: 42vw;
     }
 
     .my_wallet__card {
