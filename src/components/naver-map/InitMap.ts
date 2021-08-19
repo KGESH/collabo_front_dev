@@ -70,6 +70,13 @@ const initMap = () => {
       currentPosition.longitude,
     ),
     map: map,
+    icon: {
+      url: './currentPositionIcon.png',
+      size: new naver.maps.Size(40, 40),
+      scaledSize: new naver.maps.Size(40, 40),
+      origin: new naver.maps.Point(0, 0),
+      anchor: new naver.maps.Point(12, 34),
+    },
   });
 
   /**
@@ -116,6 +123,13 @@ const initMap = () => {
       new naver.maps.Marker({
         position: cafe.mapPos,
         map: map,
+        icon: {
+          url: './cafeIcon.png',
+          size: new naver.maps.Size(40, 40),
+          scaledSize: new naver.maps.Size(40, 40),
+          origin: new naver.maps.Point(0, 0),
+          anchor: new naver.maps.Point(12, 34),
+        },
       }),
     );
 
