@@ -3,7 +3,10 @@ import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
 import 'domain/mypage/style/MyPage.css';
 import { Link } from 'react-router-dom';
-import Menu from 'components/menu/Menu';
+import Camera from 'components/header/camera/Camera';
+import Navbar from 'components/navbar/Navbar';
+import QRCode from 'qrcode.react';
+import Header from 'components/header/Header';
 
 const GET_USER = gql`
   query GETUSER($id: Int!) {
@@ -22,9 +25,6 @@ const MyPage = () => {
   const { loading, data, error } = useQuery(GET_USER, {
     variables: { id: 11700 /* 불러올 아이디 */ },
   });
-  if (error) {
-    console.log(error);
-  }
 
   if (!loading && data) {
     db_qr_list = data.getUserById.qr_list;
@@ -33,41 +33,42 @@ const MyPage = () => {
     });
   }
 
+  const cardClick = (index: number) => {
+    document.getElementsByClassName('my_qr_box')[index].classList.toggle('hidden');
+  };
+
   return (
-    <div className='home_special'>
-      <Menu/>
-      <div className='blank'>
-        <div className='home__logo'>Collabo
-        </div>
-        <div className='point_group'>
-          <div>{data?.getUserById?.name}님</div>
-          <div className='point_group_inner'>
-            <label className='point__label'>통합 포인트</label>
+    <>
+      <div className='my_group'>
+        <Header menu={true} />
+        <Camera />
+        <div>
+          <div className='my_point_group'>
             <em>
-              <strong id='point__value'>
+              <strong id='point_value'>
                 {data?.getUserById?.point?.toLocaleString()}
               </strong>
-              원
             </em>
           </div>
         </div>
-      </div>
-
-      <div className='wallet_group'>
-        <div className='wallet_inner'>
-          {!loading &&
-          data &&
-          item_name?.map((cafe_name, index) => (
-            <Link key={index} to={`/Detail/${cafe_name}`}>
-              <div className='wallet__card'>
-                <div className='margin_left'>{cafe_name}</div>
-                <div className='cafe_info' />
+        {/* 스크롤 바 위치를 구해서 가운대 위치하고있으면 z-index 를 높여서 출력하고, 위 또는 아래에 있으면 transform -> scale을 사용해서 크기를 줄인다. 그리고 더 상단 혹은 더 하단으로 이동하면 opacity를 0으로 줄여서 지운다.*/}
+        <div className='my_wallet_group'>
+          <div className='my_wallet_inner'>
+            {!loading && data && item_name?.map((cafe_name, index) => (
+              <div className='my_wallet__card' onClick={() => cardClick(index)}>
+                <img src='https://www.shinhancard.com/pconts/images/contents/card/plate/cdCreditAXFBZE.png' alt='' />
+                <div className='my_qr_box hidden'>
+                  <div className='my_qr_code'>
+                    <QRCode value={'https://www.naver.com/'} size={100} level={'L'} />
+                  </div>
+                </div>
               </div>
-            </Link>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
-    </div>
+      <Navbar />
+    </>
   );
 };
 

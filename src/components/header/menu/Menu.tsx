@@ -1,5 +1,7 @@
 import React from 'react';
-import 'components/menu/style/Menu.css';
+import 'components/header/menu/style/Menu.css';
+import Menu_list from 'components/header/menu/MenuList';
+import { Link } from 'react-router-dom';
 
 const Menu = () => {
 
@@ -26,10 +28,11 @@ const Menu = () => {
             <div className='menu__sign_up'>회원가입</div>
           </div>
           <div className='menu__content'>
-            <div className='menu__p'>마이페이지</div>
-            <div className='menu__p'>마이페이지</div>
-            <div className='menu__p'>마이페이지</div>
-            <div className='menu__p'>마이페이지</div>
+            {Menu_list.map(w => (
+              <Link to={w.path}>
+                <div className='menu__p'>{w.label}</div>
+              </Link>
+            ))}
           </div>
         </div>
       </div>

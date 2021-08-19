@@ -1,0 +1,91 @@
+.de_re__content_group {
+    width: 85vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.de_re_first_block {
+    width: 100%;
+    display: flex;
+    position: relative;
+}
+
+.de_re_first__check_img {
+    position: relative;
+}
+
+#check {
+    position: absolute;
+    top: 5px;
+    left: 9px;
+
+}
+
+.de_re_first__data_group {
+    margin-left: 10px;
+}
+
+.de_re_first__branch {
+    font-size: 1em;
+}
+
+.de_re_first__day_and_time {
+    font-size: 0.9em;
+    color: #626262;
+    font-weight: lighter;
+}
+
+.de_re_first__spot {
+    position: absolute;
+    right: 10px;
+}
+
+.de_re_second__block {
+    margin-top: 10px;
+}
+
+.de_re_second__block img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    box-shadow: 1px 1px 5px #7c7c7c;
+}
+
+
+.de_re_third_block {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.star {
+    display: flex;
+    margin-top: 10px;
+}
+
+.de_re_third__atmosphere {
+    margin: 0 10px;
+}
+
+.heart {
+    width: 100px;
+    display: flex;
+    margin-top: 10px;
+}
+
+.de_icon {
+    width: 24px;
+    height: 24px;
+}
+
+.지도 {
+    margin-left: 10px;
+}
+
+.내용 {
+    text-align: center;
+    line-height: 22px;
+}

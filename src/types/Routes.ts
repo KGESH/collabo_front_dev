@@ -5,3 +5,8 @@ type Routes = {
 };
 
 export type { Routes };
+
+export type MenuList = {
+    path: string;
+    label: string;
+}

@@ -1,24 +1,24 @@
 .menu_trigger {
-    width: 27px;
-    height: 27px;
+    width: 24px;
+    height: 24px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     position: absolute;
-    top: 8px;
-    right: 8px;
-    z-index: 2;
+    top: 16px;
+    right: 22px;
+    z-index: 998;
 }
 
 .stick {
-    width: 27px;
-    height: 3px;
-    background-color: black;
+    width: 24px;
+    height: 2px;
     border-radius: 10px;
-    z-index: 3;
+    z-index: 999;
     transition: all 0.4s;
     position: absolute;
     display: inline-block;
+    background-color: #777777;
 }
 
 .line1 {
@@ -26,7 +26,7 @@
 }
 
 .line2 {
-    top: 12px;
+    top: 11px;
 }
 
 .line3 {
@@ -37,7 +37,7 @@
     width: 100vw;
     height: 100vh;
     background-color: rgba(133, 133, 133, 0.69);
-    z-index: 1;
+    z-index: 997;
     position: absolute;
     right: -100vw;
     transition: all 0.4s;
@@ -48,7 +48,7 @@
 }
 
 .active .line1 {
-    transform: translateY(12px) rotate(-45deg);
+    transform: translateY(11px) rotate(-45deg);
 }
 
 .active .line2 {
@@ -56,7 +56,7 @@
 }
 
 .active .line3 {
-    transform: translateY(-12px) rotate(45deg);
+    transform: translateY(-11px) rotate(45deg);
 }
 
 .menu_list_inner {

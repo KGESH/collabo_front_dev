@@ -16,6 +16,7 @@ ReactDOM.render(
           <Link to="/login">로그인</Link>
           <Link to="/mypage">마이페이지</Link>
           <Link to="/CafeTour">카페투어</Link>
+          <Link to="/Detail/스타벅스">디테일</Link>
         </div>
         {/* --------------------------------------- */}
         <App />
