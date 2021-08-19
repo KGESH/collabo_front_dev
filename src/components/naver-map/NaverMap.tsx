@@ -2,33 +2,40 @@ import React, { useState, useEffect, useRef } from 'react';
 import 'components/naver-map/style/NaverMap.css';
 import initMap from 'components/naver-map/InitMap';
 import useGeolocation from 'react-hook-geolocation';
+import { mapVar, markerVar, currentPositionVar } from 'components/naver-map/LocalState';
 import { useReactiveVar } from '@apollo/client';
-import { mapVar, markerVar } from 'components/naver-map/InitMap';
-import { makeVar } from '@apollo/client';
 
 export interface position {
   latitude: number;
   longitude: number;
 }
 
+
 const NaverMap = () => {
   /**
-   * currentPosition : 현재 좌표
-   * isMap : 지도 생성 여부
+   * positionVar : 현재 좌표
+   * isMapExist : 지도 생성 여부
    */
-  const [currentPosition, setCurrentPosition] = useState<position>({
-    latitude: 0,
-    longitude: 0,
-  });
-  const [isMap, setIsMap] = useState<boolean>(false);
+
+  const [isMapExist, setIsMapExist] = useState<boolean>(false);
   const geolocation = useGeolocation({
     enableHighAccuracy: true,
     timeout: Infinity,
     maximumAge: 0,
   });
 
-  const map = useReactiveVar(mapVar);
-  const currentMarker = useReactiveVar(markerVar);
+  const setCenter = () => {
+    const map = mapVar();
+    const currentPosition = currentPositionVar();
+    if (map) {
+      map.setCenter(
+        new naver.maps.LatLng(
+          currentPosition.latitude,
+          currentPosition.longitude,
+        ),
+      );
+    }
+  };
 
   /**
    * 지도가 이미 생성되어 있거나 (0, 0) 좌표이면 지도를 생성하지 않음
@@ -41,15 +48,16 @@ const NaverMap = () => {
       `${geolocation.latitude}, ${geolocation.longitude}, ${geolocation.timestamp}, hook`,
     );
     if (!geolocation.error && geolocation.latitude) {
-      setCurrentPosition({
+      currentPositionVar({
         latitude: geolocation.latitude,
         longitude: geolocation.longitude,
       });
-      if (!isMap && currentPosition.latitude) {
-        initMap(currentPosition);
-        setIsMap(true);
-      } else if (isMap) {
-        console.log(markerVar(), currentMarker, `makeVar`);
+      const currentPosition = currentPositionVar();
+      if (!isMapExist && currentPosition.latitude) {
+        initMap(currentPosition, setCenter);
+        setIsMapExist(true);
+      } else if (isMapExist) {
+        const currentMarker = markerVar();
         if (currentMarker) {
           currentMarker.setOptions({
             position: new naver.maps.LatLng(
@@ -61,6 +69,7 @@ const NaverMap = () => {
       }
     }
   }, [geolocation]);
+
 
   return (
     <>

@@ -3,16 +3,19 @@ import { cafeList } from 'components/naver-map/CafeList';
 import { mapProps } from 'components/naver-map/CafeList';
 import { makeVar } from '@apollo/client';
 import 'components/naver-map/style/NaverMap.css';
+import { useReactiveVar } from '@apollo/client';
+import { mapVar, markerVar, currentPositionVar } from 'components/naver-map/LocalState';
 import img from 'resources/images/currentPosition/currentPosition.png';
 
-export const mapVar = makeVar<naver.maps.Map | null>(null);
-export const markerVar = makeVar<naver.maps.Marker | null>(null);
 
-const initMap = (currentPosition: position) => {
+
+const initMap = (currentPosition: position, setCenter: () => void) => {
   /**
    * 지도 생성
    * 현재 위치 받아서 가운데 놓기
+   * 전역 변수에 저장
    */
+
   const map = new naver.maps.Map('map', {
     useStyleMap: true,
     center: new naver.maps.LatLng(
@@ -22,6 +25,7 @@ const initMap = (currentPosition: position) => {
     zoom: 19, //지도의 초기 줌 레벨
     disableKineticPan: false,
   });
+  mapVar(map);
 
   /**
    * 현재 위치로 지도를 옮기는 버튼 생성
@@ -38,21 +42,14 @@ const initMap = (currentPosition: position) => {
     const domEventListener = naver.maps.Event.addDOMListener(
       customControl.getElement(),
       'click',
-      () => {
-        map.setCenter(
-          new naver.maps.LatLng(
-            currentPosition.latitude,
-            currentPosition.longitude,
-          ),
-        );
-      },
+      setCenter,
     );
   });
 
   /**
    * 현재 위치에 대한 표시
+   * 전역 변수에 저장
    */
-
   const currentMarker = new naver.maps.Marker({
     position: new naver.maps.LatLng(
       currentPosition.latitude,
@@ -60,13 +57,13 @@ const initMap = (currentPosition: position) => {
     ),
     map: map,
   });
-
-  const cafeMarkers: naver.maps.Marker[] = [];
-  const cafeInfomations: naver.maps.InfoWindow[] = [];
+  markerVar(currentMarker);
 
   /**
    * cafeList를 받아와 지도에 표시
    */
+  const cafeMarkers: naver.maps.Marker[] = [];
+  const cafeInfomations: naver.maps.InfoWindow[] = [];
   cafeList.map((cafe: mapProps) => {
     /*
       현재 위치 & 카페 위치를 기반으로 한 작업
@@ -157,9 +154,6 @@ const initMap = (currentPosition: position) => {
       }),
     );
   });
-
-  mapVar(map);
-  markerVar(currentMarker);
 };
 
 export default initMap;
