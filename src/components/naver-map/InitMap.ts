@@ -1,30 +1,25 @@
 import { position } from 'components/naver-map/NaverMap';
 import { cafeList } from 'components/naver-map/CafeList';
 import { mapProps } from 'components/naver-map/CafeList';
+import { makeVar } from '@apollo/client';
+import 'components/naver-map/style/NaverMap.css';
+import img from 'resources/images/currentPosition/currentPosition.png';
 
-let map: any = null;
-let currentMarker: any = null;
+export const mapVar = makeVar<naver.maps.Map | null>(null);
+export const markerVar = makeVar<naver.maps.Marker | null>(null);
 
 const initMap = (currentPosition: position) => {
   /**
    * 지도 생성
    * 현재 위치 받아서 가운데 놓기
    */
-  map = new naver.maps.Map('map', {
+  const map = new naver.maps.Map('map', {
     useStyleMap: true,
     center: new naver.maps.LatLng(
       currentPosition.latitude,
       currentPosition.longitude,
     ), //지도의 초기 중심 좌표
     zoom: 19, //지도의 초기 줌 레벨
-    /*
-      minZoom: 10, //지도의 최소 줌 레벨
-      maxZoom: 21,
-      zoomControl: true, //줌 컨트롤의 표시 여부
-      zoomControlOptions: {
-        //줌 컨트롤의 옵션
-        position: naver.maps.Position.TOP_RIGHT,
-      },*/
     disableKineticPan: false,
   });
 
@@ -32,8 +27,7 @@ const initMap = (currentPosition: position) => {
    * 현재 위치로 지도를 옮기는 버튼 생성
    */
   const locationBtnHtml =
-    '<a href="#" class="btn_mylct"><span class="spr_trff spr_ico_mylct">현재 위치</span></a>';
-  //'<a href="#" class="btn_mylct"><span class="spr_trff spr_ico_mylct">현재 위치</span></a>';
+    '<a href="#" class="btn_mylct" style="pointer-events: auto;"><img class="currentImg" src="currentPosition.png" alt="현재위치"/></span></a>';
 
   naver.maps.Event.once(map, 'init_stylemap', () => {
     //customControl 객체 이용하기
@@ -59,13 +53,14 @@ const initMap = (currentPosition: position) => {
    * 현재 위치에 대한 표시
    */
 
-  currentMarker = new naver.maps.Marker({
+  const currentMarker = new naver.maps.Marker({
     position: new naver.maps.LatLng(
       currentPosition.latitude,
       currentPosition.longitude,
     ),
     map: map,
   });
+
   const cafeMarkers: naver.maps.Marker[] = [];
   const cafeInfomations: naver.maps.InfoWindow[] = [];
 
@@ -162,7 +157,9 @@ const initMap = (currentPosition: position) => {
       }),
     );
   });
+
+  mapVar(map);
+  markerVar(currentMarker);
 };
 
-export { map, currentMarker };
 export default initMap;

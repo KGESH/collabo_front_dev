@@ -11,8 +11,7 @@
   z-index: 0;
 }
 
-
-.btn_mylct {
-  width: 2vw;
-  height: 2vh;
+.currentImg {
+  height: 40px;
+  width: 40px;
 }

@@ -2,7 +2,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import 'components/naver-map/style/NaverMap.css';
 import initMap from 'components/naver-map/InitMap';
 import useGeolocation from 'react-hook-geolocation';
-import { map, currentMarker } from 'components/naver-map/InitMap';
+import { useReactiveVar } from '@apollo/client';
+import { mapVar, markerVar } from 'components/naver-map/InitMap';
+import { makeVar } from '@apollo/client';
 
 export interface position {
   latitude: number;
@@ -25,6 +27,9 @@ const NaverMap = () => {
     maximumAge: 0,
   });
 
+  const map = useReactiveVar(mapVar);
+  const currentMarker = useReactiveVar(markerVar);
+
   /**
    * 지도가 이미 생성되어 있거나 (0, 0) 좌표이면 지도를 생성하지 않음
    * 지도가 이미 생성되어 있으면 현재 위치의 마커 현재 위치로
@@ -35,21 +40,24 @@ const NaverMap = () => {
     console.log(
       `${geolocation.latitude}, ${geolocation.longitude}, ${geolocation.timestamp}, hook`,
     );
-    if (!geolocation.error && geolocation.latitude !== null) {
+    if (!geolocation.error && geolocation.latitude) {
       setCurrentPosition({
         latitude: geolocation.latitude,
         longitude: geolocation.longitude,
       });
-      if (isMap === false && currentPosition.latitude !== 0) {
+      if (!isMap && currentPosition.latitude) {
         initMap(currentPosition);
         setIsMap(true);
-      } else if (isMap === true) {
-        currentMarker.setOptions({
-          position: new naver.maps.LatLng(
-            currentPosition.latitude,
-            currentPosition.longitude,
-          ),
-        });
+      } else if (isMap) {
+        console.log(markerVar(), currentMarker, `makeVar`);
+        if (currentMarker) {
+          currentMarker.setOptions({
+            position: new naver.maps.LatLng(
+              currentPosition.latitude,
+              currentPosition.longitude,
+            ),
+          });
+        }
       }
     }
   }, [geolocation]);
