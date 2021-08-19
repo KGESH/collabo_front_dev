@@ -38,7 +38,7 @@ const initMap = (currentPosition: position) => {
   naver.maps.Event.once(map, 'init_stylemap', () => {
     //customControl 객체 이용하기
     const customControl = new naver.maps.CustomControl(locationBtnHtml, {
-      position: naver.maps.Position.LEFT_CENTER,
+      position: naver.maps.Position.RIGHT_CENTER,
     });
     customControl.setMap(map);
     const domEventListener = naver.maps.Event.addDOMListener(

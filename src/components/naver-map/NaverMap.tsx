@@ -25,57 +25,34 @@ const NaverMap = () => {
     maximumAge: 0,
   });
 
+  /**
+   * 지도가 이미 생성되어 있거나 (0, 0) 좌표이면 지도를 생성하지 않음
+   * 지도가 이미 생성되어 있으면 현재 위치의 마커 현재 위치로
+   *
+   */
   useEffect(() => {
-    /**
-     * 지도가 이미 생성되어 있거나 (0, 0) 좌표이면 지도를 생성하지 않음
-     * 지도가 이미 생성되어 있으면 현재 위치의 마커 현재 위치로
-     *
-     */
-    if (isMap === false && currentPosition.latitude !== 0) {
-      initMap(currentPosition);
-      setIsMap(true);
-    } else if (isMap === true) {
-      currentMarker.setOptions({
-        position: new naver.maps.LatLng(
-          currentPosition.latitude,
-          currentPosition.longitude,
-        ),
-      });
-    }
-  }, [currentPosition]);
-
-  /*
-  useEffect(() => {
-    console.log(`${geolocation.latitude}, ${geolocation.longitude}, ${geolocation.timestamp}, hook`);
+    console.log(geolocation);
+    console.log(
+      `${geolocation.latitude}, ${geolocation.longitude}, ${geolocation.timestamp}, hook`,
+    );
     if (!geolocation.error && geolocation.latitude !== null) {
       setCurrentPosition({
         latitude: geolocation.latitude,
         longitude: geolocation.longitude,
       });
+      if (isMap === false && currentPosition.latitude !== 0) {
+        initMap(currentPosition);
+        setIsMap(true);
+      } else if (isMap === true) {
+        currentMarker.setOptions({
+          position: new naver.maps.LatLng(
+            currentPosition.latitude,
+            currentPosition.longitude,
+          ),
+        });
+      }
     }
-  }, [geolocation]);*/
-
-  const options = {
-    enableHighAccuracy: true,
-    timeout: Infinity,
-    maximumAge: 0,
-  };
-  
-  navigator.geolocation.getCurrentPosition(
-    (position: GeolocationPosition) => {
-      setCurrentPosition({
-        latitude: position.coords.latitude,
-        longitude: position.coords.longitude,
-      });
-      console.log(
-        `${position.coords.latitude}, ${position.coords.longitude}, geo`,
-      );
-    },
-    (error: GeolocationPositionError) => {
-      console.error(error.message);
-    },
-    options,
-  );
+  }, [geolocation]);
 
   return (
     <>
