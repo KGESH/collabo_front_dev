@@ -37,6 +37,7 @@ const MyPage = () => {
     document.getElementsByClassName('my_qr_box')[index].classList.toggle('hidden');
   };
 
+
   return (
     <>
       <div className='my_group'>
