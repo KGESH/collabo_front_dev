@@ -1,169 +1,93 @@
-h1, h2, h3, h4, div, body {
-    margin: 0;
-    padding: 0;
-}
-
 @media (orientation: portrait) {
     /* Portrait 모드일 때 적용할 CSS */
-    .home_special {
+    .my_group {
         display: flex;
         flex-direction: column;
         align-items: center;
         width: 100vw;
-        height: 92vh;
         background-color: white;
+        position: fixed;
     }
 
-
-    .home__logo {
-        width: 100vw;
-        height: 6vh;
-        font-size: 1.8em;
-        letter-spacing: 0.2em;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-bottom: solid 1px #b2b2b2;
-        font-family: fantasy;
-        background-color: white;
+    .my_group img {
+        width: 100%;
     }
 
-    .point_group {
-        font-size: 1.1em;
+    .my_point_group {
         width: 100vw;
-        height: 11vh;
         display: flex;
         flex-direction: column;
-        justify-content: center;
         align-items: center;
+        margin-top: 5vh;
     }
 
-    .point_group_inner {
-        display: flex;
-        font-size: 1.7em;
+    #point_value {
+        font-size: 3em;
+        font-weight: lighter;
+        font-style: normal;
     }
 
-    .wallet_group {
-        width: 100vw;
-        height: 75vh;
-        border-top: solid 1px #b2b2b2;
+    .my_wallet_group {
+        margin-top: 5vh;
         display: flex;
         flex-direction: column;
         align-items: center;
     }
 
-    .wallet_inner {
-        width: 80%;
-        height: 40vh;
+    .my_wallet_inner {
+        width: 80vw;
+        height: 30vh;
         overflow: auto;
+        scroll-snap-type: y mandatory;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .my_wallet_inner:nth-child(1) {
+        padding-top: 25vw;
+        padding-bottom: 25vw;
+    }
+
+    .my_wallet__card {
+        width: 67vw;
+        height: 42vw;
+        border-radius: 10px;
+        scroll-snap-align: center;
         position: relative;
-        margin-top: 4vh;
+        box-shadow: 0 0 7px #7a7a7a;
+    }
+
+    .my_qr_box {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1;
+        backdrop-filter: blur(5px);
+    }
+
+    .my_qr_code {
+        width: 110px;
+        height: 110px;
         border-radius: 5px;
+        box-shadow: 0 0 7px #7a7a7a;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: white;
     }
 
-    .wallet_inner::-webkit-scrollbar {
-        display: none;
-    }
-
-    .wallet__card {
-        font-size: 1em;
-        width: 99.4%;
-        height: 47vw;
-        border: solid 1px;
-        background-color: #ffffff;
-        border-radius: 5px;
-        margin-bottom: -50%;
-        padding-top: 1vh;
-        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.38);
-        position: relative;
-    }
-
-    .margin_left {
-        margin-left: 5%;
-    }
-
-    .cafe_info {
-        width: 50vw;
-        height: 30vw;
-        margin-top: 4vw;
-        margin-left: 5vw;
-        border: solid 1px;
+    .hidden {
+        visibility: hidden;
     }
 }
 
 @media (orientation: landscape) {
     /* Landscape 모드일 때 적용할 CSS */
-    .home_special {
-        display: flex;
-        justify-content: center;
-        width: 100vw;
-        height: 100vh;
-        background-color: #F1F4F6;
-    }
 
-    .home__logo {
-        width: 30vw;
-        height: 15vh;
-        font-size: 2.3em;
-        font-weight: bold;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-family: Cursive;
-    }
-
-    .point_group {
-        font-size: 1.1em;
-        width: 30vw;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .point_group_inner {
-        display: flex;
-        font-size: 1.2em;
-        padding: 4px;
-
-    }
-
-    .wallet_group {
-        width: 60vw;
-        height: 82vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .wallet_inner {
-        width: 50vw;
-        height: 80vh;
-        overflow: auto;
-        position: relative;
-        margin-top: 4vh;
-        border-radius: 5px;
-
-    }
-
-    .wallet_inner::-webkit-scrollbar {
-        display: none;
-    }
-
-    .wallet__card {
-        font-size: 1em;
-        width: 99.4%;
-        height: 200px;
-        border: solid 1px;
-        background-color: #dcdcdc;
-        border-radius: 5px;
-        margin-bottom: -170px;
-        padding-top: 2%;
-        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.38);
-        position: relative;
-    }
-
-    .margin_left {
-        margin-left: 10%;
-    }
 }

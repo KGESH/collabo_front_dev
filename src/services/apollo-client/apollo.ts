@@ -1,5 +1,11 @@
-import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
+import {
+  ApolloClient,
+  createHttpLink,
+  InMemoryCache,
+  NormalizedCacheObject,
+} from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
+import { cache } from 'services/apollo-client/cache';
 
 const GRAPHQL_SERVER_URL = `http://localhost:4010`;
 const httpLink = createHttpLink({
@@ -8,6 +14,7 @@ const httpLink = createHttpLink({
 
 const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem('jwt');
+  console.log(`call auth link`);
 
   return {
     headers: {
