@@ -1,4 +1,4 @@
-type mapProps = {
+export interface mapProps {
   name: string;
   mapPos: naver.maps.LatLng;
   latitude: string;
@@ -73,5 +73,3 @@ export const cafeList: mapProps[] = [
     longitude: "126.99530974796347",
   }
 ];
-
-export type {mapProps};
