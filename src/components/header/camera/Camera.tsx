@@ -4,15 +4,17 @@ import { Link } from 'react-router-dom';
 
 export default () => {
 
+  const exeDeepLink = () => {
+    const url: string = 'camera://path/';
+    location.href = url;
+  };
 
   return (
     <>
-      <Link to='/qrscan'>
-        <div className='plus-btn'>
-          <div id='fucking_stick_1' />
-          <div id='fucking_stick_2' />
-        </div>
-      </Link>
+      <div className='plus-btn' onClick={exeDeepLink}>
+        <div id='fucking_stick_1' />
+        <div id='fucking_stick_2' />
+      </div>
     </>
   );
 }

@@ -1,54 +1,90 @@
-import React from 'react';
-import { useParams, Redirect } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useParams, Redirect, Link } from 'react-router-dom';
 import { gql } from 'apollo-boost';
-import { useQuery } from '@apollo/react-hooks';
+import { useMutation, useQuery } from '@apollo/react-hooks';
+import 'domain/qrcheck/style/QRcheck.css';
 
-const GET_USER = gql`
-  query($id: Int!) {
-    getUserById(id: $id) {
-      qr_list
-      auth
-      code_list
-      cafe_name
+const add_QR = gql`
+  mutation (
+    $cafeName: String!
+    $code: String!
+  ) {
+    addQR(
+      cafeName: $cafeName
+      code: $code
+    ) {
+      code
     }
   }
 `;
 
 const QRcheck = () => {
-  // 포트 번호는 배포 시에 front서버의 포트 번호를 받아온다.
+
   const params: any = useParams();
-  let cafeNames: string[] = [];
-  let codeList: string[] = [];
+  const [addQR] = useMutation(add_QR);
 
-  const { loading, data } = useQuery(GET_USER, {
-    variables: { id: 11700/* 불러올 아이디 */ },
-  });
+  const addQR_to_db = () => {
+    try {
+      addQR({
+        variables: {
+          cafeName: `${params.cafeName}`,
+          code: `${params.code}`,
+        },
+      });
+    } catch (e) {
+      console.log(e);
+    }
+    return (<Redirect to='/' />);
+  };
 
-  if (data) {
-    // db에 있는 코드를 불러온다.
-    cafeNames = data.getUserById.cafe_name;
-    codeList = data.getUserById.code_list;
+  /** 로그인(false) 일 때 */
+  if (false) {
+    return (<Redirect to='/login' />);
+  }
 
-    /** 고객중에서 */
-    if (data.getUserById.auth === ('client')) {
-      /** db에 동일한 카페의 카드가 이미 등록된 상태일때 */
-      if (cafeNames.includes(params.cafe)) {
-        return (<div>이미 등록되어있는 카드입니다.</div>);
-      } else /** db에 없을 때 => 카드 등록 */{
-        return (<div>카드를 등록합니다.</div>);
-        // mutation을 이용해 db -> qr배열에 newQR을 통째로 저장
+  /** 로그인(true) 일 때 */
+  else {
+    // 현재 User 에 저장된 카페 목록들을 받아온다.
 
+    /** 로그인 한 user가 "CLIENT" 일 때 */
+    if (true/*data.getUserById.auth === ('client')*/) {
+
+      /** 이미 동일한 카페의 카드가 db에 있을 때 => 등록 실패 */
+      if (false/*cafeNames.includes(params.cafe)*/) {
+        return (
+          <div className='qr_c_group'>
+            이미 등록되어있는 카드입니다.
+          </div>
+        );
+
+        /** 동일한 카페의 카드가 db에 없을 때 => 등록 성공 */
+      } else {
+        return (
+          <div className='qr_c_group'>
+            <div className='qr_c_card'>
+              <img className='qr_c_card_img' src='/detail/st_card.png' alt='' />
+            </div>
+            <div className='qr_btn_box'>
+              <Link to='/mypage'>
+                <div id='add_qr' onClick={addQR_to_db}>추가</div>
+              </Link>
+              <Link to='/mypage'>
+                <div id='cancel_qr'>취소</div>
+              </Link>
+            </div>
+          </div>
+        );
       }
     }
-    /** 고객이 아닌 점주일때 */
-    else if (data.getUserById.auth === 'owner') {
+
+    /** 로그인 한 user가 "OWNER" 일 때 */
+    else if (false/*data.getUserById.auth === 'owner'*/) {
       return (
-        /** 포인트를 적립하는 점주 전용 페이지로 이동 (인자 /:카페이름/:카드numbering */
+        /** 매장 전용 "App"으로 이동 */
         <Redirect to={`/적립domain/${params.cafe}/${params.code}`} />
       );
     }
   }
-  return (<></>);
 };
 
 export default QRcheck;

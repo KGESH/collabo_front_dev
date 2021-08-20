@@ -17,6 +17,7 @@ ReactDOM.render(
           <Link to="/mypage">마이페이지</Link>
           <Link to="/CafeTour">카페투어</Link>
           <Link to="/Detail/스타벅스">디테일</Link>
+          <Link to="/qrcheck/스타벅스/E9OW312GF1Q">카드추가</Link>
         </div>
         {/* --------------------------------------- */}
         <App />
