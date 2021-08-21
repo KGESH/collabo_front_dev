@@ -7,6 +7,8 @@ import Camera from 'components/header/camera/Camera';
 import Navbar from 'components/navbar/Navbar';
 import QRCode from 'qrcode.react';
 import Header from 'components/header/Header';
+import { useReactiveVar } from '@apollo/client';
+import { isInitVar, currentUserVar } from 'services/apollo-client/LocalState';
 
 const GET_USER = gql`
   query GETUSER($id: Int!) {
@@ -21,6 +23,10 @@ const GET_USER = gql`
 const MyPage = () => {
   let db_qr_list: string[] = [];
   let item_name: string[] = [];
+
+  const user = useReactiveVar(currentUserVar);
+
+  console.log(user);
 
   const { loading, data, error } = useQuery(GET_USER, {
     variables: { id: 11700 /* 불러올 아이디 */ },

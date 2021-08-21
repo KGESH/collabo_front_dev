@@ -1,5 +1,6 @@
 import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
+import { cache } from 'services/apollo-client/Cache';
 
 const GRAPHQL_SERVER_URL = `http://localhost:4010`;
 const httpLink = createHttpLink({
@@ -20,5 +21,5 @@ const authLink = setContext((_, { headers }) => {
 
 export const client: any = new ApolloClient({
   link: authLink.concat(httpLink),
-  cache: new InMemoryCache(),
+  cache,
 });

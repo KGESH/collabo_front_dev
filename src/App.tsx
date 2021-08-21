@@ -18,6 +18,7 @@ const App = () => {
    * Apollo Client - Reactive Variables 참조
    * (21-8-16:지성현)
    */
+
   const isInit = useReactiveVar(isInitVar);
   const isLoggedIn = useReactiveVar(isLoggedInVar);
   const user = useReactiveVar(currentUserVar);
@@ -43,6 +44,7 @@ const App = () => {
 
   useEffect(() => {
     console.log(`Login : ${isLoggedIn}`);
+    console.log('user');
     console.log(user);
   }, [user, isLoggedIn]);
 
