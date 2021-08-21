@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 export default () => {
 
   const exeDeepLink = () => {
-    const url: string = 'camera://path/';
+    const url: string = 'twitter://marketplace';
     location.href = url;
   };
 

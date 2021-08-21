@@ -37,7 +37,7 @@ const QRcheck = () => {
     return (<Redirect to='/' />);
   };
 
-  /** 로그인(false) 일 때 */
+  /** 로그인(false) 일 때 => 로그인페이지로 이동 */
   if (false) {
     return (<Redirect to='/login' />);
   }
@@ -46,7 +46,7 @@ const QRcheck = () => {
   else {
     // 현재 User 에 저장된 카페 목록들을 받아온다.
 
-    /** 로그인 한 user가 "CLIENT" 일 때 */
+    /** 로그인 한 user 가 "CLIENT" 일 때 */
     if (true/*data.getUserById.auth === ('client')*/) {
 
       /** 이미 동일한 카페의 카드가 db에 있을 때 => 등록 실패 */
@@ -61,6 +61,7 @@ const QRcheck = () => {
       } else {
         return (
           <div className='qr_c_group'>
+            카드에 있는 qr링크를 통해서 들어왔을 때 화면입니다.
             <div className='qr_c_card'>
               <img className='qr_c_card_img' src='/detail/st_card.png' alt='' />
             </div>

@@ -21,13 +21,15 @@ const MypageDetail = () => {
     setClick(e.currentTarget.id);
   };
 
+  const params:any = useParams();
+
   return (
     <div className='detail__special'>
       <div className='detail__first_block'>
         <div className='de_first__card_img'>
           <img src='/detail/st_card.png' alt='' id='detail_card_img' />
         </div>
-        <div className='de_first__cafe_name'>STARBUCKS</div>
+        <div className='de_first__cafe_name'>{params.cafe}</div>
       </div>
       <div className='detail__second_block'>
         <input type='radio' id='visit' name='radios' onClick={fnc} checked={click === 'visit'}/>
