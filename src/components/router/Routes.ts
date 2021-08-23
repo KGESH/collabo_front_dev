@@ -43,7 +43,7 @@ const AppRoutes: IRoutes[] = [
   {
     path: '/CafeTour',
     exact: true,
-    component: Map,
+    component: CafeTour,
   },
   {
     path: '/qrcheck/:cafe/:code',

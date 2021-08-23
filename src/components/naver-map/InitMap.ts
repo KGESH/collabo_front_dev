@@ -1,17 +1,15 @@
-import { position } from 'components/naver-map/NaverMap';
-import { cafeList } from 'components/naver-map/CafeList';
-import { mapProps } from 'components/naver-map/CafeList';
-import { makeVar } from '@apollo/client';
+import { ICafeInfo } from 'components/naver-map/MapInterface';
 import 'components/naver-map/style/NaverMap.css';
-import { useReactiveVar } from '@apollo/client';
 import {
   mapVar,
   currentMarkerVar,
   currentPositionVar,
 } from 'components/naver-map/LocalState';
+import { makeVar } from '@apollo/client';
+import { useReactiveVar } from '@apollo/client';
 import img from 'resources/images/currentPosition/currentPosition.png';
 
-const initMap = () => {
+const initMap = (cafeList : ICafeInfo[]) => {
   /**
    * 지도 생성
    * 현재 위치 받아서 가운데 놓기
@@ -84,7 +82,7 @@ const initMap = () => {
    */
   const cafeMarkers: naver.maps.Marker[] = [];
   const cafeInfomations: naver.maps.InfoWindow[] = [];
-  cafeList.map((cafe: mapProps) => {
+  cafeList.map((cafe: ICafeInfo) => {
     /*
       현재 위치 & 카페 위치를 기반으로 한 작업
       1. 거리 구하기 (경도, 위도 좌표값을 통한 계산)
@@ -167,9 +165,9 @@ const initMap = () => {
   });
 
   /**
-   * 현재 위치 표시
+   * 맵에서 클릭한 위치 표시
    */
-
+  /*
   naver.maps.Event.addListener(map, 'mousedown', (e) => {
     console.log('Coord: ' + e.coord.toString());
     console.log(e.coord._lat, e.coord._lng);
@@ -181,6 +179,8 @@ const initMap = () => {
       }),
     );
   });
+
+  */
 
   /**
    * map, currentMarker 전역변수 저장

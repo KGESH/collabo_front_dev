@@ -1,9 +1,9 @@
 import { makeVar } from '@apollo/client';
-import { position } from 'components/naver-map/NaverMap';
+import { IPosition } from 'components/naver-map/MapInterface';
 
 export const mapVar = makeVar<naver.maps.Map | null>(null);
 export const currentMarkerVar = makeVar<naver.maps.Marker | null>(null);
-export const currentPositionVar = makeVar<position>({
+export const currentPositionVar = makeVar<IPosition>({
   latitude: 0,
   longitude: 0,
 });
