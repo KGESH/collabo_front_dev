@@ -14,6 +14,7 @@ const GET_USER = gql`
       cafe_list {
         cafe_name
         code
+        card_img
       }
       point
     }
@@ -102,7 +103,7 @@ const MyPage = () => {
           <div className='my_wallet_inner'>
             {!loading && data && data.getUserById.cafe_list.map((w: any, index: number) => (
               <div className='my_wallet__card' onClick={() => cardClick(index)}>
-                <img src='https://cdn.lcnews.co.kr/news/photo/202004/6489_7363_548.png' alt='' />
+                <img src={w.card_img} alt='' />
                 <div className='my_qr_box hidden'>
                   <div className='my_qr_code'>
                     {/* user정보에 있는 '카페이름'과 해당 카페의 'Code'를 가져와서 아래 링크로 가는 QR코드를 생성한다. */}

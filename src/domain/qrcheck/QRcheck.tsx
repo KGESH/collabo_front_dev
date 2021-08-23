@@ -9,11 +9,13 @@ const ADD_CARD = gql`
     $id: Int!
     $cafe_name: String!
     $code: String!
+    $card_img: String!
   ) {
     addCard(
       id: $id
       cafe_name: $cafe_name
       code: $code
+      card_img: $card_img
     ) {
       id
     }
@@ -70,6 +72,7 @@ const QRcheck = () => {
           id: 11700, /* 배포 시 수정해야 합니다. @@@@@@@@@@@*/
           cafe_name: `${params.cafeName}`,
           code: `${params.code}`,
+          card_img: `${data?.getCafeByName?.cafe_info?.card_img}`
         },
       });
     } catch (e) {
@@ -89,7 +92,7 @@ const QRcheck = () => {
     /** 로그인 한 user 가 "CLIENT" 일 때 */
     if (data?.getUserById?.auth == 'client') {
       /** 이미 동일한 카페의 카드가 db에 있을 때 => 등록 실패  */
-      if (data?.existCafeNameInMyDB !== null) {
+      if (data?.getCafeByName !== null) {
         return (
           <div className='error_message'>
             이미 등록되어있는 카드입니다.
@@ -99,13 +102,13 @@ const QRcheck = () => {
         /** 동일한 카페의 카드가 db에 없을 때 => 해당하는 카페가 db에 존재하는지 확인 */
       } else {
         /** 해당 카페가 존재한다면 카페 등록 화면으로 전환 */
-        if (data?.getCafeByCafeName !== null) {
+        if (data?.getCafeByName !== null) {
           return (
             <div className='qr_c_group'>
               <div className='qr_c_card'>
-                <img className='qr_c_card_img' src={data?.getCafeByCafeName?.cafe_info?.card_img} alt='' />
+                <img className='qr_c_card_img' src={data?.getCafeByName?.cafe_info?.card_img} alt='' />
               </div>
-              <div>{data?.getCafeByCafeName?.cafe_info?.name}</div>
+              <div>{data?.getCafeByName?.cafe_info?.name}</div>
               <div className='qr_btn_box'>
                 <Link to='/mypage'>
                   <div id='add_qr' onClick={addCard_to_db}>추가</div>
