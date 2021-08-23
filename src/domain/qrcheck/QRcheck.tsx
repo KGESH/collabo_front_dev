@@ -92,7 +92,7 @@ const QRcheck = () => {
     /** 로그인 한 user 가 "CLIENT" 일 때 */
     if (data?.getUserById?.auth == 'client') {
       /** 이미 동일한 카페의 카드가 db에 있을 때 => 등록 실패  */
-      if (data?.getCafeByName !== null) {
+      if (data?.existCafeNameInMyDB !== null) {
         return (
           <div className='error_message'>
             이미 등록되어있는 카드입니다.
