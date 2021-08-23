@@ -39,7 +39,7 @@ const GET_USER = gql`
         cafe_name
       }
     }
-    getCafeByCafeName(
+    getCafeByName(
       name: $name
     ) {
       cafe_info {
@@ -88,7 +88,6 @@ const QRcheck = () => {
 
     /** 로그인 한 user 가 "CLIENT" 일 때 */
     if (data?.getUserById?.auth == 'client') {
-
       /** 이미 동일한 카페의 카드가 db에 있을 때 => 등록 실패  */
       if (data?.existCafeNameInMyDB !== null) {
         return (
