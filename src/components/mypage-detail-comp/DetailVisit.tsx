@@ -2,6 +2,7 @@ import React from 'react';
 import 'components/mypage-detail-comp/style/DetailVisit.css';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
+import SmallMenu from '../small-menu/SmallMenu';
 
 const GET_MY_MILEAGE_LOG = gql`
   query GETMYMILEAGELOG($client_id: String!) {
@@ -18,9 +19,6 @@ export default () => {
     variables: { client_id: '유성현' },
   });
 
-  const small_menu = () => {
-    alert('메뉴');
-  };
 
   return (
       <div className='de_vi__content_group'>
@@ -34,11 +32,7 @@ export default () => {
             <div className='de_vi_first__day_and_time'>8.15 일 | 오후 3:00</div>
           </div>
           {/* 누르면 detail->menu 생성 (여기서 menu는 파일 하나를 추가해서 다루도록 함 */}
-          <div className='de_vi_first__spot' onClick={small_menu}>
-            <div className='dot' />
-            <div className='dot' />
-            <div className='dot' />
-          </div>
+          <SmallMenu mode='visit'/>
         </div>
         <div className='de_vi_second_block'>
           <div className='de_vi_second__visit_times'>3번째 방문</div>

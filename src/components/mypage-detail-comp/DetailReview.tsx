@@ -6,7 +6,7 @@ import { useQuery } from '@apollo/react-hooks';
 
 const GET_MY_REVIEW = gql`
   query GETMYREVIEW($key: String!) {
-    getReview(key: $key) {
+    getReviewByKey(key: $key) {
       user_name
       content
       like
@@ -28,7 +28,7 @@ export default () => {
 
   return (
     <>
-      {!loading && data && data.getReview.map((review: any, index: number) => (
+      {!loading && data && data.getReviewByKey.map((review: any, index: number) => (
         <div className='de_re__content_group'>
           <div className='de_re_first_block'>
             <div className='de_re_first__check_img'>

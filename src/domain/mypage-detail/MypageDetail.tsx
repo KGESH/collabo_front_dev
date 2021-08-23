@@ -9,7 +9,7 @@ import DetailBeans from 'components/mypage-detail-comp/DetailBeans';
 
 const GET_CAFE = gql`
   query ($name: String!) {
-    getCafeBy(name: $name) {
+    getCafeByName(name: $name) {
       cafe_info{
         name
         card_img
@@ -37,9 +37,9 @@ const MypageDetail = () => {
       <div className='detail__first_block'>
         <div className='de_first__card_img'>
           {/* 카드 이미지는 몸고.cafes.cafe_info.card_img에 url 형태로 저장시키고 받아오도록 한다. */}
-          <img src={data?.getCafeBy?.cafe_info?.card_img} alt='' id='detail_card_img' />
+          <img src={data?.getCafeByName?.cafe_info?.card_img} alt='' id='detail_card_img' />
         </div>
-        <div className='de_first__cafe_name'>{data?.getCafeBy?.cafe_info?.name}</div>
+        <div className='de_first__cafe_name'>{data?.getCafeByName?.cafe_info?.name}</div>
       </div>
       <div className='detail__second_block'>
         <input type='radio' id='visit' name='radios' onClick={fnc} checked={click === 'visit'} />
