@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import 'components/small-menu/style/SmallMenu.css';
 
 export default ({ mode }: any) => {
 
@@ -13,7 +14,11 @@ export default ({ mode }: any) => {
         <div className='dot' />
         <div className='dot' />
       </div>
-      {modal ? console.log('ppap') : ''}
+      {modal ?
+        <div className='sm_modal_group'>
+          <div>{mode}의 모달</div>
+        </div>
+        : ''}
     </>
   );
 }

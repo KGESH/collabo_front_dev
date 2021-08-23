@@ -6,10 +6,25 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+    z-index: 11;
 }
+
 .dot {
     width: 3px;
     height: 3px;
     border-radius: 10px;
     background-color: #7a7a7a;
+}
+
+.sm_modal_group {
+    width: 150px;
+    height: 180px;
+    border-radius: 10px;
+    box-shadow: 0 0 6px #939393;
+    z-index: 10;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: white;
+
 }

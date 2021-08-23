@@ -29,22 +29,7 @@
 
 .de_vi_first__day_and_time {
     font-size: 0.9em;
-}
-
-.de_vi_first__spot {
-    width: 25px;
-    height: 25px;
-    position: absolute;
-    right: 10px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-}
-.dot {
-    width: 3px;
-    height: 3px;
-    border-radius: 10px;
-    background-color: #7a7a7a;
+    font-weight: lighter;
 }
 
 .de_vi_second_block {

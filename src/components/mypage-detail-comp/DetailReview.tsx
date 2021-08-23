@@ -2,6 +2,7 @@ import React from 'react';
 import 'components/mypage-detail-comp/style/DetailReview.css';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
+import SmallMenu from '../small-menu/SmallMenu';
 
 
 const GET_MY_REVIEW = gql`
@@ -39,7 +40,7 @@ export default () => {
               <div className='de_re_first__branch'>스타벅스 강남역점</div>
               <div className='de_re_first__day_and_time'>8.15 일 | 오후 3:00</div>
             </div>
-            <div className='de_re_first__spot'>. . .</div>
+            <SmallMenu mode='review'/>
           </div>
 
           <div className='de_re_second__block'>

@@ -88,7 +88,6 @@ const MyPage = () => {
     <>
       <div className='my_group'>
         <Header menu={true} />
-        <Camera />
         <div>
           <div className='my_point_group'>
             <em>
