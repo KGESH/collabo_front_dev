@@ -50,8 +50,9 @@ export default () => {
 
           <div className='de_re_third_block'>
             <div className='star'>
+              {/* 맛 분위기 가격은 몽고.review.star에서 받아온다. */}
               <div className='de_re_third__flavour'>맛 {review.star.flavor}</div>
-              <div className='de_re_third__atmosphere'>공간 {review.star.atmosphere}</div>
+              <div className='de_re_third__atmosphere'>분위기 {review.star.atmosphere}</div>
               <div className='de_re_third__price'>가격 {review.star.price}</div>
             </div>
             <div className='heart'>
@@ -65,7 +66,7 @@ export default () => {
               </div>
             </div>
             <div className='내용'>
-              <p>너무 맛있고 좋 공간이였습니다. 에티오피아 특유의 향미가 일품이였고 직원들의 서비스 또한 친절하여 다시 방문 할 예정입니다.</p>
+              <p>{review.content}</p>
             </div>
           </div>
         </div>

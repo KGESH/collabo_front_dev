@@ -49,7 +49,7 @@ const AppRoutes: IRoutes[] = [
     component: QRcheck,
   },
   {
-    path: '/Detail/:cafe',
+    path: '/Detail/:name',
     exact: true,
     component: MypageDetail,
   },
