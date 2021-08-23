@@ -55,17 +55,17 @@ export default () => {
               <div className='de_re_third__atmosphere'>분위기 {review.star.atmosphere}</div>
               <div className='de_re_third__price'>가격 {review.star.price}</div>
             </div>
-            <div className='heart'>
-              <div>
-                <img className='de_icon' src='/detail/heart-regular.svg' alt='' />
+            <div className='evaluation_member'>
+              <div className='eva_like eva_center'>
+                <img className='de_icon' src='/detail/review/heart.png' alt='' />
                 <span>{review.like}</span>
               </div>
-              <div className='지도'>
-                <img className='de_icon' src='/detail/map.svg' alt='' />
+              <div className='eva_map eva_center'>
+                <img className='de_icon' src='/detail/review/position.png' alt='' />
                 <span>{review.map}</span>
               </div>
             </div>
-            <div className='내용'>
+            <div className='review_content'>
               <p>{review.content}</p>
             </div>
           </div>
