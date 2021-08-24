@@ -1,0 +1,25 @@
+.map_box {
+  display: fix;
+  width: 100vw;
+  height: 75vh;
+}
+
+.map__header {
+  width: 100vw;
+  height: 14vh;
+  position: fixed;
+  z-index: 100;
+  background-color: transparent;
+  text-align: center;
+}
+
+
+.map__footer{
+  position:fixed;
+  left:0px;
+  bottom:0px;
+}
+
+.map__section{
+  position: fixed;
+}

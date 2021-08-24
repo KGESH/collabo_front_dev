@@ -47,11 +47,11 @@
     border-radius: 10px;
 }
 
-input[type="radio"] {
+.de_second__input_radio {
     visibility: hidden;
     position: absolute;
 }
 
-input[type="radio"]:checked + label div {
+.de_second__input_radio:checked + label div {
     background-color: #E7E6E6;
 }
