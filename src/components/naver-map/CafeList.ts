@@ -1,6 +1,6 @@
 import { ICafeInfo } from 'components/naver-map/MapInterface';
 
-export const cafeList: ICafeInfo[] = [
+export const List: ICafeInfo[] = [
   {
     name: 'UCL',
     mapPos: new naver.maps.LatLng(37.49739247636679, 127.024500411214),

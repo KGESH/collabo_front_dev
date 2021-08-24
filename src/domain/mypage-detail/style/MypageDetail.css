@@ -46,7 +46,7 @@
     border: solid 1px #B0B2B2;
     border-radius: 10px;
 }
-
+/*
 input[type="radio"] {
     visibility: hidden;
     position: absolute;
@@ -54,4 +54,4 @@ input[type="radio"] {
 
 input[type="radio"]:checked + label div {
     background-color: #E7E6E6;
-}
+}*/

@@ -12,3 +12,4 @@ export const currentJwtVar = makeVar<String | null>(
 );
 export const isLoggedInVar = makeVar<boolean>(false);
 export const isInitVar = makeVar<boolean>(false);
+export const clickedHashTagVar = makeVar<string>('팔로우');

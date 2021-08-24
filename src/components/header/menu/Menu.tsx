@@ -9,7 +9,6 @@ const Menu = () => {
     const list: any = document.getElementById('menu_list');
     list.classList.toggle('open');
     event.currentTarget.classList.toggle('active');
-
   };
 
   return (

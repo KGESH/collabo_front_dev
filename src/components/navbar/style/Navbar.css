@@ -11,6 +11,8 @@
         position: absolute;
         bottom: 0;
         border-top: solid 1px #DEE0DF;
+        background-color: #FFFFFF;
+        z-index: 100;
     }
 
     .nav_img {

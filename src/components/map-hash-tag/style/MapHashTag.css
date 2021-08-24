@@ -1,0 +1,39 @@
+.map__hash_tag_container {
+  width: 90vw;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1vh;
+  margin-left: 5vw;
+}
+
+.container__hash_tag_list{
+  width: 75vw;
+  display: flex;
+  justify-content: space-between;
+  overflow-x: scroll;
+}
+.container__hash_tag_list::-webkit-scrollbar {
+  display:none;
+}
+
+.hash_tag_list__border {
+  width: 40px;
+  height: 16px;
+  font-size: 0.7em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: solid 1px #B0B2B2;
+  border-radius: 10px;
+  margin-right: 4vw;
+  background-color: aliceblue;
+}
+
+.hash_tag_list__radio_btn {
+  visibility: hidden;
+  position: absolute;
+}
+
+.hash_tag_list__radio_btn:checked + label div {
+  background-color: #B0B2B2;
+}

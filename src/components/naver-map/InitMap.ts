@@ -1,20 +1,24 @@
-import { ICafeInfo } from 'components/naver-map/MapInterface';
+import { ICafeInfo, IPosition } from 'components/naver-map/MapInterface';
 import 'components/naver-map/style/NaverMap.css';
 import {
   mapVar,
   currentMarkerVar,
   currentPositionVar,
 } from 'components/naver-map/LocalState';
+import { getDistance } from 'components/naver-map/MapFunctions';
 import { makeVar } from '@apollo/client';
 import { useReactiveVar } from '@apollo/client';
 import img from 'resources/images/currentPosition/currentPosition.png';
+import { List } from './CafeList';
 
-const initMap = (cafeList : ICafeInfo[]) => {
+const initMap = (cafeList: ICafeInfo[]) => {
   /**
    * 지도 생성
    * 현재 위치 받아서 가운데 놓기
    * 전역 변수에 저장
    */
+
+  cafeList = List;
 
   const currentPosition = currentPositionVar();
 
@@ -88,34 +92,13 @@ const initMap = (cafeList : ICafeInfo[]) => {
       1. 거리 구하기 (경도, 위도 좌표값을 통한 계산)
       2. 경로 구하기 (카카오맵 앱 URL SCHEME)
       */
-    const currentLatitude: number = +currentPosition.latitude;
-    const currentLongitude: number = +currentPosition.longitude;
-    const cafeLatitude: number = +cafe.latitude;
-    const cafeLongitude: number = +cafe.longitude;
 
-    let distance: number = 0;
-    if (
-      currentLatitude !== cafeLatitude ||
-      currentLongitude !== cafeLongitude
-    ) {
-      const radlat1 = (Math.PI * currentLatitude) / 180;
-      const radlat2 = (Math.PI * cafeLatitude) / 180;
-      const theta = currentLongitude - cafeLongitude;
-      const radtheta = (Math.PI * theta) / 180;
-      distance =
-        Math.sin(radlat1) * Math.sin(radlat2) +
-        Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
-      if (distance > 1) {
-        distance = 1;
-      }
-      distance = Math.acos(distance);
-      distance = (distance * 180) / Math.PI;
-      distance = distance * 60 * 1.1515;
-      distance = distance * 1.609344;
-    }
-
-    const kakaoScheme: string = `kakaomap://route?sp=${currentLatitude},${currentLongitude}&ep=${cafeLatitude},${cafeLongitude}&by=CAR`;
-    const distaceString: string = distance.toFixed(2);
+    const distaceString: string = getDistance(
+      +currentPosition.latitude,
+      +currentPosition.longitude,
+      +cafe.latitude,
+      +cafe.longitude,
+    );
 
     cafeMarkers.push(
       new naver.maps.Marker({
@@ -123,8 +106,8 @@ const initMap = (cafeList : ICafeInfo[]) => {
         map: map,
         icon: {
           url: './cafeIcon.png',
-          size: new naver.maps.Size(40, 40),
-          scaledSize: new naver.maps.Size(40, 40),
+          size: new naver.maps.Size(25, 25),
+          scaledSize: new naver.maps.Size(25, 25),
           origin: new naver.maps.Point(0, 0),
           anchor: new naver.maps.Point(12, 34),
         },
@@ -135,7 +118,6 @@ const initMap = (cafeList : ICafeInfo[]) => {
       '<div class="iw_inner">',
       '   <h3>' + cafe.name + '</h3>',
       '   <p>거리 : ' + distaceString + 'km<br />',
-      '       <a href=' + kakaoScheme + ' target="_blank">카카오맵</a>',
       '   </p>',
       '</div>',
     ].join('');
@@ -153,6 +135,12 @@ const initMap = (cafeList : ICafeInfo[]) => {
 
     const i = cafeMarkers.length - 1;
     naver.maps.Event.addListener(cafeMarkers[i], 'click', () => {
+      const cafeInfo: ICafeInfo = cafe;
+      const position: IPosition = currentPositionVar();
+      const kakaoScheme: string = `kakaomap://route?sp=${position.latitude},${position.longitude}&ep=${cafeInfo.latitude},${cafeInfo.longitude}&by=CAR`;
+      const now: Date = new Date();
+      console.log(position.latitude, position.longitude);
+      console.log(cafeInfo.latitude, cafeInfo.longitude, now);
       const marker: naver.maps.Marker = cafeMarkers[i],
         infoWindow: naver.maps.InfoWindow = cafeInfomations[i];
       if (infoWindow.getMap()) {

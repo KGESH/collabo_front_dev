@@ -9,6 +9,7 @@ import QRcheck from 'domain/qrcheck/QRcheck';
 import MypageDetail from 'domain/mypage-detail/MypageDetail';
 import QRscan from 'domain/qr-scan/QRscan';
 import Map from 'domain/map/Map';
+import test from 'domain/test-page/Test';
 /**
  * 새로운 페이지를 라우터에 연결할 때
  * 이곳에 추가
@@ -64,6 +65,11 @@ const AppRoutes: IRoutes[] = [
     path: '/map',
     exact: true,
     component: Map,
+  },
+  {
+    path: '/test',
+    exact: true,
+    component: test,
   },
 ];
 
