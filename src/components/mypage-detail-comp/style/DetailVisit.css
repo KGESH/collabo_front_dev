@@ -29,11 +29,7 @@
 
 .de_vi_first__day_and_time {
     font-size: 0.9em;
-}
-
-.de_vi_first__spot {
-    position: absolute;
-    right: 10px;
+    font-weight: lighter;
 }
 
 .de_vi_second_block {
@@ -50,16 +46,18 @@
 
 .de_vi_second__visit_times {
     width: 80%;
-    height: 30px;
-    margin-top: 20px;
+    height: 47px;
+    display: flex;
+    align-items: center;
     border-bottom: solid 1px #E7E7E7;
 }
 
 .de_vi_second__data_group {
     width: 80%;
-    margin: 10px 0;
+    height: 47px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .de_vi_third_block {

@@ -1,19 +1,53 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useParams, Redirect, Link } from 'react-router-dom';
 import { gql } from 'apollo-boost';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import 'domain/qrcheck/style/QRcheck.css';
 
-const add_QR = gql`
+const ADD_CARD = gql`
   mutation (
-    $cafeName: String!
+    $id: Int!
+    $cafe_name: String!
     $code: String!
+    $card_img: String!
   ) {
-    addQR(
-      cafeName: $cafeName
+    addCard(
+      id: $id
+      cafe_name: $cafe_name
       code: $code
+      card_img: $card_img
     ) {
-      code
+      id
+    }
+  }
+`;
+
+const GET_USER = gql`
+  query (
+    $id: Int!
+    $cafe_name: String!
+    $name: String!
+  ) {
+    getUserById(
+      id: $id
+    ) {
+      auth
+    }
+    existCafeNameInMyDB(
+      id: $id
+      cafe_name: $cafe_name
+    ) {
+      cafe_list {
+        cafe_name
+      }
+    }
+    getCafeByName(
+      name: $name
+    ) {
+      cafe_info {
+        name
+        card_img
+      }
     }
   }
 `;
@@ -21,69 +55,90 @@ const add_QR = gql`
 const QRcheck = () => {
 
   const params: any = useParams();
-  const [addQR] = useMutation(add_QR);
+  const [addCard] = useMutation(ADD_CARD);
+  const { data } = useQuery(GET_USER, {
+    variables: {
+      id: 11700, /* 배포 시 수정해야 합니다. @@@@@@@@@@@*/
+      cafe_name: params.cafeName,
+      name: params.cafeName,
+    },
+  });
 
-  const addQR_to_db = () => {
+  /** 등록을 요청하는 Mutation */
+  const addCard_to_db = () => {
     try {
-      addQR({
+      addCard({
         variables: {
-          cafeName: `${params.cafeName}`,
+          id: 11700, /* 배포 시 수정해야 합니다. @@@@@@@@@@@*/
+          cafe_name: `${params.cafeName}`,
           code: `${params.code}`,
+          card_img: `${data?.getCafeByName?.cafe_info?.card_img}`
         },
       });
     } catch (e) {
       console.log(e);
     }
-    return (<Redirect to='/' />);
   };
 
-  /** 로그인(false) 일 때 */
+  /** 로그인(false) 일 때 => 로그인페이지로 이동 */
   if (false) {
+    // 로그인 시 history 사용 !!
     return (<Redirect to='/login' />);
   }
 
-  /** 로그인(true) 일 때 */
+  /** 로그인 상태(true) 일 때 */
   else {
-    // 현재 User 에 저장된 카페 목록들을 받아온다.
 
-    /** 로그인 한 user가 "CLIENT" 일 때 */
-    if (true/*data.getUserById.auth === ('client')*/) {
-
-      /** 이미 동일한 카페의 카드가 db에 있을 때 => 등록 실패 */
-      if (false/*cafeNames.includes(params.cafe)*/) {
+    /** 로그인 한 user 가 "CLIENT" 일 때 */
+    if (data?.getUserById?.auth == 'client') {
+      /** 이미 동일한 카페의 카드가 db에 있을 때 => 등록 실패  */
+      if (data?.existCafeNameInMyDB !== null) {
         return (
-          <div className='qr_c_group'>
+          <div className='error_message'>
             이미 등록되어있는 카드입니다.
           </div>
         );
 
-        /** 동일한 카페의 카드가 db에 없을 때 => 등록 성공 */
+        /** 동일한 카페의 카드가 db에 없을 때 => 해당하는 카페가 db에 존재하는지 확인 */
       } else {
-        return (
-          <div className='qr_c_group'>
-            <div className='qr_c_card'>
-              <img className='qr_c_card_img' src='/detail/st_card.png' alt='' />
+        /** 해당 카페가 존재한다면 카페 등록 화면으로 전환 */
+        if (data?.getCafeByName !== null) {
+          return (
+            <div className='qr_c_group'>
+              <div className='qr_c_card'>
+                <img className='qr_c_card_img' src={data?.getCafeByName?.cafe_info?.card_img} alt='' />
+              </div>
+              <div>{data?.getCafeByName?.cafe_info?.name}</div>
+              <div className='qr_btn_box'>
+                <Link to='/mypage'>
+                  <div id='add_qr' onClick={addCard_to_db}>추가</div>
+                </Link>
+                <Link to='/mypage'>
+                  <div id='cancel_qr'>취소</div>
+                </Link>
+              </div>
             </div>
-            <div className='qr_btn_box'>
-              <Link to='/mypage'>
-                <div id='add_qr' onClick={addQR_to_db}>추가</div>
-              </Link>
-              <Link to='/mypage'>
-                <div id='cancel_qr'>취소</div>
-              </Link>
+          );
+        } else {
+          /** 존재하지 않는다면 error message를 화면에 출력 */
+          return (
+            <div className='error_message'>
+              유효하지 않은 카드입니다.
             </div>
-          </div>
-        );
+          );
+        }
       }
     }
 
     /** 로그인 한 user가 "OWNER" 일 때 */
-    else if (false/*data.getUserById.auth === 'owner'*/) {
+    else if (data?.getUserById?.auth == 'owner' || data?.getUserById?.auth == 'staff') {
       return (
         /** 매장 전용 "App"으로 이동 */
         <Redirect to={`/적립domain/${params.cafe}/${params.code}`} />
       );
     }
+
+    else {return (<></>);}
   }
 };
 

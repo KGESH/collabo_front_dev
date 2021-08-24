@@ -8,6 +8,7 @@ export default (props:any) => {
    * 햄버거 메뉴가 없는 헤더 호출 => <Header menu={false}/>
    * 햄버거 메뉴가 있는 헤더 호출 => <Header menu={true}/>
    * 카메라(qr코드 스캐너)는 따로 import 해주세요.
+   * (제작:유성현)
    */
   return (
     <>

@@ -64,16 +64,27 @@
 .star {
     display: flex;
     margin-top: 10px;
+    color: #2F2F2F;
 }
 
 .de_re_third__atmosphere {
     margin: 0 10px;
 }
 
-.heart {
+.evaluation_member {
     width: 100px;
     display: flex;
+    justify-content: space-between;
     margin-top: 10px;
+}
+.eva_center {
+    display: flex;
+    align-items: center;
+    font-size: 1.1em;
+    color: #5D5D5D;
+}
+.eva_like span {
+    margin-left: 2px;
 }
 
 .de_icon {
@@ -81,11 +92,12 @@
     height: 24px;
 }
 
-.지도 {
+.eva_map {
     margin-left: 10px;
 }
 
-.내용 {
+.review_content {
     text-align: center;
     line-height: 22px;
+    color: #2F2F2F;
 }
