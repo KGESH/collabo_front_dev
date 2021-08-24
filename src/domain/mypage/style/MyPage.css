@@ -35,7 +35,7 @@
     }
 
     .my_wallet_inner {
-        width: 80vw;
+        width: 95vw;
         height: 5vh;
         overflow: auto;
         scroll-snap-type: y mandatory;
@@ -44,15 +44,20 @@
         align-items: center;
         padding-top: 42vw;
         padding-bottom: 42vw;
+        position: absolute;
     }
 
     .my_wallet__card {
-        width: 67vw;
-        height: 42vw;
+        width: 258px;
+        height: 161px;
         border-radius: 10px;
         scroll-snap-align: center;
         position: relative;
         box-shadow: 0 0 7px #7a7a7a;
+    }
+    .my_wallet__card img {
+        width: 100%;
+        border-radius: 8px;
     }
 
     .my_qr_box {

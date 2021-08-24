@@ -1,4 +1,4 @@
-import { IRoutes } from 'types/Routes';
+import type { IRoutes } from 'types/Routes';
 import Home from 'domain/home/Home';
 import Login from 'domain/login/Login';
 import EmailSignUp from 'domain/email-sign-up/EmailSignUp';
@@ -7,9 +7,8 @@ import MyPage from 'domain/mypage/MyPage';
 import CafeTour from 'domain/cafe-tour/CafeTour';
 import QRcheck from 'domain/qrcheck/QRcheck';
 import MypageDetail from 'domain/mypage-detail/MypageDetail';
-import QRscan from 'domain/qr-scan/QRscan';
-import Map from 'domain/map/Map';
 import test from 'domain/test-page/Test';
+import Map from 'domain/map/Map';
 /**
  * 새로운 페이지를 라우터에 연결할 때
  * 이곳에 추가
@@ -47,7 +46,7 @@ const AppRoutes: IRoutes[] = [
     component: CafeTour,
   },
   {
-    path: '/qrcheck/:cafe/:code',
+    path: '/qrcheck/:cafeName/:code',
     exact: true,
     component: QRcheck,
   },
@@ -55,11 +54,6 @@ const AppRoutes: IRoutes[] = [
     path: '/Detail/:cafe',
     exact: true,
     component: MypageDetail,
-  },
-  {
-    path: '/qrscan',
-    exact: true,
-    component: QRscan,
   },
   {
     path: '/map',
@@ -70,6 +64,11 @@ const AppRoutes: IRoutes[] = [
     path: '/test',
     exact: true,
     component: test,
+  },
+  {
+    path: '/Detail/:name',
+    exact: true,
+    component: MypageDetail,
   },
 ];
 

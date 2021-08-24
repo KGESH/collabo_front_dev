@@ -1,0 +1,57 @@
+.qr_c_group {
+    width: 100vw;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.qr_c_card {
+    width: 256px;
+    height: 160px;
+
+}
+
+.qr_c_card_img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    box-shadow: 0 0 8px #9a9a9a;
+}
+
+.qr_btn_box {
+    margin-top: 30px;
+    display: flex;
+    width: 150px;
+    justify-content: space-between;
+}
+
+#add_qr {
+    width: 50px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: solid 1px;
+    border-radius: 10px;
+}
+
+#cancel_qr {
+    width: 50px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: solid 1px;
+    border-radius: 10px;
+}
+
+.error_message {
+    width: 100vw;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2em;
+}

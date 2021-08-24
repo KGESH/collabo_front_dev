@@ -1,5 +1,9 @@
 import { ICafeInfo } from 'components/naver-map/MapInterface';
 
+/**
+ * DB 사용하지 않을 때, TEST용 DATA
+ */
+
 export const List: ICafeInfo[] = [
   {
     name: 'UCL',

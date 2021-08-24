@@ -10,7 +10,7 @@ import {
   currentMarkerVar,
   currentPositionVar,
   cafeInfoVar,
-} from 'components/naver-map/LocalState';
+} from 'services/apollo-client/LocalState';
 import { useReactiveVar } from '@apollo/client';
 import { clickedHashTagVar } from 'services/apollo-client/LocalState';
 

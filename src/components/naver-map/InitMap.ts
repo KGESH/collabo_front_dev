@@ -4,12 +4,10 @@ import {
   mapVar,
   currentMarkerVar,
   currentPositionVar,
-} from 'components/naver-map/LocalState';
+} from 'services/apollo-client/LocalState';
 import { getDistance } from 'components/naver-map/MapFunctions';
-import { makeVar } from '@apollo/client';
-import { useReactiveVar } from '@apollo/client';
 import img from 'resources/images/currentPosition/currentPosition.png';
-import { List } from './CafeList';
+import { List } from 'components/naver-map/CafeList';
 
 const initMap = (cafeList: ICafeInfo[]) => {
   /**
