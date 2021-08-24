@@ -8,10 +8,10 @@ import DetailReview from 'components/mypage-detail-comp/DetailReview';
 import DetailBeans from 'components/mypage-detail-comp/DetailBeans';
 
 const GET_CAFE = gql`
-  query ($name: String!) {
-    getCafeByName(name: $name) {
+  query ($cafe_name: String!) {
+    getCafeByName(cafe_name: $cafe_name) {
       cafe_info{
-        name
+        cafe_name
         card_img
       }
     }
@@ -26,7 +26,7 @@ const MypageDetail = () => {
   };
   const params: any = useParams();
   const { loading, data, error } = useQuery(GET_CAFE, {
-    variables: { name: params.name },
+    variables: { cafe_name: params.name },
   });
   if(data) {
     console.log("데이터" + data);
@@ -39,7 +39,7 @@ const MypageDetail = () => {
           {/* 카드 이미지는 몸고.cafes.cafe_info.card_img에 url 형태로 저장시키고 받아오도록 한다. */}
           <img src={data?.getCafeByName?.cafe_info?.card_img} alt='' id='detail_card_img' />
         </div>
-        <div className='de_first__cafe_name'>{data?.getCafeByName?.cafe_info?.name}</div>
+        <div className='de_first__cafe_name'>{data?.getCafeByName?.cafe_info?.cafe_name}</div>
       </div>
       <div className='detail__second_block'>
         <input type='radio' id='visit' name='radios' onClick={fnc} checked={click === 'visit'} />

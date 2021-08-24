@@ -24,8 +24,12 @@ const Menu = () => {
         <div className='menu_list_inner'>
           <div className='menu__logo'>collabo</div>
           <div className='menu__member'>
-            <div className='menu__sign_in'>로그인</div>
-            <div className='menu__sign_up'>회원가입</div>
+            <Link to='/login'>
+              <div className='menu__sign_in'>로그인</div>
+            </Link>
+            <Link to='/signup'>
+              <div className='menu__sign_up'>회원가입</div>
+            </Link>
           </div>
           <div className='menu__content'>
             {Menu_list.map(w => (

@@ -83,7 +83,7 @@ const MyPage = () => {
   //   });
   // }, [loading]);
 
-
+  console.log(data);
   return (
     <>
       <div className='my_group'>

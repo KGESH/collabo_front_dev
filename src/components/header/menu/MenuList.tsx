@@ -5,28 +5,44 @@ import type { IMenuList } from 'types/Routes';
 
 const Menu_list: IMenuList[] = [
   {
-    path: '/',
-    label: '홈페이지',
+    path: '/mypage',
+    label: '프로필 편집',
   },
   {
-    path: '/Login',
-    label: '로그인',
+    path: '/mypage',
+    label: '설정',
   },
   {
-    path: '/EmailSignUp',
-    label: '회원가입',
+    path: '/mypage',
+    label: '프로필 편집',
   },
   {
-    path: '/MyPage',
-    label: '마이페이지',
+    path: '/mypage',
+    label: '설정',
   },
   {
-    path: '/CafeTour',
-    label: '카페투어',
+    path: '/mypage',
+    label: '프로필 편집',
   },
   {
-    path: '/qrcheck/:cafe/:code',
-    label: '카페 등록',
+    path: '/mypage',
+    label: '설정',
+  },
+  {
+    path: '/mypage',
+    label: '프로필 편집',
+  },
+  {
+    path: '/mypage',
+    label: '설정',
+  },
+  {
+    path: '/mypage',
+    label: '프로필 편집',
+  },
+  {
+    path: '/mypage',
+    label: '설정',
   },
 ];
 
