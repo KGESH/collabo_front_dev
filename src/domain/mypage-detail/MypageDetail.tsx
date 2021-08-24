@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import 'domain/mypage-detail/style/MypageDetail.css';
 import { useParams } from 'react-router-dom';
 import { gql } from 'apollo-boost';
@@ -25,12 +25,9 @@ const MypageDetail = () => {
     setClick(e.currentTarget.id);
   };
   const params: any = useParams();
-  const { loading, data, error } = useQuery(GET_CAFE, {
-    variables: { cafe_name: params.name },
+  const {data} = useQuery(GET_CAFE, {
+    variables: { cafe_name: params.cafe },
   });
-  if(data) {
-    console.log("데이터" + data);
-  }
 
   return (
     <div className='detail__special'>

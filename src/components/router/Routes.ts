@@ -64,12 +64,7 @@ const AppRoutes: IRoutes[] = [
     path: '/test',
     exact: true,
     component: test,
-  },
-  {
-    path: '/Detail/:name',
-    exact: true,
-    component: MypageDetail,
-  },
+  }
 ];
 
 export default AppRoutes;
