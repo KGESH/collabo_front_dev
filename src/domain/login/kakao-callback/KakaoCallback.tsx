@@ -5,7 +5,7 @@ import {
   currentUserVar,
   isLoggedInVar,
 } from 'services/apollo-client/LocalState';
-import { useQuery } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/react-hooks';
 import { GET_KAKAO_USER_BY_JWT } from 'services/apollo-client/GetKaKaoUserInfo';
 import { IUser } from 'types/User';
 import LoadingPage from 'components/loading-page/LoadingPage';
@@ -13,26 +13,31 @@ import LoadingPage from 'components/loading-page/LoadingPage';
 const KakaoCallback = () => {
   const location = useLocation();
   const { jwt } = queryString.parse(location.search);
+  const [getKakaoUser, { data, loading, error }] = useMutation(
+    GET_KAKAO_USER_BY_JWT,
+  );
   if (jwt) {
     localStorage.setItem('jwt', jwt as string);
+    getKakaoUser({ variables: { jwt } });
   }
-
-  const { loading, data, error } = useQuery(GET_KAKAO_USER_BY_JWT, {
-    variables: { jwt },
-  });
 
   if (error) {
     console.log(`kakao callback page error`);
     console.log(error);
   }
 
+  if (!loading && data) {
+    console.log(`loading done!`);
+    console.log(data);
+  }
   useEffect(() => {
-    if (!loading) {
+    if (!loading && data) {
+      console.log(data);
       const user: IUser = {
-        id: data?.getKakaoUserByJwt.id,
-        email: data?.getKakaoUserByJwt.email,
-        name: data?.getKakaoUserByJwt.name,
-        point: data?.getKakaoUserByJwt.point,
+        id: data?.getKakaoUserByJwt?.id,
+        email: data?.getKakaoUserByJwt?.email,
+        name: data?.getKakaoUserByJwt?.name,
+        point: data?.getKakaoUserByJwt?.point,
       };
       currentUserVar(user);
       isLoggedInVar(true);

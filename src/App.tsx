@@ -7,7 +7,7 @@ import {
   isLoggedInVar,
   isInitVar,
 } from 'services/apollo-client/LocalState';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery, useMutation } from '@apollo/react-hooks';
 import { useReactiveVar } from '@apollo/client';
 import { GET_KAKAO_USER } from 'services/apollo-client/GetKaKaoUserInfo';
 import { IUser } from 'types/User';
@@ -22,14 +22,21 @@ const App = () => {
   const isInit = useReactiveVar(isInitVar);
   const isLoggedIn = useReactiveVar(isLoggedInVar);
   const user = useReactiveVar(currentUserVar);
-  const { loading, data } = useQuery(GET_KAKAO_USER);
+  const [getKakaoUser, { loading, data }] = useMutation(GET_KAKAO_USER);
 
   useEffect(() => {
     KakaoSdkInit();
   }, []);
 
   useEffect(() => {
-    if (!user && data?.authUser) {
+    if (!user) {
+      console.log(`call kakao user Mutation`);
+      getKakaoUser();
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!loading && data?.authUser) {
       const me: IUser = {
         id: data.authUser.id,
         name: data.authUser.name,
@@ -40,13 +47,8 @@ const App = () => {
       isLoggedInVar(true);
     }
     isInitVar(true);
+    console.log(`call App useEffect / loading`);
   }, [loading]);
-
-  useEffect(() => {
-    console.log(`Login : ${isLoggedIn}`);
-    console.log('user');
-    console.log(user);
-  }, [user, isLoggedIn]);
 
   return <>{isInit ? <AppRouter /> : <Loading />}</>;
 };
