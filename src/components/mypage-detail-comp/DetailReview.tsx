@@ -1,7 +1,7 @@
 import React from 'react';
 import 'components/mypage-detail-comp/style/DetailReview.css';
 import { gql } from 'apollo-boost';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import SmallMenu from '../small-menu/SmallMenu';
 
 

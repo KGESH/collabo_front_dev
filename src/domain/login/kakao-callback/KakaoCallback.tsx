@@ -5,7 +5,7 @@ import {
   currentUserVar,
   isLoggedInVar,
 } from 'services/apollo-client/LocalState';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import { GET_KAKAO_USER_BY_JWT } from 'services/apollo-client/GetKaKaoUserInfo';
 import { IUser } from 'types/User';
 import LoadingPage from 'components/loading-page/LoadingPage';

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams, Redirect, Link } from 'react-router-dom';
 import { gql } from 'apollo-boost';
-import { useMutation, useQuery } from '@apollo/react-hooks';
+import { useMutation, useQuery } from '@apollo/client';
 import 'domain/qrcheck/style/QRcheck.css';
 
 const ADD_CARD = gql`

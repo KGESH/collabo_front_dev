@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import 'domain/mypage-detail/style/MypageDetail.css';
 import { useParams } from 'react-router-dom';
 import { gql } from 'apollo-boost';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import DetailVisit from 'components/mypage-detail-comp/DetailVisit';
 import DetailReview from 'components/mypage-detail-comp/DetailReview';
 import DetailBeans from 'components/mypage-detail-comp/DetailBeans';

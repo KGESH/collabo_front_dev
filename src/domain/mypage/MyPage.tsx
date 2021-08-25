@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { gql } from 'apollo-boost';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import 'domain/mypage/style/MyPage.css';
 import Navbar from 'components/navbar/Navbar';
 import QRCode from 'qrcode.react';
@@ -24,7 +24,6 @@ const MyPage = () => {
   const { loading, data, error } = useQuery(GET_USER, {
     variables: { id: 11700 /* 불러올 아이디 */ },
   });
-
   const cardClick = (index: number) => {
     document.getElementsByClassName('my_qr_box')[index].classList.toggle('hidden');
   };
@@ -81,7 +80,6 @@ const MyPage = () => {
   //   });
   // }, [loading]);
 
-  console.log(data);
   return (
     <>
       <div className='my_group'>
