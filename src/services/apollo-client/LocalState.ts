@@ -18,7 +18,7 @@ export const isInitVar = makeVar<boolean>(false);
 
 /**
  * 지도 관련 전역 상태
- * 
+ *
  */
 export const clickedHashTagVar = makeVar<string>('팔로우');
 export const mapVar = makeVar<naver.maps.Map | null>(null);
@@ -28,3 +28,5 @@ export const currentPositionVar = makeVar<IPosition>({
   longitude: 0,
 });
 export const cafeInfoVar = makeVar<ICafeInfo[]>([]);
+
+
