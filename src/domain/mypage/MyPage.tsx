@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { gql } from 'apollo-boost';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import 'domain/mypage/style/MyPage.css';
 import { Link } from 'react-router-dom';
 import Camera from 'components/header/camera/Camera';
@@ -24,7 +24,6 @@ const GET_USER = gql`
 `;
 
 const MyPage = () => {
-
   const user = useReactiveVar(currentUserVar);
 
   console.log(user);
@@ -34,7 +33,9 @@ const MyPage = () => {
   });
 
   const cardClick = (index: number) => {
-    document.getElementsByClassName('my_qr_box')[index].classList.toggle('hidden');
+    document
+      .getElementsByClassName('my_qr_box')
+      [index].classList.toggle('hidden');
   };
 
   /**
@@ -89,7 +90,6 @@ const MyPage = () => {
   //   });
   // }, [loading]);
 
-
   return (
     <>
       <div className='my_group'>
@@ -106,17 +106,26 @@ const MyPage = () => {
         </div>
         <div className='my_wallet_group'>
           <div className='my_wallet_inner'>
-            {!loading && data && data.getUserById.cafe_list.map((w: any, index: number) => (
-              <div className='my_wallet__card' onClick={() => cardClick(index)}>
-                <img src={w.card_img} alt='' />
-                <div className='my_qr_box hidden'>
-                  <div className='my_qr_code'>
-                    {/* user정보에 있는 '카페이름'과 해당 카페의 'Code'를 가져와서 아래 링크로 가는 QR코드를 생성한다. */}
-                    <QRCode value={`localhost:3000/qrcheck/${w.cafe_name}/${w.code}`} size={100} level={'L'} />
+            {!loading &&
+              data &&
+              data.getUserById.cafe_list.map((w: any, index: number) => (
+                <div
+                  className='my_wallet__card'
+                  onClick={() => cardClick(index)}
+                >
+                  <img src={w.card_img} alt='' />
+                  <div className='my_qr_box hidden'>
+                    <div className='my_qr_code'>
+                      {/* user정보에 있는 '카페이름'과 해당 카페의 'Code'를 가져와서 아래 링크로 가는 QR코드를 생성한다. */}
+                      <QRCode
+                        value={`localhost:3000/qrcheck/${w.cafe_name}/${w.code}`}
+                        size={100}
+                        level={'L'}
+                      />
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
           </div>
         </div>
       </div>

@@ -7,7 +7,7 @@ import {
   isLoggedInVar,
   isInitVar,
 } from 'services/apollo-client/LocalState';
-import { useQuery, useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/client';
 import { useReactiveVar } from '@apollo/client';
 import { GET_KAKAO_USER } from 'services/apollo-client/GetKaKaoUserInfo';
 import { IUser } from 'types/User';
@@ -42,6 +42,7 @@ const App = () => {
         name: data.authUser.name,
         email: data.authUser.email,
         point: data.authUser.point,
+        profile_img: data.authUser.profile_img,
       };
       currentUserVar(me);
       isLoggedInVar(true);

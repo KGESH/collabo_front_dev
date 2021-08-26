@@ -7,6 +7,7 @@ export const GET_KAKAO_USER_BY_JWT = gql`
       name
       email
       point
+      profile_img
     }
   }
 `;
@@ -18,6 +19,7 @@ export const GET_KAKAO_USER = gql`
       name
       email
       point
+      profile_img
     }
   }
 `;

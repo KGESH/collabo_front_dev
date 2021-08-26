@@ -5,7 +5,7 @@ import {
   currentUserVar,
   isLoggedInVar,
 } from 'services/apollo-client/LocalState';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/client';
 import { GET_KAKAO_USER_BY_JWT } from 'services/apollo-client/GetKaKaoUserInfo';
 import { IUser } from 'types/User';
 import LoadingPage from 'components/loading-page/LoadingPage';
@@ -26,18 +26,14 @@ const KakaoCallback = () => {
     console.log(error);
   }
 
-  if (!loading && data) {
-    console.log(`loading done!`);
-    console.log(data);
-  }
   useEffect(() => {
     if (!loading && data) {
-      console.log(data);
       const user: IUser = {
-        id: data?.getKakaoUserByJwt?.id,
-        email: data?.getKakaoUserByJwt?.email,
-        name: data?.getKakaoUserByJwt?.name,
-        point: data?.getKakaoUserByJwt?.point,
+        id: data.getKakaoUserByJwt.id,
+        email: data.getKakaoUserByJwt.email,
+        name: data.getKakaoUserByJwt.name,
+        point: data.getKakaoUserByJwt.point,
+        profile_img: data.getKakaoUserByJwt.profile_img,
       };
       currentUserVar(user);
       isLoggedInVar(true);
