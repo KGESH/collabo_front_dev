@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams, Redirect, Link } from 'react-router-dom';
 import { gql } from 'apollo-boost';
-import { useMutation, useQuery } from '@apollo/react-hooks';
+import { useMutation, useQuery } from '@apollo/client';
 import 'domain/qrcheck/style/QRcheck.css';
 
 const ADD_CARD = gql`
@@ -11,7 +11,7 @@ const ADD_CARD = gql`
     $code: String!
     $card_img: String!
   ) {
-    addCard(
+    saveCardToUser(
       id: $id
       cafe_name: $cafe_name
       code: $code
@@ -26,14 +26,13 @@ const GET_USER = gql`
   query (
     $id: Int!
     $cafe_name: String!
-    $name: String!
   ) {
     getUserById(
       id: $id
     ) {
       auth
     }
-    existCafeNameInMyDB(
+    existCafeNameInUser(
       id: $id
       cafe_name: $cafe_name
     ) {
@@ -42,10 +41,10 @@ const GET_USER = gql`
       }
     }
     getCafeByName(
-      name: $name
+      cafe_name: $cafe_name
     ) {
       cafe_info {
-        name
+        cafe_name
         card_img
       }
     }
@@ -60,7 +59,6 @@ const QRcheck = () => {
     variables: {
       id: 11700, /* 배포 시 수정해야 합니다. @@@@@@@@@@@*/
       cafe_name: params.cafeName,
-      name: params.cafeName,
     },
   });
 
@@ -92,7 +90,7 @@ const QRcheck = () => {
     /** 로그인 한 user 가 "CLIENT" 일 때 */
     if (data?.getUserById?.auth == 'client') {
       /** 이미 동일한 카페의 카드가 db에 있을 때 => 등록 실패  */
-      if (data?.existCafeNameInMyDB !== null) {
+      if (data?.existCafeNameInUser !== null) {
         return (
           <div className='error_message'>
             이미 등록되어있는 카드입니다.

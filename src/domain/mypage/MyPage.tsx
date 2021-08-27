@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/client';
 import 'domain/mypage/style/MyPage.css';
-import { Link } from 'react-router-dom';
-import Camera from 'components/header/camera/Camera';
 import Navbar from 'components/navbar/Navbar';
 import QRCode from 'qrcode.react';
 import Header from 'components/header/Header';
@@ -31,7 +29,6 @@ const MyPage = () => {
   const { loading, data, error } = useQuery(GET_USER, {
     variables: { id: 11700 /* 불러올 아이디 */ },
   });
-
   const cardClick = (index: number) => {
     document
       .getElementsByClassName('my_qr_box')

@@ -1,0 +1,12 @@
+
+#map {
+  width: 100vw;
+  height: 88vh;
+  z-index: 0;
+}
+
+.currentImg {
+  height: 40px;
+  width: 40px;
+}
+

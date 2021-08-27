@@ -8,6 +8,8 @@ import CafeTour from 'domain/cafe-tour/CafeTour';
 import QRcheck from 'domain/qrcheck/QRcheck';
 import MypageDetail from 'domain/mypage-detail/MypageDetail';
 import PostReview from 'domain/post-review/PostReview';
+import test from 'domain/test-page/Test';
+import Map from 'domain/map/Map';
 /**
  * 새로운 페이지를 라우터에 연결할 때
  * 이곳에 추가
@@ -50,7 +52,7 @@ const AppRoutes: IRoutes[] = [
     component: QRcheck,
   },
   {
-    path: '/Detail/:name',
+    path: '/Detail/:cafe',
     exact: true,
     component: MypageDetail,
   },
@@ -58,6 +60,16 @@ const AppRoutes: IRoutes[] = [
     path: '/PostReview',
     exact: true,
     component: PostReview,
+  },
+  {
+    path: '/map',
+    exact: true,
+    component: Map,
+  },
+  {
+    path: '/test',
+    exact: true,
+    component: test,
   },
 ];
 
