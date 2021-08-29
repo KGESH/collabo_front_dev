@@ -1,40 +1,54 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useReactiveVar } from '@apollo/client';
 import { currentUserVar } from 'services/apollo-client/LocalState';
 import 'components/review-form/style/ReviewForm.css';
-import test from 'components/review-form/style/test.svg';
+import PlusIcon from 'resources/images/PostReview.svg';
+import TextareaAutosize from 'react-textarea-autosize';
+import HashTagModal from 'components/review-form/HashTagModal';
 
 const ReviewForm = () => {
+  const ref = useRef();
+  const [modalOpen, setModalOpen] = useState(false);
   const user = useReactiveVar(currentUserVar);
   const [imgBase64, setImgBase64] = useState('');
   const [img, setImg] = useState<File | null>(null);
 
-  const handleChangeFile = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const reader = new FileReader();
+  const openModal = () => setModalOpen(true);
+  const closeModal = () => setModalOpen(false);
 
-    reader.onloadend = () => {
-      const base64 = reader.result;
-      if (base64) {
-        setImgBase64(base64.toString());
-      }
-    };
-    if (event?.target?.files) {
-      reader.readAsDataURL(event.target.files[0]);
-      setImg(event.target.files[0]);
+  const handleChangeFile = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files as FileList;
+
+    if (files[0]) {
+      const reader = new FileReader();
+      reader.readAsDataURL(files[0]);
+      reader.onloadend = () => {
+        console.log(`call onload`);
+        const base64 = reader.result;
+        if (base64) {
+          console.log(`call base64`);
+
+          setImgBase64(base64.toString());
+          console.log(base64);
+        }
+      };
     }
   };
+
   return (
-    <div className='review__form'>
-      <div className='review__container'>
+    <>
+      <section className='review__container'>
         <img className='review__profile_img' src={user?.profile_img} alt='' />
-        <input className='review__contents' />
+        <TextareaAutosize
+          className='review__contents'
+          minRows={1}
+          placeholder='내용 입력'
+        />
         <label htmlFor='input_img'>
           {imgBase64 ? (
             <img src={imgBase64} className='review__selected_img' />
           ) : (
-            <>
-              <span>input</span>
-            </>
+            <img src={PlusIcon} className='review__selected_img' />
           )}
           <input
             type='file'
@@ -44,10 +58,18 @@ const ReviewForm = () => {
             onChange={handleChangeFile}
           />
         </label>
-      </div>
+      </section>
       <div className='review__add_payment_history'>방문 카페</div>
-      <div className='review__add_hash_tag'>해시태그 추가</div>
-    </div>
+      <div
+        className='review__add_hash_tag'
+        onClick={() => {
+          openModal();
+        }}
+      >
+        해시태그 추가
+      </div>
+      <HashTagModal isOpen={modalOpen} handleClose={closeModal} />
+    </>
   );
 };
 
