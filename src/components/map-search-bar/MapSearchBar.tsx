@@ -44,7 +44,7 @@ const MapSearchBar = () => {
       (sortType === 'distance'
         ? cafeInfoSortByDistance
         : cafeInfoSortByname
-      ).filter((cafe: ICafeInfo) => regex.test(cafe.name)),
+      ).filter((cafe: ICafeInfo) => regex.test(cafe.name.toLowerCase())),
     );
   }, [sortType]);
 
@@ -72,7 +72,7 @@ const MapSearchBar = () => {
       (sortType === 'distance'
         ? cafeInfoSortByDistance
         : cafeInfoSortByname
-      ).filter((cafe: ICafeInfo) => regex.test(cafe.name)),
+      ).filter((cafe: ICafeInfo) => regex.test(cafe.name.toLowerCase())),
     );
     console.log(searchResultList);
   };
@@ -151,7 +151,13 @@ const MapSearchBar = () => {
                     id={cafe.name}
                     onClick={onSearchListClick}
                   >
-                    {cafe.name}, {cafe.distance}
+                    <div className='cafe_info__cafe_name'>{cafe.name}</div>
+                    <div className='cafe_info__cafe_distance'>
+                      {cafe.distance + 'km'}
+                    </div>
+                    <div className='cafe_info__cafe__address'>
+                      {cafe.address}
+                    </div>
                   </li>
                 );
               })}

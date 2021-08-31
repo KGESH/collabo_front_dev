@@ -42,6 +42,7 @@ const ch2pattern = (ch: string) => {
 }
 
 export const createFuzzyMatcher = (input: string) => {
+  input = input.toLowerCase();
   const pattern = input.split('').map(ch2pattern).join('.*?');
   return new RegExp(pattern);
 }

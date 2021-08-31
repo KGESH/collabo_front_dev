@@ -50,13 +50,18 @@
 
 .search_list__container {
   list-style: none;
-  padding-left: 10vw;
+  margin-block-start: 0em;
+  margin-block-end: 0em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 0px;
 }
 
 .search_list__cafe_info {
+  position: relative;
   width: 100vw;
   height: 10vh;
-  margin-bottom: 1vh;
+  border-bottom: 1px solid #d3d3d3;
 }
 
 
