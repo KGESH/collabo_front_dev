@@ -15,7 +15,6 @@ export const currentJwtVar = makeVar<String | null>(
 export const isLoggedInVar = makeVar<boolean>(false);
 export const isInitVar = makeVar<boolean>(false);
 
-
 /**
  * 지도 관련 전역 상태
  *
@@ -29,4 +28,10 @@ export const currentPositionVar = makeVar<IPosition>({
 });
 export const cafeInfoVar = makeVar<ICafeInfo[]>([]);
 
-
+/**
+ * 리뷰 작성 상태
+ */
+export const reviewContentVar = makeVar<string>('');
+export const hashTagListVar = makeVar<string[]>([]);
+export const uploadImgBase64Var = makeVar<string>('');
+export const uploadImgVar = makeVar<File | null>(null);

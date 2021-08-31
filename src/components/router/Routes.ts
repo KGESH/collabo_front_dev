@@ -7,6 +7,7 @@ import MyPage from 'domain/mypage/MyPage';
 import CafeTour from 'domain/cafe-tour/CafeTour';
 import QRcheck from 'domain/qrcheck/QRcheck';
 import MypageDetail from 'domain/mypage-detail/MypageDetail';
+import PostReview from 'domain/post-review/PostReview';
 import test from 'domain/test-page/Test';
 import Map from 'domain/map/Map';
 /**
@@ -56,6 +57,11 @@ const AppRoutes: IRoutes[] = [
     component: MypageDetail,
   },
   {
+    path: '/PostReview',
+    exact: true,
+    component: PostReview,
+  },
+  {
     path: '/map',
     exact: true,
     component: Map,
@@ -64,11 +70,6 @@ const AppRoutes: IRoutes[] = [
     path: '/test',
     exact: true,
     component: test,
-  },
-  {
-    path: '/Detail/:name',
-    exact: true,
-    component: MypageDetail,
   },
 ];
 

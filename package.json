@@ -26,6 +26,7 @@
     "react-geolocated": "^3.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "react-textarea-autosize": "^8.3.3",
     "react.qrcode.generator": "^0.0.3",
     "typescript": "^4.3.5",
     "web-vitals": "^1.1.2"

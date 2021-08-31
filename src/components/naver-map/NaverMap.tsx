@@ -3,7 +3,7 @@ import 'components/naver-map/style/NaverMap.css';
 import initMap from 'components/naver-map/InitMap';
 import { ICafeInfo } from 'components/naver-map/MapInterface';
 import { GET_CAFES } from 'components/naver-map/MapGql';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import useGeolocation from 'react-hook-geolocation';
 import {
   mapVar,

@@ -1,14 +1,13 @@
 import React from 'react';
 import 'components/mypage-detail-comp/style/DetailReview.css';
 import { gql } from 'apollo-boost';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import SmallMenu from '../small-menu/SmallMenu';
 
 
 const GET_MY_REVIEW = gql`
   query GETMYREVIEW($key: String!) {
     getReviewByKey(key: $key) {
-      user_name
       content
       like
       map
@@ -26,6 +25,7 @@ export default () => {
   const { loading, data, error } = useQuery(GET_MY_REVIEW, {
     variables: { key: 'C73RF' },
   });
+  const Review_data = data?.getReviewByKey;
 
   return (
     <>
@@ -40,7 +40,7 @@ export default () => {
               <div className='de_re_first__branch'>스타벅스 강남역점</div>
               <div className='de_re_first__day_and_time'>8.15 일 | 오후 3:00</div>
             </div>
-            <SmallMenu mode='review'/>
+            <SmallMenu mode='review' />
           </div>
 
           <div className='de_re_second__block'>

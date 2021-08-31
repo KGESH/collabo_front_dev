@@ -1,12 +1,12 @@
 import React from 'react';
 import 'components/mypage-detail-comp/style/DetailVisit.css';
 import { gql } from 'apollo-boost';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import SmallMenu from '../small-menu/SmallMenu';
 
 const GET_MY_MILEAGE_LOG = gql`
-  query GETMYMILEAGELOG($client_id: String!) {
-    getMileageByClientId(client_id: $client_id) {
+  query GETMYMILEAGELOG($client_id: Int!) {
+    getMileageLogByClientId(client_id: $client_id) {
       price
       menu_name
     }
@@ -16,8 +16,10 @@ const GET_MY_MILEAGE_LOG = gql`
 export default () => {
 
   const { data } = useQuery(GET_MY_MILEAGE_LOG, {
-    variables: { client_id: '유성현' },
+    variables: { client_id: 11700 },
   });
+  const log_data = data?.getMileageLogByClientId[0];
+  // 수정 필요
 
 
   return (
@@ -37,8 +39,8 @@ export default () => {
         <div className='de_vi_second_block'>
           <div className='de_vi_second__visit_times'>3번째 방문</div>
           <div className='de_vi_second__data_group'>
-            <div className='de_vi_second__menu'>{data?.getMileageByClientId?.menu_name}</div>
-            <div className='de_vi_second__price'>{data?.getMileageByClientId?.price.toLocaleString()}원</div>
+            <div className='de_vi_second__menu'>{log_data?.menu_name}</div>
+            <div className='de_vi_second__price'>{log_data?.price?.toLocaleString()}원</div>
           </div>
         </div>
         <div className='de_vi_third_block'>
