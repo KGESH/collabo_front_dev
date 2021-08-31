@@ -13,6 +13,7 @@ import {
 } from 'services/apollo-client/LocalState';
 import { useReactiveVar } from '@apollo/client';
 import { clickedHashTagVar } from 'services/apollo-client/LocalState';
+import { getDistance } from 'components/naver-map/MapFunctions';
 
 const NaverMap = () => {
   window.addEventListener(
@@ -30,25 +31,6 @@ const NaverMap = () => {
    */
   const cafeInfo: ICafeInfo[] = [];
   const { loading, data, error } = useQuery(GET_CAFES, {});
-  if (!loading && data) {
-    data.getAllCafe.map((cafe: any) => {
-      const name: string = cafe.cafe_info.cafe_name;
-      const [latitude, longitude]: string[] =
-        cafe.cafe_info.position.split(',');
-      const mapPos: naver.maps.LatLng = new naver.maps.LatLng(
-        +latitude,
-        +longitude,
-      );
-      cafeInfo.push({
-        name: name,
-        mapPos: mapPos,
-        latitude: latitude,
-        longitude: longitude,
-      });
-      cafeInfoVar(cafeInfo);
-      //console.log(name, latitude, longitude, `info`);
-    });
-  }
 
   /**
    * positionVar : 현재 좌표
@@ -64,12 +46,43 @@ const NaverMap = () => {
   });
   const clickedHashTag = useReactiveVar(clickedHashTagVar);
 
+  useEffect(() => {
+    if (!loading && data && !cafeInfo.length && geolocation.latitude) {
+      data.getAllCafe.map((cafe: any) => {
+        const name: string = cafe.cafe_info.cafe_name;
+        const address: string = cafe.cafe_info.address;
+        const [latitude, longitude]: string[] =
+          cafe.cafe_info.position.split(',');
+        const mapPos: naver.maps.LatLng = new naver.maps.LatLng(
+          +latitude,
+          +longitude,
+        );
+        const distaceString: string = getDistance(
+          +geolocation.latitude,
+          +geolocation.longitude,
+          +latitude,
+          +longitude,
+        );
+        cafeInfo.push({
+          name: name,
+          mapPos: mapPos,
+          latitude: latitude,
+          longitude: longitude,
+          distance: +distaceString,
+          address: address,
+        });
+        cafeInfoVar(cafeInfo);
+        //console.log(name, latitude, longitude, `info`);
+      });
+    }
+  }, [geolocation]);
+
   /**
-  * 해쉬 태그 클릭 감지
-  */
-  useEffect(()=>{
+   * 해쉬 태그 클릭 감지
+   */
+  useEffect(() => {
     console.log(clickedHashTag);
-  },[clickedHashTag]);
+  }, [clickedHashTag]);
 
   /**
    * 지도가 이미 생성되어 있거나 (0, 0) 좌표이면 지도를 생성하지 않음
@@ -87,7 +100,7 @@ const NaverMap = () => {
         longitude: geolocation.longitude,
       });
       const currentPosition = currentPositionVar();
-      if (!isMapExist && currentPosition.latitude) {
+      if (!isMapExist && cafeInfo.length && currentPosition.latitude) {
         initMap(cafeInfo);
         setIsMapExist(true);
       } else if (isMapExist) {

@@ -5,11 +5,48 @@ import SearchBarBackImg from 'resources/images/back_arrow.png';
 import { cafeInfoVar } from 'services/apollo-client/LocalState';
 import { useReactiveVar } from '@apollo/client';
 import { ICafeInfo } from 'components/naver-map/MapInterface';
+import { mapVar } from 'services/apollo-client/LocalState';
+import { useEffect } from 'react';
+import { createFuzzyMatcher } from 'components/map-search-bar/MapSearchFunction';
 
 const MapSearchBar = () => {
   const [searchInput, setSearchInput] = useState<string>('');
   const [searchBoardExist, setSearchBoardExist] = useState<boolean>(false);
   const cafeInfo = useReactiveVar(cafeInfoVar);
+  const [searchResultList, setSearchResultList] = useState<ICafeInfo[]>([]);
+  const [cafeInfoSortByDistance, setCafeInfoSortByDistance] = useState<
+    ICafeInfo[]
+  >([]);
+  const [cafeInfoSortByname, setCafeInfoSortByname] = useState<ICafeInfo[]>([]);
+  const [sortType, setSortType] = useState('distance');
+
+  const compareByDistance = (a: ICafeInfo, b: ICafeInfo) => {
+    return a.distance > b.distance ? 1 : b.distance > a.distance ? -1 : 0;
+  };
+
+  const compareByName = (a: ICafeInfo, b: ICafeInfo) => {
+    return a.name > b.name ? 1 : b.name > a.name ? -1 : 0;
+  };
+
+  useEffect(() => {
+    if (!searchResultList.length) {
+      const cafeInfoDistance: ICafeInfo[] = [...cafeInfo];
+      const cafeInfoName: ICafeInfo[] = [...cafeInfo];
+      setSearchResultList(cafeInfoDistance.sort(compareByDistance));
+      setCafeInfoSortByDistance(cafeInfoDistance.sort(compareByDistance));
+      setCafeInfoSortByname(cafeInfoName.sort(compareByName));
+    }
+  }, [cafeInfo]);
+
+  useEffect(() => {
+    const regex = createFuzzyMatcher(searchInput);
+    setSearchResultList(
+      (sortType === 'distance'
+        ? cafeInfoSortByDistance
+        : cafeInfoSortByname
+      ).filter((cafe: ICafeInfo) => regex.test(cafe.name)),
+    );
+  }, [sortType]);
 
   const onSearchBarSubmit = (event: any) => {
     event.preventDefault();
@@ -30,6 +67,14 @@ const MapSearchBar = () => {
     if (event.target.value) {
       setSearchBoardExist(true);
     }
+    const regex = createFuzzyMatcher(event.target.value);
+    setSearchResultList(
+      (sortType === 'distance'
+        ? cafeInfoSortByDistance
+        : cafeInfoSortByname
+      ).filter((cafe: ICafeInfo) => regex.test(cafe.name)),
+    );
+    console.log(searchResultList);
   };
 
   const onSearchBarInputClick = () => {
@@ -38,12 +83,30 @@ const MapSearchBar = () => {
 
   const onSearchBarDeleteButtonClick = () => {
     setSearchInput('');
+    setSearchResultList(
+      sortType === 'distance' ? cafeInfoSortByDistance : cafeInfoSortByname,
+    );
     //setSearchBoardExist(false);
   };
 
   const onSearchBarSearchButtonClick = () => {
     if (searchBoardExist) {
     } else {
+      setSearchBoardExist(true);
+    }
+  };
+
+  const onSearchListClick = (event: any) => {
+    console.log(event.currentTarget.id);
+    const cafeName: string = event.currentTarget.id;
+    const target: ICafeInfo[] = searchResultList.filter(
+      (cafe) => cafe.name === cafeName,
+    );
+    console.log(target);
+    setSearchBoardExist(false);
+    const map = mapVar();
+    if (map) {
+      map.setCenter(target[0].mapPos);
     }
   };
 
@@ -51,7 +114,49 @@ const MapSearchBar = () => {
     <>
       {searchBoardExist ? (
         <div className='header__search_board'>
-          <div className='search_board__search_list'>123</div>
+          <div className='search_board__sort_list'>
+            <>
+              <label
+                htmlFor='distance'
+                id='distance'
+                onClick={(event: any) => {
+                  setSortType(event.target.id);
+                  console.log(sortType);
+                }}
+              >
+                <div id='distance' className='sort_list__border'>
+                  {'거리순'}
+                </div>
+              </label>
+              <label
+                htmlFor='name'
+                id='name'
+                onClick={(event: any) => {
+                  setSortType(event.target.id);
+                  console.log(sortType);
+                }}
+              >
+                <div id='name' className='sort_list__border'>
+                  {'이름순'}
+                </div>
+              </label>
+            </>
+          </div>
+          <div className='search_board__search_list'>
+            <ul className='search_list__container'>
+              {searchResultList.map((cafe: ICafeInfo) => {
+                return (
+                  <li
+                    className='search_list__cafe_info'
+                    id={cafe.name}
+                    onClick={onSearchListClick}
+                  >
+                    {cafe.name}, {cafe.distance}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
         </div>
       ) : null}
       <form className='header__search_bar' onSubmit={onSearchBarSubmit}>

@@ -4,6 +4,7 @@ import {
   mapVar,
   currentMarkerVar,
   currentPositionVar,
+  cafeInfoVar,
 } from 'services/apollo-client/LocalState';
 import { getDistance } from 'components/naver-map/MapFunctions';
 import img from 'resources/images/currentPosition/currentPosition.png';
@@ -16,7 +17,7 @@ const initMap = (cafeList: ICafeInfo[]) => {
    * 전역 변수에 저장
    */
 
-  cafeList = List;
+  cafeList = cafeInfoVar();
 
   const currentPosition = currentPositionVar();
 
@@ -91,13 +92,6 @@ const initMap = (cafeList: ICafeInfo[]) => {
       2. 경로 구하기 (카카오맵 앱 URL SCHEME)
       */
 
-    const distaceString: string = getDistance(
-      +currentPosition.latitude,
-      +currentPosition.longitude,
-      +cafe.latitude,
-      +cafe.longitude,
-    );
-
     cafeMarkers.push(
       new naver.maps.Marker({
         position: cafe.mapPos,
@@ -115,7 +109,7 @@ const initMap = (cafeList: ICafeInfo[]) => {
     const contentString = [
       '<div class="iw_inner">',
       '   <h3>' + cafe.name + '</h3>',
-      '   <p>거리 : ' + distaceString + 'km<br />',
+      '   <p>거리 : ' + cafe.distance.toString() + 'km<br />',
       '   </p>',
       '</div>',
     ].join('');
