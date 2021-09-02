@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useReactiveVar } from '@apollo/client';
 import {
   currentUserVar,
   hashTagListVar,
   reviewContentVar,
-  uploadImgBase64Var,
+  uploadImgBase64ListVar,
 } from 'services/apollo-client/LocalState';
 import 'components/review-form/style/ReviewForm.css';
 import PlusIcon from 'resources/images/PostReview.svg';
@@ -16,7 +16,7 @@ import { handleChangeFile } from 'components/review-form/HandleChangeFile';
 const ReviewForm = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const user = useReactiveVar(currentUserVar);
-  const imgBase64 = useReactiveVar(uploadImgBase64Var);
+  const imgBase64List = useReactiveVar(uploadImgBase64ListVar);
   const tagList = useReactiveVar(hashTagListVar);
   const content = useReactiveVar(reviewContentVar);
   const openModal = () => setIsModalOpen(true);
@@ -34,8 +34,8 @@ const ReviewForm = () => {
           onChange={(event) => reviewContentVar(event.target.value)}
         />
         <label htmlFor='input_img'>
-          {imgBase64 ? (
-            <img src={imgBase64} className='review__selected_img' />
+          {imgBase64List[0] ? (
+            <img src={imgBase64List[0]} className='review__selected_img' />
           ) : (
             <img src={PlusIcon} className='review__selected_img' />
           )}
@@ -44,6 +44,7 @@ const ReviewForm = () => {
             className='review__img_selector'
             id='input_img'
             accept='image/*'
+            multiple
             onChange={handleChangeFile}
           />
         </label>
