@@ -8,4 +8,6 @@ export interface ICafeInfo {
   mapPos: naver.maps.LatLng;
   latitude: string;
   longitude: string;
+  distance: number;
+  address?: string;
 }
