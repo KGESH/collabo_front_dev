@@ -33,5 +33,5 @@ export const cafeInfoVar = makeVar<ICafeInfo[]>([]);
  */
 export const reviewContentVar = makeVar<string>('');
 export const hashTagListVar = makeVar<string[]>([]);
-export const uploadImgBase64Var = makeVar<string>('');
-export const uploadImgVar = makeVar<File | null>(null);
+export const uploadImgBase64ListVar = makeVar<string[]>([]);
+export const uploadImgListVar = makeVar<FileList | null>(null);
