@@ -173,7 +173,7 @@ const MapSearchBar = () => {
                     className='search_list__cafe_info'
                     id={cafe.name}
                     onClick={onSearchListClick}
-                  >EnJWUPC3b
+                  >
                     <div className='cafe_info__cafe_name'>{cafe.name}</div>
                     <div className='cafe_info__cafe_distance'>
                       {cafe.distance + 'km'}
