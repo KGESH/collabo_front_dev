@@ -28,12 +28,13 @@ const KakaoCallback = () => {
 
   useEffect(() => {
     if (!loading && data) {
+      console.log(data);
       const user: IUser = {
-        id: data.getKakaoUserByJwt.id,
-        email: data.getKakaoUserByJwt.email,
-        name: data.getKakaoUserByJwt.name,
-        point: data.getKakaoUserByJwt.point,
-        profile_img: data.getKakaoUserByJwt.profile_img,
+        id: data.getKakaoUserByJwt.user.id,
+        email: data.getKakaoUserByJwt.user.email,
+        name: data.getKakaoUserByJwt.user.name,
+        point: data.getKakaoUserByJwt.user.point,
+        profile_img: data.getKakaoUserByJwt.user.profile_img,
       };
       currentUserVar(user);
       isLoggedInVar(true);

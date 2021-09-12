@@ -2,6 +2,7 @@ import { makeVar } from '@apollo/client';
 import { IUser } from 'types/User';
 import { IPosition } from 'components/naver-map/MapInterface';
 import { ICafeInfo } from 'components/naver-map/MapInterface';
+import { ICafeList } from 'types/Review';
 
 /**
  * 이곳에서 전역 상태를 관리
@@ -35,3 +36,4 @@ export const reviewContentVar = makeVar<string>('');
 export const hashTagListVar = makeVar<string[]>([]);
 export const uploadImgBase64ListVar = makeVar<string[]>([]);
 export const uploadImgListVar = makeVar<FileList | null>(null);
+export const cafeListVar = makeVar<ICafeList[]>([]);

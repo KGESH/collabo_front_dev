@@ -45,6 +45,10 @@ const PostReview = () => {
     upload({ variables: { content, hash_tag_list: tagList, files: imgList } });
   };
 
+  if (error) {
+    console.log(`post error!`);
+    console.log(error);
+  }
   useEffect(() => {
     if (!loading && data) {
       console.log(data);
