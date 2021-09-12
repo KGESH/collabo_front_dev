@@ -30,8 +30,8 @@ const MapSearchBar = () => {
 
   useEffect(() => {
     if (!searchResultList.length) {
-      const cafeInfoDistance: ICafeInfo[] = [...cafeInfo];
-      const cafeInfoName: ICafeInfo[] = [...cafeInfo];
+      const cafeInfoDistance: ICafeInfo[] = [...cafeInfo, ...cafeInfo];
+      const cafeInfoName: ICafeInfo[] = [...cafeInfo, ...cafeInfo];
       setSearchResultList(cafeInfoDistance.sort(compareByDistance));
       setCafeInfoSortByDistance(cafeInfoDistance.sort(compareByDistance));
       setCafeInfoSortByname(cafeInfoName.sort(compareByName));
@@ -40,11 +40,22 @@ const MapSearchBar = () => {
 
   useEffect(() => {
     const regex = createFuzzyMatcher(searchInput);
+    const regexMinusOne = createFuzzyMatcher(
+      searchInput.replace(/(\s*)/g, '').substr(0, searchInput.length - 1),
+    );
+    const regexRemoveSpace = createFuzzyMatcher(
+      searchInput.replace(/(\s*)/g, ''),
+    );
     setSearchResultList(
       (sortType === 'distance'
         ? cafeInfoSortByDistance
         : cafeInfoSortByname
-      ).filter((cafe: ICafeInfo) => regex.test(cafe.name.toLowerCase())),
+      ).filter(
+        (cafe: ICafeInfo) =>
+          regex.test(cafe.name.toLowerCase()) ||
+          regexMinusOne.test(cafe.name.toLowerCase()) ||
+          regexRemoveSpace.test(cafe.name.toLowerCase()),
+      ),
     );
   }, [sortType]);
 
@@ -64,15 +75,25 @@ const MapSearchBar = () => {
 
   const onSearchBarInputChange = (event: any) => {
     setSearchInput(event.target.value);
-    if (event.target.value) {
-      setSearchBoardExist(true);
-    }
     const regex = createFuzzyMatcher(event.target.value);
+    const regexMinusOne = createFuzzyMatcher(
+      event.target.value
+        .replace(/(\s*)/g, '')
+        .substr(0, event.target.value.replace(/(\s*)/g, '').length - 1),
+    );
+    const regexRemoveSpace = createFuzzyMatcher(
+      event.target.value.replace(/(\s*)/g, ''),
+    );
     setSearchResultList(
       (sortType === 'distance'
         ? cafeInfoSortByDistance
         : cafeInfoSortByname
-      ).filter((cafe: ICafeInfo) => regex.test(cafe.name.toLowerCase())),
+      ).filter(
+        (cafe: ICafeInfo) =>
+          regex.test(cafe.name.toLowerCase()) ||
+          regexMinusOne.test(cafe.name.toLowerCase()) ||
+          regexRemoveSpace.test(cafe.name.toLowerCase()),
+      ),
     );
     console.log(searchResultList);
   };
@@ -107,6 +128,7 @@ const MapSearchBar = () => {
     const map = mapVar();
     if (map) {
       map.setCenter(target[0].mapPos);
+      map.setZoom(19);
     }
   };
 
@@ -114,8 +136,8 @@ const MapSearchBar = () => {
     <>
       {searchBoardExist ? (
         <div className='header__search_board'>
-          <div className='search_board__sort_list'>
-            <>
+          <div className='search_board__sort_type'>
+            <div className='sort_type__buttons'>
               <label
                 htmlFor='distance'
                 id='distance'
@@ -140,8 +162,9 @@ const MapSearchBar = () => {
                   {'이름순'}
                 </div>
               </label>
-            </>
+            </div>
           </div>
+          <div className='search_board__division_line'></div>
           <div className='search_board__search_list'>
             <ul className='search_list__container'>
               {searchResultList.map((cafe: ICafeInfo) => {

@@ -8,13 +8,26 @@
   z-index: 150;
 }
 
-.search_board__sort_list {
+.search_board__sort_type {
   position: relative;
   display: flex;
   margin-top: 10vh;
-  margin-left: 10vw;
   width: 100vw;
-  height: 5vh;
+  height: 4vh;
+  border-bottom: solid 0.1vh #000;
+}
+
+.sort_type__buttons {
+  position: relative;
+  display: flex;
+  margin-left: 10vw;
+}
+
+.search_board__division_line{
+  position: relative;
+  width: 100vw;
+  height: 1vh;
+  background-color: #d9d9d9;
 }
 
 .sort_list__radio_btn {
@@ -60,7 +73,7 @@
 .search_list__cafe_info {
   position: relative;
   width: 100vw;
-  height: 10vh;
+  height: 7vh;
   border-bottom: 1px solid #d3d3d3;
 }
 
