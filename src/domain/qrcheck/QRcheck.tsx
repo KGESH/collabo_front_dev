@@ -63,20 +63,20 @@ const QRcheck = () => {
   });
 
   /** 등록을 요청하는 Mutation */
-  const addCard_to_db = () => {
-    try {
-      addCard({
-        variables: {
-          id: 11700, /* 배포 시 수정해야 합니다. @@@@@@@@@@@*/
-          cafe_name: `${params.cafeName}`,
-          code: `${params.code}`,
-          card_img: `${data?.getCafeByName?.cafe_info?.card_img}`
-        },
-      });
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  // const addCard_to_db = ( {
+  //   try {
+  //     addCard({
+  //       variables: {
+  //         id: 11700, /* 배포 시 수정해야 합니다. @@@@@@@@@@@*/
+  //         cafe_name: `${params.cafeName}`,
+  //         code: `${params.code}`,
+  //         card_img: `${data?.getCafeByName?.cafe_info?.card_img}`
+  //       },
+  //     });
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
 
   /** 로그인(false) 일 때 => 로그인페이지로 이동 */
   if (false) {
@@ -109,7 +109,7 @@ const QRcheck = () => {
               <div>{data?.getCafeByName?.cafe_info?.name}</div>
               <div className='qr_btn_box'>
                 <Link to='/mypage'>
-                  <div id='add_qr' onClick={addCard_to_db}>추가</div>
+                  {/*<div id='add_qr' onClick={addCard_to_db}>추가</div>*/}
                 </Link>
                 <Link to='/mypage'>
                   <div id='cancel_qr'>취소</div>
