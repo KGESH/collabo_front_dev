@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
 import 'domain/mypage-detail/style/MypageDetail.css';
-<<<<<<< HEAD
 import { useParams } from 'react-router-dom';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/client';
-=======
->>>>>>> main
 import DetailVisit from 'components/mypage-detail-comp/DetailVisit';
 import DetailReview from 'components/mypage-detail-comp/DetailReview';
 import DetailBeans from 'components/mypage-detail-comp/DetailBeans';
@@ -53,11 +50,8 @@ const MypageDetail = () => {
             리뷰
           </div>
         </label>
-<<<<<<< HEAD
         <input className='de_second__input_radio' type='radio' id='beans' name='radios'  onClick={fnc} checked={click === 'beans'}/>
-=======
         <input type='radio' id='beans' name='radios' onClick={fnc} />
->>>>>>> main
         <label htmlFor='beans'>
           <div id='beans' className='de_second__beans d_s_border'>
             원두
@@ -67,11 +61,6 @@ const MypageDetail = () => {
       {click === 'visit' ? <DetailVisit /> : ''}
       {click === 'review' ? <DetailReview /> : ''}
       {click === 'beans' ? <DetailBeans /> : ''}
-<<<<<<< HEAD
-
-
-=======
->>>>>>> main
     </div>
   );
 };

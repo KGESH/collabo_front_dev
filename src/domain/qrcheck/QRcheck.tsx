@@ -1,143 +1,25 @@
 import React from 'react';
-import { useParams, Redirect, Link } from 'react-router-dom';
+import { useParams, Redirect } from 'react-router-dom';
 import { gql } from 'apollo-boost';
-import { useMutation, useQuery } from '@apollo/client';
-import 'domain/qrcheck/style/QRcheck.css';
-
-const ADD_CARD = gql`
-  mutation (
-    $id: Int!
-    $cafe_name: String!
-    $code: String!
-    $card_img: String!
-  ) {
-    saveCardToUser(
-      id: $id
-      cafe_name: $cafe_name
-      code: $code
-      card_img: $card_img
-    ) {
-      id
-    }
-  }
-`;
+import { useQuery } from '@apollo/react-hooks';
 
 const GET_USER = gql`
-<<<<<<< HEAD
-  query (
-    $id: Int!
-    $cafe_name: String!
-  ) {
-    getUserById(
-      id: $id
-    ) {
-=======
   query ($id: Int!) {
     getUserById(id: $id) {
       qr_list
->>>>>>> main
       auth
-    }
-    existCafeNameInUser(
-      id: $id
-      cafe_name: $cafe_name
-    ) {
-      cafe_list {
-        cafe_name
-      }
-    }
-    getCafeByName(
-      cafe_name: $cafe_name
-    ) {
-      cafe_info {
-        cafe_name
-        card_img
-      }
+      code_list
+      cafe_name
     }
   }
 `;
 
 const QRcheck = () => {
-
-<<<<<<< HEAD
+  // 포트 번호는 배포 시에 front서버의 포트 번호를 받아온다.
   const params: any = useParams();
-  const [addCard] = useMutation(ADD_CARD);
-  const { data } = useQuery(GET_USER, {
-    variables: {
-      id: 11700, /* 배포 시 수정해야 합니다. @@@@@@@@@@@*/
-      cafe_name: params.cafeName,
-    },
-  });
+  let cafeNames: string[] = [];
+  let codeList: string[] = [];
 
-  /** 등록을 요청하는 Mutation */
-  // const addCard_to_db = ( {
-  //   try {
-  //     addCard({
-  //       variables: {
-  //         id: 11700, /* 배포 시 수정해야 합니다. @@@@@@@@@@@*/
-  //         cafe_name: `${params.cafeName}`,
-  //         code: `${params.code}`,
-  //         card_img: `${data?.getCafeByName?.cafe_info?.card_img}`
-  //       },
-  //     });
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
-
-  /** 로그인(false) 일 때 => 로그인페이지로 이동 */
-  if (false) {
-    // 로그인 시 history 사용 !!
-    return (<Redirect to='/login' />);
-  }
-
-  /** 로그인 상태(true) 일 때 */
-  else {
-
-    /** 로그인 한 user 가 "CLIENT" 일 때 */
-    if (data?.getUserById?.auth == 'client') {
-      /** 이미 동일한 카페의 카드가 db에 있을 때 => 등록 실패  */
-      if (data?.existCafeNameInUser !== null) {
-        return (
-          <div className='error_message'>
-            이미 등록되어있는 카드입니다.
-          </div>
-        );
-
-        /** 동일한 카페의 카드가 db에 없을 때 => 해당하는 카페가 db에 존재하는지 확인 */
-      } else {
-        /** 해당 카페가 존재한다면 카페 등록 화면으로 전환 */
-        if (data?.getCafeByName !== null) {
-          return (
-            <div className='qr_c_group'>
-              <div className='qr_c_card'>
-                <img className='qr_c_card_img' src={data?.getCafeByName?.cafe_info?.card_img} alt='' />
-              </div>
-              <div>{data?.getCafeByName?.cafe_info?.name}</div>
-              <div className='qr_btn_box'>
-                <Link to='/mypage'>
-                  {/*<div id='add_qr' onClick={addCard_to_db}>추가</div>*/}
-                </Link>
-                <Link to='/mypage'>
-                  <div id='cancel_qr'>취소</div>
-                </Link>
-              </div>
-            </div>
-          );
-        } else {
-          /** 존재하지 않는다면 error message를 화면에 출력 */
-          return (
-            <div className='error_message'>
-              유효하지 않은 카드입니다.
-            </div>
-          );
-        }
-      }
-    }
-
-    /** 로그인 한 user가 "OWNER" 일 때 */
-    else if (data?.getUserById?.auth == 'owner' || data?.getUserById?.auth == 'staff') {
-=======
   const { loading, data, error } = useQuery(GET_USER, {
     variables: { id: 11700 /* 불러올 아이디 */ },
   });
@@ -159,19 +41,13 @@ const QRcheck = () => {
       }
     } else if (data.getUserById.auth === 'owner') {
       /** 고객이 아닌 점주일때 */
->>>>>>> main
       return (
-        /** 매장 전용 "App"으로 이동 */
+        /** 포인트를 적립하는 점주 전용 페이지로 이동 (인자 /:카페이름/:카드numbering */
         <Redirect to={`/적립domain/${params.cafe}/${params.code}`} />
       );
     }
-
-    else {return (<></>);}
   }
-<<<<<<< HEAD
-=======
   return <></>;
->>>>>>> main
 };
 
 export default QRcheck;

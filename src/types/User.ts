@@ -3,8 +3,4 @@ export interface IUser {
   name: string;
   email: string;
   point?: number;
-<<<<<<< HEAD
-  profile_img?: string;
-=======
->>>>>>> main
 }
