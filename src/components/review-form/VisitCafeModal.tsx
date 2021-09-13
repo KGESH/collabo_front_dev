@@ -8,11 +8,13 @@ import { ICafeList } from 'types/Review';
 export const GET_KAKAO_USER_BY_JWT = gql`
   mutation GET_KAKAO_USER_BY_JWT($jwt: String!) {
     getKakaoUserByJwt(jwt: $jwt) {
-      cafe_list {
-        cafe_name
-        visit_times
-        card_img
-        code
+      user {
+        cafe_list {
+          cafe_name
+          visit_times
+          card_img
+          code
+        }
       }
     }
   }
@@ -24,7 +26,6 @@ const VisitCafeModal = (props: IModalFrameProps) => {
   const [getCafeList, { loading, data, error }] = useMutation(
     GET_KAKAO_USER_BY_JWT,
   );
-  //const [cafeList, setCafeList] = useState<string[]>([]);
   const cafeList = useReactiveVar(cafeListVar);
 
   if (error) {
@@ -33,10 +34,10 @@ const VisitCafeModal = (props: IModalFrameProps) => {
   }
 
   useEffect(() => {
-    if (!loading && data?.getKakaoUserByJwt?.cafe_list) {
+    if (!loading && data?.getKakaoUserByJwt?.user?.cafe_list) {
       //console.log(data?.getKakaoUserByJwt);
-      console.log(data.getKakaoUserByJwt.cafe_list[0]);
-      const res: ICafeList[] = data.getKakaoUserByJwt.cafe_list;
+      console.log(data.getKakaoUserByJwt.user.cafe_list[0]);
+      const res: ICafeList[] = data.getKakaoUserByJwt.user.cafe_list;
       cafeListVar([...cafeList, ...res.map((elemelt: ICafeList) => elemelt)]);
     }
   }, [loading, data]);
@@ -56,7 +57,7 @@ const VisitCafeModal = (props: IModalFrameProps) => {
           <div>{cafe.cafe_name}</div>
           <div>{cafe.visit_times}</div>
           <div>{cafe.card_img}</div>
-          <div>{cafe.code}</div>
+          <div>등등 데이터들</div>
         </>
       ))}
     </Modal>
