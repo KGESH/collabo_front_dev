@@ -1,7 +1,10 @@
 import { makeVar } from '@apollo/client';
 import { IUser } from 'types/User';
+<<<<<<< HEAD
 import { IPosition } from 'components/naver-map/MapInterface';
 import { ICafeInfo } from 'components/naver-map/MapInterface';
+=======
+>>>>>>> main
 
 /**
  * 이곳에서 전역 상태를 관리
@@ -14,11 +17,11 @@ export const currentJwtVar = makeVar<String | null>(
 );
 export const isLoggedInVar = makeVar<boolean>(false);
 export const isInitVar = makeVar<boolean>(false);
-
+<<<<<<< HEAD
 
 /**
  * 지도 관련 전역 상태
- * 
+ *
  */
 export const clickedHashTagVar = makeVar<string>('팔로우');
 export const mapVar = makeVar<naver.maps.Map | null>(null);
@@ -28,3 +31,13 @@ export const currentPositionVar = makeVar<IPosition>({
   longitude: 0,
 });
 export const cafeInfoVar = makeVar<ICafeInfo[]>([]);
+
+/**
+ * 리뷰 작성 상태
+ */
+export const reviewContentVar = makeVar<string>('');
+export const hashTagListVar = makeVar<string[]>([]);
+export const uploadImgBase64ListVar = makeVar<string[]>([]);
+export const uploadImgListVar = makeVar<FileList | null>(null);
+=======
+>>>>>>> main

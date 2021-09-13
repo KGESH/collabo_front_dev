@@ -23,6 +23,7 @@ const ADD_CARD = gql`
 `;
 
 const GET_USER = gql`
+<<<<<<< HEAD
   query (
     $id: Int!
     $cafe_name: String!
@@ -30,6 +31,11 @@ const GET_USER = gql`
     getUserById(
       id: $id
     ) {
+=======
+  query ($id: Int!) {
+    getUserById(id: $id) {
+      qr_list
+>>>>>>> main
       auth
     }
     existCafeNameInUser(
@@ -53,6 +59,7 @@ const GET_USER = gql`
 
 const QRcheck = () => {
 
+<<<<<<< HEAD
   const params: any = useParams();
   const [addCard] = useMutation(ADD_CARD);
   const { data } = useQuery(GET_USER, {
@@ -130,6 +137,29 @@ const QRcheck = () => {
 
     /** 로그인 한 user가 "OWNER" 일 때 */
     else if (data?.getUserById?.auth == 'owner' || data?.getUserById?.auth == 'staff') {
+=======
+  const { loading, data, error } = useQuery(GET_USER, {
+    variables: { id: 11700 /* 불러올 아이디 */ },
+  });
+  error ? console.log(error) : '';
+
+  if (data) {
+    // db에 있는 코드를 불러온다.
+    cafeNames = data.getUserById.cafe_name;
+    codeList = data.getUserById.code_list;
+
+    /** 고객중에서 */
+    if (data.getUserById.auth === 'client') {
+      /** db에 동일한 카페의 카드가 이미 등록된 상태일때 */
+      if (cafeNames.includes(params.cafe)) {
+        return <div>이미 등록되어있는 카드입니다.</div>;
+      } /** db에 없을 때 => 카드 등록 */ else {
+        return <div>카드를 등록합니다.</div>;
+        // mutation을 이용해 db -> qr배열에 newQR을 통째로 저장
+      }
+    } else if (data.getUserById.auth === 'owner') {
+      /** 고객이 아닌 점주일때 */
+>>>>>>> main
       return (
         /** 매장 전용 "App"으로 이동 */
         <Redirect to={`/적립domain/${params.cafe}/${params.code}`} />
@@ -138,6 +168,10 @@ const QRcheck = () => {
 
     else {return (<></>);}
   }
+<<<<<<< HEAD
+=======
+  return <></>;
+>>>>>>> main
 };
 
 export default QRcheck;

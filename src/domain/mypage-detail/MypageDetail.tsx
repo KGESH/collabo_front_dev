@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import 'domain/mypage-detail/style/MypageDetail.css';
+<<<<<<< HEAD
 import { useParams } from 'react-router-dom';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/client';
+=======
+>>>>>>> main
 import DetailVisit from 'components/mypage-detail-comp/DetailVisit';
 import DetailReview from 'components/mypage-detail-comp/DetailReview';
 import DetailBeans from 'components/mypage-detail-comp/DetailBeans';
@@ -19,7 +22,6 @@ const GET_CAFE = gql`
 `;
 
 const MypageDetail = () => {
-
   const [click, setClick] = useState('visit');
   const fnc = (e: any) => {
     setClick(e.currentTarget.id);
@@ -41,22 +43,35 @@ const MypageDetail = () => {
       <div className='detail__second_block'>
       <input className='de_second__input_radio' type='radio' id='visit' name='radios' onClick={fnc} checked={click === 'visit'}/>
         <label htmlFor='visit'>
-          <div id='visit' className='de_second__visit d_s_border'>방문</div>
+          <div id='visit' className='de_second__visit d_s_border'>
+            방문
+          </div>
         </label>
         <input className='de_second__input_radio' type='radio' id='review' name='radios' onClick={fnc} checked={click === 'review'}/>
         <label htmlFor='review'>
-          <div id='review' className='de_second__review d_s_border' >리뷰</div>
+          <div id='review' className='de_second__review d_s_border'>
+            리뷰
+          </div>
         </label>
+<<<<<<< HEAD
         <input className='de_second__input_radio' type='radio' id='beans' name='radios'  onClick={fnc} checked={click === 'beans'}/>
+=======
+        <input type='radio' id='beans' name='radios' onClick={fnc} />
+>>>>>>> main
         <label htmlFor='beans'>
-          <div id='beans' className='de_second__beans d_s_border'>원두</div>
+          <div id='beans' className='de_second__beans d_s_border'>
+            원두
+          </div>
         </label>
       </div>
       {click === 'visit' ? <DetailVisit /> : ''}
       {click === 'review' ? <DetailReview /> : ''}
       {click === 'beans' ? <DetailBeans /> : ''}
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> main
     </div>
   );
 };

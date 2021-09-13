@@ -1,4 +1,85 @@
+.header__search_board {
+  position: absolute;
+  background-color: #fff;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: 150;
+}
+
+.search_board__sort_type {
+  position: relative;
+  display: flex;
+  margin-top: 10vh;
+  width: 100vw;
+  height: 4vh;
+  border-bottom: solid 0.1vh #000;
+}
+
+.sort_type__buttons {
+  position: relative;
+  display: flex;
+  margin-left: 10vw;
+}
+
+.search_board__division_line{
+  position: relative;
+  width: 100vw;
+  height: 1vh;
+  background-color: #d9d9d9;
+}
+
+.sort_list__radio_btn {
+  visibility: hidden;
+  position: absolute;
+}
+
+.sort_list__radio_btn:checked + label div {
+  background-color: #B0B2B2;
+}
+
+.sort_list__border {
+  width: 40px;
+  height: 16px;
+  font-size: 0.7em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: solid 1px #B0B2B2;
+  border-radius: 10px;
+  margin-right: 4vw;
+  background-color: aliceblue;
+}
+
+
+.search_board__search_list {
+  position: relative;
+  width: 100vw;
+  height: 85vh;
+  text-align: start;
+  overflow-y: scroll;
+}
+
+.search_list__container {
+  list-style: none;
+  margin-block-start: 0em;
+  margin-block-end: 0em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 0px;
+}
+
+.search_list__cafe_info {
+  position: relative;
+  width: 100vw;
+  height: 7vh;
+  border-bottom: 1px solid #d3d3d3;
+}
+
+
 .header__search_bar {
+  position: relative;
   margin: 1vh 0;
   text-align: start;
   display: inline-block;
@@ -8,7 +89,9 @@
   border-radius: 5px;
   background-color: #fff;
   opacity: 1;
+  z-index: 1000;
 }
+
 
 .search_bar__img {
   position: fixed;
@@ -18,6 +101,7 @@
   width: 2.4vh;
   height: 1.5vh;
   opacity: 1;
+  z-index: 1000;
 }
 
 .search_bar__input {
@@ -39,7 +123,7 @@
   text-indent: 0px;
   text-shadow: none;
   appearance: auto;
-  z-index: 100;
+  z-index: 1050;
 }
 
 input::-ms-clear,
@@ -63,7 +147,7 @@ input::-webkit-search-results-decoration{
   position: fixed;
 }
 
-.search_bar__btn+.search_bar__btn:before {
+.search_bar__button+.search_bar__button:before {
   content: "";
   width: 0.3vw;
   height: 3vh;
@@ -73,7 +157,7 @@ input::-webkit-search-results-decoration{
   left: 0.9vw;
 }
 
-.search_bar__btn {
+.search_bar__button {
   width: 2rem;
   background: none;
   border: none;

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import type { ILoginFormValues } from 'types/FormValues';
+import { ILoginFormValues } from 'types/FormValues';
 import 'components/login-form/style/LoginForm.css';
 
 const LoginForm = () => {

@@ -7,7 +7,7 @@ import {
   isLoggedInVar,
   isInitVar,
 } from 'services/apollo-client/LocalState';
-import { useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/react-hooks';
 import { useReactiveVar } from '@apollo/client';
 import { GET_KAKAO_USER } from 'services/apollo-client/GetKaKaoUserInfo';
 import { IUser } from 'types/User';

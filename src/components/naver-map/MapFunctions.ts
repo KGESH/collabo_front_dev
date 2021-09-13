@@ -6,7 +6,6 @@ export const getDistance = (
   cafeLatitude: number,
   cafeLongitude: number,
 ): string => {
-
   let distance: number = 0;
   if (currentLatitude !== cafeLatitude || currentLongitude !== cafeLongitude) {
     const radlat1 = (Math.PI * currentLatitude) / 180;
