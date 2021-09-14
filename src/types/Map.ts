@@ -4,6 +4,7 @@ export interface IPosition {
 }
 
 export interface ICafeInfo {
+  id: number;
   name: string;
   mapPos: naver.maps.LatLng;
   latitude: string;
@@ -11,3 +12,7 @@ export interface ICafeInfo {
   distance: number;
   address?: string;
 }
+
+export interface IHashTag {
+  name : string;
+};

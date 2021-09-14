@@ -1,4 +1,4 @@
-import { IPosition } from 'components/naver-map/MapInterface';
+import { IPosition } from 'types/Map';
 
 export const getDistance = (
   currentLatitude: number,
