@@ -1,7 +1,7 @@
 import React from 'react';
 import 'components/map-hash-tag/style/MapHashTag.css';
 import { HashTagList } from 'components/map-hash-tag/HashTagList';
-import { IHashTag } from 'types/Map';
+import { IHashTag } from 'types/HashTag';
 import { clickedHashTagVar } from 'services/apollo-client/LocalState';
 import { useReactiveVar } from '@apollo/client';
 

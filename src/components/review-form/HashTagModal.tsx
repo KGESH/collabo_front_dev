@@ -2,7 +2,10 @@ import React, { useEffect, useState } from 'react';
 import Modal from 'components/modal-frame/Modal';
 import { IModalFrameProps } from 'types/Props';
 import { useInput } from 'hooks/useInput';
-import { hashTagListVar } from 'services/apollo-client/LocalState';
+import {
+  hashTagListVar,
+  hashTagQueryVar,
+} from 'services/apollo-client/LocalState';
 import { useReactiveVar } from '@apollo/client';
 import {
   handleRemoveTagListItem,
@@ -10,56 +13,57 @@ import {
   tagValidator,
 } from './HandleTagList';
 import { createFuzzyMatcher } from 'components/auto-complete-search/CreateFuzzyMatcher';
-import { HashTagList } from 'components/review-form/HashTagList';
-import { IHashTag } from 'types/Map';
+import { IHashTag } from 'types/HashTag';
 
 const HashTagModal = (props: IModalFrameProps) => {
   const { isOpen, handleClose } = props;
-  const tagList = useReactiveVar(hashTagListVar);
-  const tagInput = useInput('', tagValidator);
+  const hashTagList = useReactiveVar(hashTagListVar);
+  const hashTagQuery = useReactiveVar(hashTagQueryVar);
+  const hashTagInput = useInput('', tagValidator);
   const [hashTagSearchList, setHashTagSearchList] = useState<IHashTag[]>([]);
 
   useEffect(() => {
-    if (tagInput.value === '') {
+    if (hashTagInput.value === '') {
       setHashTagSearchList([]);
       return;
     }
-    const regex = createFuzzyMatcher(tagInput.value);
+    const regex = createFuzzyMatcher(hashTagInput.value);
     const regexMinusOne = createFuzzyMatcher(
-      tagInput.value.length > 1
-        ? tagInput.value.trim().substr(0, tagInput.value.trim().length - 1)
-        : tagInput.value,
+      hashTagInput.value.length > 1
+        ? hashTagInput.value
+            .trim()
+            .substr(0, hashTagInput.value.trim().length - 1)
+        : hashTagInput.value,
     );
-    const regexRemoveSpace = createFuzzyMatcher(tagInput.value.trim());
+    const regexRemoveSpace = createFuzzyMatcher(hashTagInput.value.trim());
     setHashTagSearchList(
-      HashTagList.filter(
-        (hashTag: IHashTag) =>
+      hashTagQuery.filter(
+        (hashTag: IHashTag, index: number) =>
           regex.test(hashTag.name.toLowerCase()) ||
           regexMinusOne.test(hashTag.name.toLowerCase()) ||
           regexRemoveSpace.test(hashTag.name.toLowerCase()),
       ),
     );
-    console.log(tagInput.value);
+    console.log(hashTagInput.value);
     console.log(hashTagSearchList);
-    console.log(HashTagList);
-  }, [tagInput.value]);
+  }, [hashTagInput.value]);
 
   return (
     <Modal isOpen={isOpen} handleClose={handleClose} header='해시태그 추가'>
       <input
         className='modal_hash_tag_input'
         placeholder='태그 입력'
-        value={tagInput.value}
-        onChange={tagInput.onChange}
+        value={hashTagInput.value}
+        onChange={hashTagInput.onChange}
       />
       <button
         className='modal_hash_tag_add_button'
-        onClick={() => handleAddTag(tagInput)}
+        onClick={() => handleAddTag(hashTagInput)}
       >
         +
       </button>
       <div>
-        {hashTagSearchList.map((matchedHashTag: IHashTag) => {
+        {hashTagSearchList.map((matchedHashTag: IHashTag, index: number) => {
           return (
             <>
               <span className='modal_hash_tag_mathched_hash_tag'>
@@ -71,7 +75,7 @@ const HashTagModal = (props: IModalFrameProps) => {
         })}
       </div>
       <div>
-        {tagList.map((tag, index) => {
+        {hashTagList.map((tag, index) => {
           return (
             <>
               <span>{tag}</span>

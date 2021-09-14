@@ -1,6 +1,6 @@
 import React from 'react';
 import 'components/mypage-detail-comp/style/DetailVisit.css';
-import { gql } from 'apollo-boost';
+import { gql } from '@apollo/client';
 import { useQuery, useReactiveVar } from '@apollo/client';
 import SmallMenu from '../small-menu/SmallMenu';
 import { currentUserVar } from 'services/apollo-client/LocalState';

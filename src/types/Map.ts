@@ -12,7 +12,3 @@ export interface ICafeInfo {
   distance: number;
   address?: string;
 }
-
-export interface IHashTag {
-  name : string;
-};

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams, Redirect, Link } from 'react-router-dom';
-import { gql } from 'apollo-boost';
+import { gql } from '@apollo/client';
 import { useMutation, useQuery } from '@apollo/client';
 import 'domain/qrcheck/style/QRcheck.css';
 import { useReactiveVar } from '@apollo/client';

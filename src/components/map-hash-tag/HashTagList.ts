@@ -1,4 +1,4 @@
-import { IHashTag } from 'types/Map';
+import { IHashTag } from 'types/HashTag';
 
 export const HashTagList: IHashTag[] = [
   {
