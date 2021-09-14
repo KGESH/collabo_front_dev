@@ -15,6 +15,11 @@ export const handleAddTag = (tagInput: any) => {
   }
 };
 
+export const handleAddTagByQuery = (tagInput: string) => {
+  /** empty string check & only white space check */
+  hashTagListVar([...hashTagListVar(), tagInput]);
+};
+
 export const tagValidator = (value: any) => {
   /**
    * test validator

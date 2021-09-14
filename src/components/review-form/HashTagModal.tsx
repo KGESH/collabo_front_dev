@@ -10,10 +10,12 @@ import { useReactiveVar } from '@apollo/client';
 import {
   handleRemoveTagListItem,
   handleAddTag,
+  handleAddTagByQuery,
   tagValidator,
 } from './HandleTagList';
 import { createFuzzyMatcher } from 'components/auto-complete-search/CreateFuzzyMatcher';
 import { IHashTag } from 'types/HashTag';
+import 'components/review-form/style/HashTagModal.css';
 
 const HashTagModal = (props: IModalFrameProps) => {
   const { isOpen, handleClose } = props;
@@ -62,29 +64,35 @@ const HashTagModal = (props: IModalFrameProps) => {
       >
         +
       </button>
-      <div>
+      <ul className='modal_hash_tag_ul'>
         {hashTagSearchList.map((matchedHashTag: IHashTag, index: number) => {
           return (
-            <>
+            <li
+              key={index}
+              onClick={() => {
+                handleAddTagByQuery(matchedHashTag.name);
+                hashTagInput.clear();
+              }}
+            >
               <span className='modal_hash_tag_mathched_hash_tag'>
                 {matchedHashTag.name + '   '}
               </span>
               <br />
-            </>
+            </li>
           );
         })}
-      </div>
-      <div>
+      </ul>
+      <ul className='modal_hash_tag_ul'>
         {hashTagList.map((tag: string, index: number) => {
           return (
-            <>
+            <li key={index}>
               <span>{tag}</span>
               <button onClick={() => handleRemoveTagListItem(index)}>-</button>
               <br />
-            </>
+            </li>
           );
         })}
-      </div>
+      </ul>
     </Modal>
   );
 };
