@@ -1,4 +1,4 @@
-import { IHashTag } from 'components/map-hash-tag/HashTagInterface';
+import { IHashTag } from 'types/Map';
 
 export const HashTagList: IHashTag[] = [
   {

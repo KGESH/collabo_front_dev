@@ -1,7 +1,6 @@
 import { makeVar } from '@apollo/client';
 import { IUser } from 'types/User';
-import { IPosition } from 'components/naver-map/MapInterface';
-import { ICafeInfo } from 'components/naver-map/MapInterface';
+import { IPosition, ICafeInfo } from 'types/Map';
 
 /**
  * 이곳에서 전역 상태를 관리
@@ -27,6 +26,7 @@ export const currentPositionVar = makeVar<IPosition>({
   longitude: 0,
 });
 export const cafeInfoVar = makeVar<ICafeInfo[]>([]);
+export const currentLatLng = makeVar<number>(1);
 
 /**
  * 리뷰 작성 상태

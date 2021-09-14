@@ -5,6 +5,7 @@ import { client } from 'services/apollo-client/apollo';
 import { ApolloProvider } from '@apollo/client';
 import App from './App';
 import './index.css';
+import GetCurrentPosition from 'components/get-current-position/GetCurrentPosition';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -22,6 +23,7 @@ ReactDOM.render(
         </div>
         {/* --------------------------------------- */}
         <App />
+        <GetCurrentPosition />
       </BrowserRouter>
     </ApolloProvider>
   </React.StrictMode>,

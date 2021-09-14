@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import 'components/naver-map/style/NaverMap.css';
 import initMap from 'components/naver-map/InitMap';
-import { ICafeInfo } from 'components/naver-map/MapInterface';
+import { ICafeInfo } from 'types/Map';
 import { GET_CAFES } from 'components/naver-map/MapGql';
 import { useQuery } from '@apollo/client';
 import useGeolocation from 'react-hook-geolocation';
@@ -33,22 +33,18 @@ const NaverMap = () => {
   const { loading, data, error } = useQuery(GET_CAFES, {});
 
   /**
-   * positionVar : 현재 좌표
    * isMapExist : 지도 생성 여부
    * clikedHashTag : 현재 지도의 해쉬 태그
    */
 
   const [isMapExist, setIsMapExist] = useState<boolean>(false);
-  const geolocation = useGeolocation({
-    enableHighAccuracy: true,
-    timeout: Infinity,
-    maximumAge: 0,
-  });
   const clickedHashTag = useReactiveVar(clickedHashTagVar);
+  const currentPosition = useReactiveVar(currentPositionVar);
 
   useEffect(() => {
-    if (!loading && data && !cafeInfo.length && geolocation.latitude) {
+    if (!loading && data && !cafeInfo.length && currentPosition.latitude) {
       data.getAllCafe.map((cafe: any) => {
+        const id: number = cafe.cafe_id;
         const name: string = cafe.cafe_info.cafe_name;
         const address: string = cafe.cafe_info.address;
         const [latitude, longitude]: string[] =
@@ -58,12 +54,13 @@ const NaverMap = () => {
           +longitude,
         );
         const distaceString: string = getDistance(
-          +geolocation.latitude,
-          +geolocation.longitude,
+          +currentPosition.latitude,
+          +currentPosition.longitude,
           +latitude,
           +longitude,
         );
         cafeInfo.push({
+          id: id,
           name: name,
           mapPos: mapPos,
           latitude: latitude,
@@ -75,7 +72,7 @@ const NaverMap = () => {
         //console.log(name, latitude, longitude, `info`);
       });
     }
-  }, [geolocation]);
+  }, [currentPosition, loading]);
 
   /**
    * 해쉬 태그 클릭 감지
@@ -94,28 +91,21 @@ const NaverMap = () => {
     /*console.log(
       `${geolocation.latitude}, ${geolocation.longitude}, ${geolocation.timestamp}, hook`,
     );*/
-    if (!geolocation.error && geolocation.latitude) {
-      currentPositionVar({
-        latitude: geolocation.latitude,
-        longitude: geolocation.longitude,
-      });
-      const currentPosition = currentPositionVar();
-      if (!isMapExist && cafeInfo.length && currentPosition.latitude) {
-        initMap(cafeInfo);
-        setIsMapExist(true);
-      } else if (isMapExist) {
-        const currentMarker = currentMarkerVar();
-        if (currentMarker) {
-          currentMarker.setOptions({
-            position: new naver.maps.LatLng(
-              currentPosition.latitude,
-              currentPosition.longitude,
-            ),
-          });
-        }
+    if (!isMapExist && cafeInfo.length && currentPosition.latitude) {
+      initMap();
+      setIsMapExist(true);
+    } else if (isMapExist) {
+      const currentMarker = currentMarkerVar();
+      if (currentMarker) {
+        currentMarker.setOptions({
+          position: new naver.maps.LatLng(
+            currentPosition.latitude,
+            currentPosition.longitude,
+          ),
+        });
       }
     }
-  }, [geolocation]);
+  }, [currentPosition, loading]);
 
   const trigger = (event: any) => {
     const list: any = document.getElementById('menu_list');

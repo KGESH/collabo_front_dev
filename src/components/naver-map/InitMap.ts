@@ -1,4 +1,4 @@
-import { ICafeInfo, IPosition } from 'components/naver-map/MapInterface';
+import { ICafeInfo, IPosition } from 'types/Map';
 import 'components/naver-map/style/NaverMap.css';
 import {
   mapVar,
@@ -8,16 +8,15 @@ import {
 } from 'services/apollo-client/LocalState';
 import { getDistance } from 'components/naver-map/MapFunctions';
 import img from 'resources/images/currentPosition/currentPosition.png';
-import { List } from 'components/naver-map/CafeList';
 
-const initMap = (cafeList: ICafeInfo[]) => {
+const initMap = () => {
   /**
    * 지도 생성
    * 현재 위치 받아서 가운데 놓기
    * 전역 변수에 저장
    */
 
-  cafeList = cafeInfoVar();
+  const cafeList: ICafeInfo[] = cafeInfoVar();
 
   const currentPosition = currentPositionVar();
 
