@@ -6,7 +6,6 @@ import {
   currentUserVar,
   isLoggedInVar,
   isInitVar,
-  currentPositionVar,
 } from 'services/apollo-client/LocalState';
 import { useMutation } from '@apollo/client';
 import { useReactiveVar } from '@apollo/client';

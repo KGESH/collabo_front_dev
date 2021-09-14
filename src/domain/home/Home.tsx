@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import 'domain/home/style/Home.css';
 import { useReactiveVar } from '@apollo/client';
 import { currentUserVar } from 'services/apollo-client/LocalState';
-import PostReviewIcon from 'resources/images/PostReview.svg';
+import { ReactComponent as PostReviewIcon } from 'resources/images/PostReview.svg';
+import { ReactComponent as HeaderLogo } from 'resources/images/CaLogo.svg';
 import { Link } from 'react-router-dom';
 const Home = () => {
   const user = useReactiveVar(currentUserVar);
@@ -15,11 +16,13 @@ const Home = () => {
 
   return (
     <>
-      <header>
+      <header className='home__header'>
         <Link to='/PostReview'>
-          <img src={PostReviewIcon} />
+          <PostReviewIcon />
         </Link>
+        <HeaderLogo />
       </header>
+      <section className='home__hash_tag_filter'></section>
       <div className='hash_tag'>해쉬 태그</div>
       {main_img.map((img, index) => (
         <div key={index}>
