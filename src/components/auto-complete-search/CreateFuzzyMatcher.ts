@@ -39,10 +39,13 @@ const ch2pattern = (ch: string) => {
   // 그 외엔 그대로 내보냄
   // escapeRegExp는 lodash에서 가져옴
   return escapeRegExp(ch);
-}
+};
 
 export const createFuzzyMatcher = (input: string) => {
   input = input.toLowerCase();
-  const pattern = input.split('').map(ch2pattern).join('.*?');
+  const pattern = input
+    .split('')
+    .map((character: string, index: number) => ch2pattern(character))
+    .join('.*?');
   return new RegExp(pattern);
-}
+};

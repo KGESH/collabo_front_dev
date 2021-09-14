@@ -9,8 +9,8 @@ const Map = () => {
   return (
     <React.Fragment>
       <header className='map__header'>
-        <MapSearchBar/>
-        <MapHashTag/>
+        <MapSearchBar />
+        <MapHashTag />
       </header>
       <section className='map__section'>
         <NaverMap />

@@ -84,7 +84,7 @@ const initMap = () => {
    */
   const cafeMarkers: naver.maps.Marker[] = [];
   const cafeInfomations: naver.maps.InfoWindow[] = [];
-  cafeList.map((cafe: ICafeInfo) => {
+  cafeList.map((cafe: ICafeInfo, index: number) => {
     /*
       현재 위치 & 카페 위치를 기반으로 한 작업
       1. 거리 구하기 (경도, 위도 좌표값을 통한 계산)

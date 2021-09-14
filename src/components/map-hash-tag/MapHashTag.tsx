@@ -10,10 +10,10 @@ const MapHashTag = () => {
 
   return (
     <div className='map__hash_tag_container'>
-      <div className='container__hash_tag_list'>
-        {HashTagList.map((tag: IHashTag) => {
+      <ul className='container__hash_tag_list'>
+        {HashTagList.map((tag: IHashTag, index: number) => {
           return (
-            <>
+            <li key={index}>
               <input
                 className='hash_tag_list__radio_btn'
                 type='radio'
@@ -22,17 +22,17 @@ const MapHashTag = () => {
                 onClick={(event: any) => {
                   clickedHashTagVar(event.currentTarget.id);
                 }}
-                checked={clickedHashTag === tag.name}
+                defaultChecked={clickedHashTag === tag.name}
               />
               <label htmlFor={tag.name}>
                 <div id={tag.name} className='hash_tag_list__border'>
                   {tag.name}
                 </div>
               </label>
-            </>
+            </li>
           );
         })}
-      </div>
+      </ul>
       <button>추가</button>
     </div>
   );

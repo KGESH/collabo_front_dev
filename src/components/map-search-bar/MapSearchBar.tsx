@@ -51,7 +51,7 @@ const MapSearchBar = () => {
         ? cafeInfoSortByDistance
         : cafeInfoSortByname
       ).filter(
-        (cafe: ICafeInfo) =>
+        (cafe: ICafeInfo, index: number) =>
           regex.test(cafe.name.toLowerCase()) ||
           regexMinusOne.test(cafe.name.toLowerCase()) ||
           regexRemoveSpace.test(cafe.name.toLowerCase()),
@@ -73,7 +73,7 @@ const MapSearchBar = () => {
     }
   };
 
-  const onSearchBarInputChange = (event: any) => {
+  const onSearchBarInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value: string = event.target.value;
     setSearchInput(value);
     const regex = createFuzzyMatcher(value);
@@ -90,7 +90,7 @@ const MapSearchBar = () => {
         ? cafeInfoSortByDistance
         : cafeInfoSortByname
       ).filter(
-        (cafe: ICafeInfo) =>
+        (cafe: ICafeInfo, index: number) =>
           regex.test(cafe.name.toLowerCase()) ||
           regexMinusOne.test(cafe.name.toLowerCase()) ||
           regexRemoveSpace.test(cafe.name.toLowerCase()),
@@ -122,7 +122,7 @@ const MapSearchBar = () => {
     const cafeId: number = +event.currentTarget.id;
     console.log(cafeId);
     const target: ICafeInfo[] = searchResultList.filter(
-      (cafe) => cafe.id === cafeId,
+      (cafe: ICafeInfo, index: number) => cafe.id === cafeId,
     );
     console.log(target);
     setSearchBoardExist(false);
@@ -168,9 +168,10 @@ const MapSearchBar = () => {
           <div className='search_board__division_line'></div>
           <div className='search_board__search_list'>
             <ul className='search_list__container'>
-              {searchResultList.map((cafe: ICafeInfo) => {
+              {searchResultList.map((cafe: ICafeInfo, index: number) => {
                 return (
                   <li
+                    key={index}
                     className='search_list__cafe_info'
                     id={cafe.id.toString()}
                     onClick={onSearchListClick}

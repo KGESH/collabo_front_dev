@@ -75,7 +75,7 @@ const HashTagModal = (props: IModalFrameProps) => {
         })}
       </div>
       <div>
-        {hashTagList.map((tag, index) => {
+        {hashTagList.map((tag: string, index: number) => {
           return (
             <>
               <span>{tag}</span>

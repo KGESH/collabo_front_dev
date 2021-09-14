@@ -59,7 +59,7 @@ const ReviewForm = () => {
       <div className='review__add_hash_tag' onClick={openHashTagModal}>
         해시태그 추가
       </div>
-      {tagList.map((tag, index) => {
+      {tagList.map((tag: string, index: number) => {
         return (
           <>
             <span>{tag}</span>
