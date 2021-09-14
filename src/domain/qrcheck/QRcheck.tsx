@@ -3,6 +3,8 @@ import { useParams, Redirect, Link } from 'react-router-dom';
 import { gql } from '@apollo/client';
 import { useMutation, useQuery } from '@apollo/client';
 import 'domain/qrcheck/style/QRcheck.css';
+import { useReactiveVar } from '@apollo/client';
+import { currentUserVar } from 'services/apollo-client/LocalState';
 
 const ADD_CARD = gql`
   mutation (
@@ -42,12 +44,14 @@ const GET_USER = gql`
 `;
 
 const QRcheck = () => {
+  const user = useReactiveVar(currentUserVar);
+
   const params: any = useParams();
   const [addCard] = useMutation(ADD_CARD);
   const { data } = useQuery(GET_USER, {
     variables: {
-      id: 11700 /* 배포 시 수정해야 합니다. @@@@@@@@@@@*/,
-      cafe_name: params.cafeName,
+      id: user?.id /* 배포 시 수정해야 합니다. @@@@@@@@@@@*/,
+      //cafe_name: params.cafeName,
     },
   });
 
@@ -56,7 +60,7 @@ const QRcheck = () => {
     try {
       addCard({
         variables: {
-          id: 11700 /* 배포 시 수정해야 합니다. @@@@@@@@@@@*/,
+          id: user?.id /* 배포 시 수정해야 합니다. @@@@@@@@@@@*/,
           cafe_name: `${params.cafeName}`,
           code: `${params.code}`,
           card_img: `${data?.getCafeByName?.cafe_info?.card_img}`,
@@ -72,8 +76,7 @@ const QRcheck = () => {
     // 로그인 시 history 사용 !!
     return <Redirect to='/login' />;
   } else {
-
-  /** 로그인 상태(true) 일 때 */
+    /** 로그인 상태(true) 일 때 */
     /** 로그인 한 user 가 "CLIENT" 일 때 */
     if (data?.getUserById?.auth == 'client') {
       /** 이미 동일한 카페의 카드가 db에 있을 때 => 등록 실패  */
@@ -114,8 +117,7 @@ const QRcheck = () => {
         }
       }
     } else if (
-
-    /** 로그인 한 user가 "OWNER" 일 때 */
+      /** 로그인 한 user가 "OWNER" 일 때 */
       data?.getUserById?.auth == 'owner' ||
       data?.getUserById?.auth == 'staff'
     ) {

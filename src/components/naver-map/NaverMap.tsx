@@ -114,9 +114,9 @@ const NaverMap = () => {
   };
 
   return (
-    <React.Fragment>
+    <>
       <div id='map' />
-    </React.Fragment>
+    </>
   );
 };
 

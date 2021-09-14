@@ -1,8 +1,9 @@
 import React from 'react';
 import 'components/mypage-detail-comp/style/DetailVisit.css';
 import { gql } from '@apollo/client';
-import { useQuery } from '@apollo/client';
+import { useQuery, useReactiveVar } from '@apollo/client';
 import SmallMenu from '../small-menu/SmallMenu';
+import { currentUserVar } from 'services/apollo-client/LocalState';
 
 const GET_MY_MILEAGE_LOG = gql`
   query GETMYMILEAGELOG($client_id: Int!) {
@@ -14,8 +15,9 @@ const GET_MY_MILEAGE_LOG = gql`
 `;
 
 export default () => {
+  const user = useReactiveVar(currentUserVar);
   const { data } = useQuery(GET_MY_MILEAGE_LOG, {
-    variables: { client_id: 11700 },
+    variables: { client_id: user?.id },
   });
   const log_data = data?.getMileageLogByClientId[0];
   // 수정 필요

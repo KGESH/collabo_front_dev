@@ -12,15 +12,19 @@ import TextareaAutosize from 'react-textarea-autosize';
 import HashTagModal from 'components/review-form/HashTagModal';
 import { handleRemoveTagListItem } from 'components/review-form/HandleTagList';
 import { handleChangeFile } from 'components/review-form/HandleChangeFile';
+import VisitCafeModal from './VisitCafeModal';
 
 const ReviewForm = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isHashTagModalOpen, setIsHashTagModalOpen] = useState(false);
+  const [isVisitCafeModalOpen, setIsVisitCafeModalOpen] = useState(false);
   const user = useReactiveVar(currentUserVar);
   const imgBase64List = useReactiveVar(uploadImgBase64ListVar);
   const tagList = useReactiveVar(hashTagListVar);
   const content = useReactiveVar(reviewContentVar);
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
+  const openHashTagModal = () => setIsHashTagModalOpen(true);
+  const closeHashTagModal = () => setIsHashTagModalOpen(false);
+  const openVisitCafeModal = () => setIsVisitCafeModalOpen(true);
+  const closeVisitCafeModal = () => setIsVisitCafeModalOpen(false);
 
   return (
     <>
@@ -49,8 +53,10 @@ const ReviewForm = () => {
           />
         </label>
       </section>
-      <div className='review__add_payment_history'>방문 카페</div>
-      <div className='review__add_hash_tag' onClick={openModal}>
+      <div className='review__add_payment_history' onClick={openVisitCafeModal}>
+        방문 카페
+      </div>
+      <div className='review__add_hash_tag' onClick={openHashTagModal}>
         해시태그 추가
       </div>
       {tagList.map((tag, index) => {
@@ -63,7 +69,14 @@ const ReviewForm = () => {
         );
       })}
 
-      <HashTagModal isOpen={isModalOpen} handleClose={closeModal} />
+      <HashTagModal
+        isOpen={isHashTagModalOpen}
+        handleClose={closeHashTagModal}
+      />
+      <VisitCafeModal
+        isOpen={isVisitCafeModalOpen}
+        handleClose={closeVisitCafeModal}
+      />
     </>
   );
 };

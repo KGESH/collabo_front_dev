@@ -1,5 +1,6 @@
 import { makeVar } from '@apollo/client';
 import { IUser } from 'types/User';
+import { ICafeList } from 'types/Review';
 import { IPosition, ICafeInfo } from 'types/Map';
 import { IHashTag } from 'types/HashTag';
 
@@ -27,7 +28,6 @@ export const currentPositionVar = makeVar<IPosition>({
   longitude: 0,
 });
 export const cafeInfoVar = makeVar<ICafeInfo[]>([]);
-export const currentLatLng = makeVar<number>(1);
 
 /**
  * 리뷰 작성 상태
@@ -35,5 +35,8 @@ export const currentLatLng = makeVar<number>(1);
 export const reviewContentVar = makeVar<string>('');
 export const uploadImgBase64ListVar = makeVar<string[]>([]);
 export const uploadImgListVar = makeVar<FileList | null>(null);
+export const hashTagListVar = makeVar<string[]>([]);
+export const hashTagQueryVar = makeVar<IHashTag[]>([]);
+export const cafeListVar = makeVar<ICafeList[]>([]);
 
-export const hashTagListVar = makeVar<IHashTag[]>([]);
+

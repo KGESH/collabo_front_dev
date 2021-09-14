@@ -23,3 +23,10 @@ export interface IComment {
   content: string;
   post_date: Date;
 }
+
+export interface ICafeList {
+  cafe_name: string;
+  code: string;
+  card_img: string;
+  visit_times: number;
+}

@@ -13,20 +13,11 @@ import { useReactiveVar } from '@apollo/client';
 import { gql } from '@apollo/client';
 import { useMutation } from '@apollo/client';
 
-const UP_LOAD_IMAGE = gql`
-  mutation UP_LOAD_IMAGE(
-    $content: String!
-    $hash_tag_list: [String]
-    $files: [Upload]!
-  ) {
-    uploadImage(
-      content: $content
-      hash_tag_list: $hash_tag_list
-      files: $files
-    ) {
-      filename
-      mimetype
-      encoding
+const POST_REVIEW = gql`
+  mutation POST_REVIEW($review: ReviewInput!) {
+    postReview(review: $review) {
+      success
+      message
     }
   }
 `;
@@ -37,14 +28,22 @@ const PostReview = () => {
   const tagList = useReactiveVar(hashTagListVar);
   const imgList = useReactiveVar(uploadImgListVar);
   const base64Img = useReactiveVar(uploadImgBase64ListVar);
-  const [upload, { loading, data, error }] = useMutation(UP_LOAD_IMAGE);
+  const [upload, { loading, data, error }] = useMutation(POST_REVIEW);
 
   const handleSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
     console.log(`imgList list`);
     console.log(imgList);
-    upload({ variables: { content, hash_tag_list: tagList, files: imgList } });
+    upload({
+      variables: {
+        review: { content, hash_tag_list: tagList, files: imgList },
+      },
+    });
   };
 
+  if (error) {
+    console.log(`post error!`);
+    console.log(error);
+  }
   useEffect(() => {
     if (!loading && data) {
       console.log(data);

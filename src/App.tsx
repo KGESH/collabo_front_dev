@@ -19,7 +19,7 @@ const App = () => {
    * Apollo Client - Reactive Variables 참조
    * (21-8-16:지성현)
    */
-
+  ``;
   const isInit = useReactiveVar(isInitVar);
   const isLoggedIn = useReactiveVar(isLoggedInVar);
   const user = useReactiveVar(currentUserVar);
@@ -38,13 +38,17 @@ const App = () => {
 
   useEffect(() => {
     if (!loading && data?.authUser) {
+      console.log(data);
       const me: IUser = {
-        id: data.authUser.id,
-        name: data.authUser.name,
-        email: data.authUser.email,
-        point: data.authUser.point,
-        profile_img: data.authUser.profile_img,
+        id: data.authUser.user.id,
+        name: data.authUser.user.name,
+        email: data.authUser.user.email,
+        point: data.authUser.user.point,
+        profile_img: data.authUser.user.profile_img,
       };
+      localStorage.setItem('jwt', data.authUser.jwt);
+      console.log(data.authUser.jwt);
+      console.log(me);
       currentUserVar(me);
       isLoggedInVar(true);
     }

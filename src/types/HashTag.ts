@@ -1,5 +1,5 @@
 export interface IHashTag {
-  name: string;
   id?: number;
+  name: string;
   count?: number;
 }
