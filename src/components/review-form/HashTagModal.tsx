@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Modal from 'components/modal-frame/Modal';
 import { IModalFrameProps } from 'types/Props';
 import { useInput } from 'hooks/useInput';
@@ -9,11 +9,40 @@ import {
   handleAddTag,
   tagValidator,
 } from './HandleTagList';
+import { createFuzzyMatcher } from 'components/auto-complete-search/CreateFuzzyMatcher';
+import { HashTagList } from 'components/review-form/HashTagList';
+import { IHashTag } from 'types/Map';
 
 const HashTagModal = (props: IModalFrameProps) => {
   const { isOpen, handleClose } = props;
   const tagList = useReactiveVar(hashTagListVar);
   const tagInput = useInput('', tagValidator);
+  const [hashTagSearchList, setHashTagSearchList] = useState<IHashTag[]>([]);
+
+  useEffect(() => {
+    if (tagInput.value === '') {
+      setHashTagSearchList([]);
+      return;
+    }
+    const regex = createFuzzyMatcher(tagInput.value);
+    const regexMinusOne = createFuzzyMatcher(
+      tagInput.value.length > 1
+        ? tagInput.value.trim().substr(0, tagInput.value.trim().length - 1)
+        : tagInput.value,
+    );
+    const regexRemoveSpace = createFuzzyMatcher(tagInput.value.trim());
+    setHashTagSearchList(
+      HashTagList.filter(
+        (hashTag: IHashTag) =>
+          regex.test(hashTag.name.toLowerCase()) ||
+          regexMinusOne.test(hashTag.name.toLowerCase()) ||
+          regexRemoveSpace.test(hashTag.name.toLowerCase()),
+      ),
+    );
+    console.log(tagInput.value);
+    console.log(hashTagSearchList);
+    console.log(HashTagList);
+  }, [tagInput.value]);
 
   return (
     <Modal isOpen={isOpen} handleClose={handleClose} header='해시태그 추가'>
@@ -29,6 +58,18 @@ const HashTagModal = (props: IModalFrameProps) => {
       >
         +
       </button>
+      <div>
+        {hashTagSearchList.map((matchedHashTag: IHashTag) => {
+          return (
+            <>
+              <span className='modal_hash_tag_mathched_hash_tag'>
+                {matchedHashTag.name + '   '}
+              </span>
+              <br />
+            </>
+          );
+        })}
+      </div>
       <div>
         {tagList.map((tag, index) => {
           return (
