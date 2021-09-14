@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { gql } from 'apollo-boost';
+import { gql } from '@apollo/client';
 import { useQuery } from '@apollo/client';
 import 'domain/mypage/style/MyPage.css';
 import Navbar from 'components/navbar/Navbar';

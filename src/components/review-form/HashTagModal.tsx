@@ -11,7 +11,8 @@ import {
 } from './HandleTagList';
 import { createFuzzyMatcher } from 'components/auto-complete-search/CreateFuzzyMatcher';
 import { HashTagList } from 'components/review-form/HashTagList';
-import { IHashTag } from 'types/Map';
+import { IHashTag } from 'types/HashTag';
+import { GET_CAFES } from 'components/naver-map/MapGql';
 
 const HashTagModal = (props: IModalFrameProps) => {
   const { isOpen, handleClose } = props;
