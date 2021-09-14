@@ -9,14 +9,16 @@ import { useReactiveVar } from '@apollo/client';
 import { isInitVar, currentUserVar } from 'services/apollo-client/LocalState';
 
 const GET_USER = gql`
-  query GETUSER($id: Int!) {
-    getUserById(id: $id) {
-      cafe_list {
-        cafe_name
-        code
-        card_img
+  mutation GET_KAKAO_USER_BY_JWT($id: Int!) {
+    getKakaoUserByJwt(jwt: $id) {
+      user {
+        cafe_list {
+          cafe_name
+          code
+          card_img
+        }
+        point
       }
-      point
     }
   }
 `;

@@ -17,6 +17,7 @@ const POST_REVIEW = gql`
   mutation POST_REVIEW($review: ReviewInput!) {
     postReview(review: $review) {
       success
+      message
     }
   }
 `;
