@@ -30,6 +30,8 @@ export const currentPositionVar = makeVar<IPosition>({
 export const cafeInfoVar = makeVar<ICafeInfo[]>([]);
 export const clickedCafeDetailVar = makeVar<ICafeInfo | null>(null);
 export const isCafeDetailExistVar = makeVar<boolean>(false);
+export const cafeDetailHeightVar = makeVar<string>('down');
+export const kakaoSchemeVar = makeVar<string>('');
 
 /**
  * 리뷰 작성 상태

@@ -11,4 +11,6 @@ export interface ICafeInfo {
   longitude: string;
   distance: number;
   address?: string;
+  beans?: string;
+  phone?: string;
 }

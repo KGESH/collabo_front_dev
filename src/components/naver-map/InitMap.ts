@@ -7,6 +7,8 @@ import {
   cafeInfoVar,
   clickedCafeDetailVar,
   isCafeDetailExistVar,
+  cafeDetailHeightVar,
+  kakaoSchemeVar,
 } from 'services/apollo-client/LocalState';
 import { getDistance } from 'components/naver-map/MapFunctions';
 import img from 'resources/images/currentPosition/currentPosition.png';
@@ -19,7 +21,6 @@ const initMap = () => {
    */
 
   const cafeList: ICafeInfo[] = cafeInfoVar();
-
   const currentPosition = currentPositionVar();
 
   const map = new naver.maps.Map('map', {
@@ -128,14 +129,18 @@ const initMap = () => {
      */
     const i = cafeMarkers.length - 1;
     naver.maps.Event.addListener(cafeMarkers[i], 'click', () => {
+      const cafeInfo: ICafeInfo = cafe;
+      const position: IPosition = currentPositionVar();
+      cafeDetailHeightVar('down');
       isCafeDetailExistVar(true);
       console.log(isCafeDetailExistVar());
       clickedCafeDetailVar(cafe);
+      kakaoSchemeVar(
+        `kakaomap://route?sp=${position.latitude},${position.longitude}&ep=${cafeInfo.latitude},${cafeInfo.longitude}&by=CAR`,
+      );
 
       /*
-      const cafeInfo: ICafeInfo = cafe;
-      const position: IPosition = currentPositionVar();
-      const kakaoScheme: string = `kakaomap://route?sp=${position.latitude},${position.longitude}&ep=${cafeInfo.latitude},${cafeInfo.longitude}&by=CAR`;
+
       const now: Date = new Date();
       console.log(position.latitude, position.longitude);
       console.log(cafeInfo.latitude, cafeInfo.longitude, now);
@@ -146,7 +151,6 @@ const initMap = () => {
       } else {
         infoWindow.open(map, marker);
       }*/
-
     });
   });
 
@@ -155,6 +159,7 @@ const initMap = () => {
    */
   naver.maps.Event.addListener(map, 'mousedown', (e) => {
     isCafeDetailExistVar(false);
+    cafeDetailHeightVar('down');
     console.log(isCafeDetailExistVar());
   });
 

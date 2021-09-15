@@ -47,6 +47,8 @@ const NaverMap = () => {
         const id: number = cafe.cafe_id;
         const name: string = cafe.cafe_info.cafe_name;
         const address: string = cafe.cafe_info.address;
+        const beans: string = cafe.cafe_info.beans;
+        const phone: string = cafe.cafe_info.phone;
         const [latitude, longitude]: string[] =
           cafe.cafe_info.position.split(',');
         const mapPos: naver.maps.LatLng = new naver.maps.LatLng(
@@ -67,6 +69,8 @@ const NaverMap = () => {
           longitude: longitude,
           distance: +distaceString,
           address: address,
+          beans: beans,
+          phone: phone,
         });
         cafeInfoVar(cafeInfo);
         //console.log(name, latitude, longitude, `info`);
