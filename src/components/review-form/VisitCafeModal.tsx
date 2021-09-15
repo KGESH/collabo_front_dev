@@ -38,7 +38,10 @@ const VisitCafeModal = (props: IModalFrameProps) => {
       //console.log(data?.getKakaoUserByJwt);
       console.log(data.getKakaoUserByJwt.user.cafe_list[0]);
       const res: ICafeList[] = data.getKakaoUserByJwt.user.cafe_list;
-      cafeListVar([...cafeList, ...res.map((elemelt: ICafeList) => elemelt)]);
+      cafeListVar([
+        ...cafeList,
+        ...res.map((elemelt: ICafeList, index: number) => elemelt),
+      ]);
     }
   }, [loading, data]);
 
@@ -52,7 +55,7 @@ const VisitCafeModal = (props: IModalFrameProps) => {
 
   return (
     <Modal isOpen={isOpen} handleClose={handleClose} header='방문 카페'>
-      {cafeList.map((cafe: ICafeList) => (
+      {cafeList.map((cafe: ICafeList, index: number) => (
         <>
           <div>{cafe.cafe_name}</div>
           <div>{cafe.visit_times}</div>

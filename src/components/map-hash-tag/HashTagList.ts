@@ -29,6 +29,18 @@ export const HashTagList: IHashTag[] = [
     name : '경기도',
   },
   {
-    name : '인천',
+    name : '인천1',
+  },
+  {
+    name : '인천2',
+  },
+  {
+    name : '인천3',
+  },
+  {
+    name : '인천4',
+  },
+  {
+    name : '인천5',
   },
 ];

@@ -43,7 +43,7 @@ const NaverMap = () => {
 
   useEffect(() => {
     if (!loading && data && !cafeInfo.length && currentPosition.latitude) {
-      data.getAllCafe.map((cafe: any) => {
+      data.getAllCafe.map((cafe: any, index: number) => {
         const id: number = cafe.cafe_id;
         const name: string = cafe.cafe_info.cafe_name;
         const address: string = cafe.cafe_info.address;

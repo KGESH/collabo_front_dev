@@ -11,6 +11,8 @@
   display: flex;
   justify-content: space-between;
   overflow-x: scroll;
+  list-style: none;
+  padding-left: 0vw;
 }
 .container__hash_tag_list::-webkit-scrollbar {
   display:none;

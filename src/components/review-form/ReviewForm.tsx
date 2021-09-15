@@ -59,15 +59,17 @@ const ReviewForm = () => {
       <div className='review__add_hash_tag' onClick={openHashTagModal}>
         해시태그 추가
       </div>
-      {tagList.map((tag, index) => {
-        return (
-          <>
-            <span>{tag}</span>
-            <button onClick={() => handleRemoveTagListItem(index)}>-</button>
-            <br />
-          </>
-        );
-      })}
+      <ul className='modal_hash_tag_ul'>
+        {tagList.map((tag: string, index: number) => {
+          return (
+            <li key={index}>
+              <span>{tag}</span>
+              <button onClick={() => handleRemoveTagListItem(index)}>-</button>
+              <br />
+            </li>
+          );
+        })}
+      </ul>
 
       <HashTagModal
         isOpen={isHashTagModalOpen}
