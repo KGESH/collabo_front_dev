@@ -10,9 +10,9 @@ import {
   currentMarkerVar,
   currentPositionVar,
   cafeInfoVar,
+  clickedHashTagVar,
 } from 'services/apollo-client/LocalState';
 import { useReactiveVar } from '@apollo/client';
-import { clickedHashTagVar } from 'services/apollo-client/LocalState';
 import { getDistance } from 'components/naver-map/MapFunctions';
 
 const NaverMap = () => {

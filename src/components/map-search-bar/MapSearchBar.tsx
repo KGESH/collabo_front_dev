@@ -200,7 +200,7 @@ const MapSearchBar = () => {
           onClick={onSearchBarImgClick}
         />
         <input
-          className='search_bar__input'
+          className='search_bar__input' 
           type='search'
           placeholder='바닐라가 땡기는 오늘, 검색!'
           role='combobox'

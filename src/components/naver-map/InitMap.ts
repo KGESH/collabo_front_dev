@@ -5,6 +5,8 @@ import {
   currentMarkerVar,
   currentPositionVar,
   cafeInfoVar,
+  clickedCafeDetailVar,
+  isCafeDetailExistVar,
 } from 'services/apollo-client/LocalState';
 import { getDistance } from 'components/naver-map/MapFunctions';
 import img from 'resources/images/currentPosition/currentPosition.png';
@@ -121,11 +123,16 @@ const initMap = () => {
     );
 
     /**
+     * 카페 이미지 클릭 시, 카페 세부정보창 띄움
      * 카페 위치 표시
      */
-
     const i = cafeMarkers.length - 1;
     naver.maps.Event.addListener(cafeMarkers[i], 'click', () => {
+      isCafeDetailExistVar(true);
+      console.log(isCafeDetailExistVar());
+      clickedCafeDetailVar(cafe);
+
+      /*
       const cafeInfo: ICafeInfo = cafe;
       const position: IPosition = currentPositionVar();
       const kakaoScheme: string = `kakaomap://route?sp=${position.latitude},${position.longitude}&ep=${cafeInfo.latitude},${cafeInfo.longitude}&by=CAR`;
@@ -138,28 +145,18 @@ const initMap = () => {
         infoWindow.close();
       } else {
         infoWindow.open(map, marker);
-      }
+      }*/
+
     });
-    return 0;
   });
 
   /**
-   * 맵에서 클릭한 위치 표시
+   * 맵을 클릭 시, 카페 세부정보창 사라짐
    */
-  /*
   naver.maps.Event.addListener(map, 'mousedown', (e) => {
-    console.log('Coord: ' + e.coord.toString());
-    console.log(e.coord._lat, e.coord._lng);
-    console.log(e);
-    cafeMarkers.push(
-      new naver.maps.Marker({
-        position: new naver.maps.LatLng(e.coord._lat, e.coord._lng),
-        map: map,
-      }),
-    );
+    isCafeDetailExistVar(false);
+    console.log(isCafeDetailExistVar());
   });
-
-  */
 
   /**
    * map, currentMarker 전역변수 저장

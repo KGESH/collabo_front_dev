@@ -28,6 +28,8 @@ export const currentPositionVar = makeVar<IPosition>({
   longitude: 0,
 });
 export const cafeInfoVar = makeVar<ICafeInfo[]>([]);
+export const clickedCafeDetailVar = makeVar<ICafeInfo | null>(null);
+export const isCafeDetailExistVar = makeVar<boolean>(false);
 
 /**
  * 리뷰 작성 상태
