@@ -23,9 +23,20 @@ const MapCafeDetail = () => {
     console.log(cafeDetailHeight);
   }, [cafeDetailHeight]);
 
+  useEffect(() => {
+    const detailContainer: HTMLElement | null = document.getElementById(
+      'map_cafe_detail_container',
+    );
+    if (detailContainer && cafeDetailHeight === 'down') {
+      detailContainer.style.height = '17vh';
+    } else if (detailContainer && cafeDetailHeight === 'up') {
+      detailContainer.style.height = '40vh';
+    }
+  }, [cafeDetailHeight]);
+
   return (
     <>
-      <div className='map_cafe_detail_container'>
+      <div id='map_cafe_detail_container'>
         <div className='container__adjust_height_box'>
           <div
             className='adjust_height_box__bar'
@@ -58,6 +69,36 @@ const MapCafeDetail = () => {
             </div>
           </div>
         </div>
+        {cafeDetailHeight === 'up' ? (
+          <div className='de_vi__content_group1'>
+            <div className='de_vi_first_block'>
+              <div className='de_vi_first__check_img'>
+                <img src='/detail/boll.svg' alt='' />
+                <img src='/detail/check.svg' alt='' id='check' />
+              </div>
+              <div className='de_vi_first__data_group'>
+                <div className='de_vi_first__branch'>{clickedCafeDetail?.name}</div>
+                <div className='de_vi_first__day_and_time'>
+                  8.15 일 | 오후 3:00
+                </div>
+              </div>
+            </div>
+            <div className='de_vi_second_block'>
+              <div className='de_vi_second__visit_times'>3번째 방문</div>
+              <div className='de_vi_second__data_group'>
+                <div className='de_vi_second__menu'>카라멜 마끼야또</div>
+                <div className='de_vi_second__price'>
+                  1,500원
+                </div>
+              </div>
+            </div>
+            <div className='de_vi_third_block'>
+              <div className='de_vi_third__flavour'>맛 5.6</div>
+              <div className='de_vi_third__atmosphere'>분위기 7.2</div>
+              <div className='de_vi_third__price'>가격 4.4</div>
+            </div>
+          </div>
+        ) : null}
       </div>
     </>
   );

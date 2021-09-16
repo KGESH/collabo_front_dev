@@ -1,4 +1,4 @@
-.map_cafe_detail_container {
+#map_cafe_detail_container {
   position: absolute;
   width: 100vw;
   height: 17vh;
@@ -8,6 +8,7 @@
   background: white;
   box-shadow: 0px 0px 10px #0000006E;
   border-radius: 15px 15px 15px 15px ;
+  transition: all ease 1s 0s;
   opacity: 1;
 }
 
@@ -46,19 +47,19 @@
 }
 
 .datas__name {
-  font-size: 1em;
+  font-size: 1.2em;
 }
 
 .datas__sub_datas {
-  font-size: 0.9em;
+  font-size: 1.0em;
   font-weight: lighter;
 }
 
 .cafe_info_box__cafe_img {
   position: absolute;
-  width: 25vw;
-  height: 25vw;
-  transform: translate(65vw, -1vw);
+  width: 8em;
+  height: 8em;
+  transform: translate(67vw, -1vw);
   z-index: 100;
 }
 
@@ -70,4 +71,14 @@
   margin-top: 30px;
 }
 
+.de_vi__content_group1 {
+  width: 85vw;
+  display: inline-block;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+  position: relative;
+  top: 15vh;
+  left: 10vw;
+}
 
