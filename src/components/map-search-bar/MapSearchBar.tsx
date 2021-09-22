@@ -2,7 +2,12 @@ import React, { useState } from 'react';
 import 'components/map-search-bar/style/MapSearchBar.css';
 import SearchBarMenuImg from 'resources/images/searchBarImg.png';
 import SearchBarBackImg from 'resources/images/back_arrow.png';
-import { cafeInfoVar } from 'services/apollo-client/LocalState';
+import {
+  cafeInfoVar,
+  cafeDetailHeightVar,
+  isCafeDetailExistVar,
+  clickedCafeDetailVar,
+} from 'services/apollo-client/LocalState';
 import { useReactiveVar } from '@apollo/client';
 import { ICafeInfo } from 'types/Map';
 import { mapVar } from 'services/apollo-client/LocalState';
@@ -29,13 +34,11 @@ const MapSearchBar = () => {
   };
 
   useEffect(() => {
-    if (!searchResultList.length) {
-      const cafeInfoDistance: ICafeInfo[] = [...cafeInfo];
-      const cafeInfoName: ICafeInfo[] = [...cafeInfo];
-      setSearchResultList(cafeInfoDistance.sort(compareByDistance));
-      setCafeInfoSortByDistance(cafeInfoDistance.sort(compareByDistance));
-      setCafeInfoSortByname(cafeInfoName.sort(compareByName));
-    }
+    const cafeInfoDistance: ICafeInfo[] = [...cafeInfo];
+    const cafeInfoName: ICafeInfo[] = [...cafeInfo];
+    setSearchResultList(cafeInfoDistance.sort(compareByDistance));
+    setCafeInfoSortByDistance(cafeInfoDistance.sort(compareByDistance));
+    setCafeInfoSortByname(cafeInfoName.sort(compareByName));
   }, [cafeInfo]);
 
   useEffect(() => {
@@ -43,9 +46,7 @@ const MapSearchBar = () => {
     const regexMinusOne = createFuzzyMatcher(
       searchInput.trim().substr(0, searchInput.length - 1),
     );
-    const regexRemoveSpace = createFuzzyMatcher(
-      searchInput.trim(),
-    );
+    const regexRemoveSpace = createFuzzyMatcher(searchInput.trim());
     setSearchResultList(
       (sortType === 'distance'
         ? cafeInfoSortByDistance
@@ -73,18 +74,16 @@ const MapSearchBar = () => {
     }
   };
 
-  const onSearchBarInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const onSearchBarInputChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
     const value: string = event.target.value;
     setSearchInput(value);
     const regex = createFuzzyMatcher(value);
     const regexMinusOne = createFuzzyMatcher(
-      value
-        .trim()
-        .substr(0, value.trim().length - 1),
+      value.trim().substr(0, value.trim().length - 1),
     );
-    const regexRemoveSpace = createFuzzyMatcher(
-      value.trim(),
-    );
+    const regexRemoveSpace = createFuzzyMatcher(value.trim());
     setSearchResultList(
       (sortType === 'distance'
         ? cafeInfoSortByDistance
@@ -121,15 +120,24 @@ const MapSearchBar = () => {
   const onSearchListClick = (event: any) => {
     const cafeId: number = +event.currentTarget.id;
     console.log(cafeId);
-    const target: ICafeInfo[] = searchResultList.filter(
-      (cafe: ICafeInfo, index: number) => cafe.id === cafeId,
+    const target: ICafeInfo | undefined = searchResultList?.find(
+      (cafe: ICafeInfo) => {
+        if (cafe.id === cafeId) {
+          return true;
+        }
+      },
     );
-    console.log(target);
-    setSearchBoardExist(false);
-    const map = mapVar();
-    if (map) {
-      map.setCenter(target[0].mapPos);
-      map.setZoom(19);
+    if (target) {
+      console.log(target);
+      setSearchBoardExist(false);
+      const map = mapVar();
+      if (map) {
+        map.setCenter(target.mapPos);
+        map.setZoom(19);
+      }
+      cafeDetailHeightVar('down');
+      isCafeDetailExistVar(true);
+      clickedCafeDetailVar(target);
     }
   };
 
@@ -200,7 +208,7 @@ const MapSearchBar = () => {
           onClick={onSearchBarImgClick}
         />
         <input
-          className='search_bar__input' 
+          className='search_bar__input'
           type='search'
           placeholder='바닐라가 땡기는 오늘, 검색!'
           role='combobox'

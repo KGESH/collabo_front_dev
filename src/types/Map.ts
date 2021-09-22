@@ -10,7 +10,7 @@ export interface ICafeInfo {
   latitude: string;
   longitude: string;
   distance: number;
-  address?: string;
-  beans?: string;
-  phone?: string;
+  address: string;
+  beans: string;
+  phone: string;
 }

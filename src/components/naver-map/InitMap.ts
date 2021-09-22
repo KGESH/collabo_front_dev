@@ -108,21 +108,6 @@ const initMap = () => {
       }),
     );
 
-    const contentString = [
-      '<div class="iw_inner">',
-      '   <h3>' + cafe.name + '</h3>',
-      '   <p>거리 : ' + cafe.distance.toString() + 'km<br />',
-      '   </p>',
-      '</div>',
-    ].join('');
-
-    cafeInfomations.push(
-      new naver.maps.InfoWindow({
-        content: contentString,
-        borderWidth: 5,
-      }),
-    );
-
     /**
      * 카페 이미지 클릭 시, 카페 세부정보창 띄움
      * 카페 위치 표시
@@ -134,7 +119,23 @@ const initMap = () => {
       cafeDetailHeightVar('down');
       isCafeDetailExistVar(true);
       console.log(isCafeDetailExistVar());
-      clickedCafeDetailVar(cafe);
+      const distaceString: string = getDistance(
+        location.latitude,
+        location.longitude,
+        +cafeInfo.latitude,
+        +cafeInfo.longitude,
+      );
+      clickedCafeDetailVar({
+        id: cafeInfo.id,
+        name: cafeInfo.name,
+        mapPos: cafeInfo.mapPos,
+        latitude: cafeInfo.latitude,
+        longitude: cafeInfo.longitude,
+        distance: +distaceString,
+        address: cafeInfo.address,
+        beans: cafeInfo.beans,
+        phone: cafeInfo.phone,
+      });
       kakaoSchemeVar(
         `kakaomap://route?sp=${location.latitude},${location.longitude}&ep=${cafeInfo.latitude},${cafeInfo.longitude}&by=CAR`,
       );
@@ -161,6 +162,7 @@ const initMap = () => {
     isCafeDetailExistVar(false);
     cafeDetailHeightVar('down');
     console.log(isCafeDetailExistVar());
+    clickedCafeDetailVar(null);
   });
 
   /**

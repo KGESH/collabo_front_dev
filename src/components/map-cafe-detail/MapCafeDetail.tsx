@@ -5,14 +5,16 @@ import { IHashTag } from 'types/HashTag';
 import {
   mapVar,
   currentMarkerVar,
-  currentLocationVar,
   clickedCafeDetailVar,
   cafeDetailHeightVar,
   kakaoSchemeVar,
 } from 'services/apollo-client/LocalState';
 import { useReactiveVar } from '@apollo/client';
 import cafeImg from 'resources/images/bacs_cafe_img.png';
-import { onAdjustHeightButtonClick } from 'components/map-cafe-detail/MapCafeDetailFunction';
+import {
+  onAdjustHeightButtonClick,
+  onDetailImgClick,
+} from 'components/map-cafe-detail/MapCafeDetailFunction';
 
 const MapCafeDetail = () => {
   const clickedCafeDetail = useReactiveVar(clickedCafeDetailVar);
@@ -48,6 +50,7 @@ const MapCafeDetail = () => {
             className='cafe_info_box__cafe_img'
             src={cafeImg}
             alt='cafe Img'
+            onClick={onDetailImgClick}
           />
 
           {/**구분 */}
