@@ -1,4 +1,4 @@
-import { IPosition } from 'types/Map';
+import { ILocation } from 'types/Map';
 
 export const getDistance = (
   currentLatitude: number,

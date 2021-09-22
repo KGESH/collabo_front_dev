@@ -1,9 +1,9 @@
-import { ICafeInfo, IPosition } from 'types/Map';
+import { ICafeInfo, ILocation } from 'types/Map';
 import 'components/naver-map/style/NaverMap.css';
 import {
   mapVar,
   currentMarkerVar,
-  currentPositionVar,
+  currentLocationVar,
   cafeInfoVar,
   clickedCafeDetailVar,
   isCafeDetailExistVar,
@@ -21,13 +21,13 @@ const initMap = () => {
    */
 
   const cafeList: ICafeInfo[] = cafeInfoVar();
-  const currentPosition = currentPositionVar();
+  const currentLocation = currentLocationVar();
 
   const map = new naver.maps.Map('map', {
     useStyleMap: true,
     center: new naver.maps.LatLng(
-      currentPosition.latitude,
-      currentPosition.longitude,
+      currentLocation.latitude,
+      currentLocation.longitude,
     ), //지도의 초기 중심 좌표
     zoom: 19, //지도의 초기 줌 레벨
     disableKineticPan: false,
@@ -50,12 +50,12 @@ const initMap = () => {
       'click',
       () => {
         const map = mapVar();
-        const currentPosition = currentPositionVar();
+        const currentLocation = currentLocationVar();
         if (map) {
           map.setCenter(
             new naver.maps.LatLng(
-              currentPosition.latitude,
-              currentPosition.longitude,
+              currentLocation.latitude,
+              currentLocation.longitude,
             ),
           );
         }
@@ -69,8 +69,8 @@ const initMap = () => {
    */
   const currentMarker = new naver.maps.Marker({
     position: new naver.maps.LatLng(
-      currentPosition.latitude,
-      currentPosition.longitude,
+      currentLocation.latitude,
+      currentLocation.longitude,
     ),
     map: map,
     icon: {
@@ -130,19 +130,19 @@ const initMap = () => {
     const i = cafeMarkers.length - 1;
     naver.maps.Event.addListener(cafeMarkers[i], 'click', () => {
       const cafeInfo: ICafeInfo = cafe;
-      const position: IPosition = currentPositionVar();
+      const location: ILocation = currentLocationVar();
       cafeDetailHeightVar('down');
       isCafeDetailExistVar(true);
       console.log(isCafeDetailExistVar());
       clickedCafeDetailVar(cafe);
       kakaoSchemeVar(
-        `kakaomap://route?sp=${position.latitude},${position.longitude}&ep=${cafeInfo.latitude},${cafeInfo.longitude}&by=CAR`,
+        `kakaomap://route?sp=${location.latitude},${location.longitude}&ep=${cafeInfo.latitude},${cafeInfo.longitude}&by=CAR`,
       );
 
       /*
 
       const now: Date = new Date();
-      console.log(position.latitude, position.longitude);
+      console.log(location.latitude, location.longitude);
       console.log(cafeInfo.latitude, cafeInfo.longitude, now);
       const marker: naver.maps.Marker = cafeMarkers[i],
         infoWindow: naver.maps.InfoWindow = cafeInfomations[i];

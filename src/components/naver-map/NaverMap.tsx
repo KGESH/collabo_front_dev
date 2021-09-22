@@ -8,7 +8,7 @@ import useGeolocation from 'react-hook-geolocation';
 import {
   mapVar,
   currentMarkerVar,
-  currentPositionVar,
+  currentLocationVar,
   cafeInfoVar,
   clickedHashTagVar,
 } from 'services/apollo-client/LocalState';
@@ -39,10 +39,10 @@ const NaverMap = () => {
 
   const [isMapExist, setIsMapExist] = useState<boolean>(false);
   const clickedHashTag = useReactiveVar(clickedHashTagVar);
-  const currentPosition = useReactiveVar(currentPositionVar);
+  const currentLocation = useReactiveVar(currentLocationVar);
 
   useEffect(() => {
-    if (!loading && data && !cafeInfo.length && currentPosition.latitude) {
+    if (!loading && data && !cafeInfo.length && currentLocation.latitude) {
       data.getAllCafe.map((cafe: any, index: number) => {
         const id: number = cafe.cafe_id;
         const name: string = cafe.cafe_info.cafe_name;
@@ -50,14 +50,14 @@ const NaverMap = () => {
         const beans: string = cafe.cafe_info.beans;
         const phone: string = cafe.cafe_info.phone;
         const [latitude, longitude]: string[] =
-          cafe.cafe_info.position.split(',');
+          cafe.cafe_info.location.split(',');
         const mapPos: naver.maps.LatLng = new naver.maps.LatLng(
           +latitude,
           +longitude,
         );
         const distaceString: string = getDistance(
-          +currentPosition.latitude,
-          +currentPosition.longitude,
+          +currentLocation.latitude,
+          +currentLocation.longitude,
           +latitude,
           +longitude,
         );
@@ -76,7 +76,7 @@ const NaverMap = () => {
         //console.log(name, latitude, longitude, `info`);
       });
     }
-  }, [currentPosition, loading]);
+  }, [currentLocation, loading]);
 
   /**
    * 해쉬 태그 클릭 감지
@@ -95,7 +95,7 @@ const NaverMap = () => {
     /*console.log(
       `${geolocation.latitude}, ${geolocation.longitude}, ${geolocation.timestamp}, hook`,
     );*/
-    if (!isMapExist && cafeInfo.length && currentPosition.latitude) {
+    if (!isMapExist && cafeInfo.length && currentLocation.latitude) {
       initMap();
       setIsMapExist(true);
     } else if (isMapExist) {
@@ -103,13 +103,13 @@ const NaverMap = () => {
       if (currentMarker) {
         currentMarker.setOptions({
           position: new naver.maps.LatLng(
-            currentPosition.latitude,
-            currentPosition.longitude,
+            currentLocation.latitude,
+            currentLocation.longitude,
           ),
         });
       }
     }
-  }, [currentPosition, loading]);
+  }, [currentLocation, loading]);
 
   const trigger = (event: any) => {
     const list: any = document.getElementById('menu_list');

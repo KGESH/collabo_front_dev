@@ -1,7 +1,7 @@
 import { makeVar } from '@apollo/client';
 import { IUser } from 'types/User';
 import { ICafeList } from 'types/Review';
-import { IPosition, ICafeInfo } from 'types/Map';
+import { ILocation, ICafeInfo } from 'types/Map';
 import { IHashTag } from 'types/HashTag';
 
 /**
@@ -23,7 +23,7 @@ export const isInitVar = makeVar<boolean>(false);
 export const clickedHashTagVar = makeVar<string>('팔로우');
 export const mapVar = makeVar<naver.maps.Map | null>(null);
 export const currentMarkerVar = makeVar<naver.maps.Marker | null>(null);
-export const currentPositionVar = makeVar<IPosition>({
+export const currentLocationVar = makeVar<ILocation>({
   latitude: 0,
   longitude: 0,
 });
@@ -42,5 +42,3 @@ export const uploadImgListVar = makeVar<FileList | null>(null);
 export const hashTagListVar = makeVar<string[]>([]);
 export const hashTagQueryVar = makeVar<IHashTag[]>([]);
 export const cafeListVar = makeVar<ICafeList[]>([]);
-
-

@@ -5,7 +5,7 @@ import { IHashTag } from 'types/HashTag';
 import {
   mapVar,
   currentMarkerVar,
-  currentPositionVar,
+  currentLocationVar,
   clickedCafeDetailVar,
   cafeDetailHeightVar,
   kakaoSchemeVar,
@@ -77,7 +77,9 @@ const MapCafeDetail = () => {
                 <img src='/detail/check.svg' alt='' id='check' />
               </div>
               <div className='de_vi_first__data_group'>
-                <div className='de_vi_first__branch'>{clickedCafeDetail?.name}</div>
+                <div className='de_vi_first__branch'>
+                  {clickedCafeDetail?.name}
+                </div>
                 <div className='de_vi_first__day_and_time'>
                   8.15 일 | 오후 3:00
                 </div>
@@ -87,9 +89,7 @@ const MapCafeDetail = () => {
               <div className='de_vi_second__visit_times'>3번째 방문</div>
               <div className='de_vi_second__data_group'>
                 <div className='de_vi_second__menu'>카라멜 마끼야또</div>
-                <div className='de_vi_second__price'>
-                  1,500원
-                </div>
+                <div className='de_vi_second__price'>1,500원</div>
               </div>
             </div>
             <div className='de_vi_third_block'>

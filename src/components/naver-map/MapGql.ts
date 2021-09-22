@@ -7,7 +7,7 @@ export const GET_CAFES = gql`
       cafe_info {
         cafe_name
         beans
-        position
+        location
         address
         phone
       }

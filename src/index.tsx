@@ -5,8 +5,8 @@ import { client } from 'services/apollo-client/apollo';
 import { ApolloProvider } from '@apollo/client';
 import App from './App';
 import './index.css';
-import GetCurrentPosition from 'components/get-current-position/GetCurrentPosition';
-import GetHashTag from 'components/get-hash-tag/GetHashTag'
+import GetCurrentLocation from 'components/get-current-location/GetCurrentLocation';
+import GetHashTag from 'components/get-hash-tag/GetHashTag';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -24,7 +24,7 @@ ReactDOM.render(
         </div>
         {/* --------------------------------------- */}
         <App />
-        <GetCurrentPosition />
+        <GetCurrentLocation />
         <GetHashTag />
       </BrowserRouter>
     </ApolloProvider>

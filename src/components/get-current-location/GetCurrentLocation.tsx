@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import useGeolocation from 'react-hook-geolocation';
-import { currentPositionVar } from 'services/apollo-client/LocalState';
+import { currentLocationVar } from 'services/apollo-client/LocalState';
 import { useReactiveVar } from '@apollo/client';
 
-const GetCurrentPosition = () => {
+const GetCurrentLocation = () => {
   const geolocation = useGeolocation({
     enableHighAccuracy: true,
     timeout: Infinity,
@@ -12,13 +12,13 @@ const GetCurrentPosition = () => {
 
   useEffect(() => {
     if (!geolocation.error && geolocation.latitude) {
-      currentPositionVar({
+      currentLocationVar({
         latitude: geolocation.latitude,
         longitude: geolocation.longitude,
       });
       console.log(
-        currentPositionVar().latitude,
-        currentPositionVar().longitude,
+        currentLocationVar().latitude,
+        currentLocationVar().longitude,
       );
     }
   }, [geolocation]);
@@ -26,4 +26,4 @@ const GetCurrentPosition = () => {
   return <></>;
 };
 
-export default GetCurrentPosition;
+export default GetCurrentLocation;
