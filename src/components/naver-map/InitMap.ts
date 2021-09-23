@@ -139,19 +139,6 @@ const initMap = () => {
       kakaoSchemeVar(
         `kakaomap://route?sp=${location.latitude},${location.longitude}&ep=${cafeInfo.latitude},${cafeInfo.longitude}&by=CAR`,
       );
-
-      /*
-
-      const now: Date = new Date();
-      console.log(location.latitude, location.longitude);
-      console.log(cafeInfo.latitude, cafeInfo.longitude, now);
-      const marker: naver.maps.Marker = cafeMarkers[i],
-        infoWindow: naver.maps.InfoWindow = cafeInfomations[i];
-      if (infoWindow.getMap()) {
-        infoWindow.close();
-      } else {
-        infoWindow.open(map, marker);
-      }*/
     });
   });
 

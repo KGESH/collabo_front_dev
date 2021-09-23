@@ -23,7 +23,7 @@ const Navbar = () => {
         </div>
       </Link>
 
-      <Link to='/mypage'>
+      <Link to='/map'>
         <div className='nav_box'>
           <img src='nav/map.png' alt='' className='nav_img' />
         </div>

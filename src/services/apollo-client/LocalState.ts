@@ -42,3 +42,9 @@ export const uploadImgListVar = makeVar<FileList | null>(null);
 export const hashTagListVar = makeVar<string[]>([]);
 export const hashTagQueryVar = makeVar<IHashTag[]>([]);
 export const cafeListVar = makeVar<ICafeList[]>([]);
+
+/**
+ * Home 상태
+ */
+
+export const homeTagListVar = makeVar<string[]>([]);

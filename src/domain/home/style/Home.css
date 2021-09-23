@@ -1,3 +1,15 @@
+.home__header {
+    display: flex;
+    align-items: center;
+}
+.header_logo {
+    margin:0 auto;
+    width: 3vh;
+
+}
+.header_review_icon {
+    width: 3vh;
+}
 .hash_tag {
     width: 100vw;
     height: 10vh;
@@ -5,6 +17,24 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.hash_tag_filter {
+    background-color: red;
+    display: flex;
+    list-style: none;
+    justify-content: space-between;
+    overflow-x: scroll;
+    padding-left: 0vw;
+}
+.hash_tag_filter::-webkit-scrollbar {
+    display: none;
+}
+.filter {
+    flex: none;
+    visibility: hidden;
+}
+.border {
+    background-color: gray;
 }
 
 .main_img {

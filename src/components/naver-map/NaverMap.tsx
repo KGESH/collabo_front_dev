@@ -15,6 +15,11 @@ import {
 import { useReactiveVar } from '@apollo/client';
 import { getDistance } from 'components/naver-map/MapFunctions';
 
+interface IMapProps {
+  id: string;
+  location: string;
+}
+
 const NaverMap = () => {
   window.addEventListener(
     'load',

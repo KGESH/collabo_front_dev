@@ -13,17 +13,17 @@ ReactDOM.render(
     <ApolloProvider client={client}>
       <BrowserRouter>
         {/* 개발용 NavBar. 배포 전 제거 (추가 21-08-12:유성현) */}
-        {/*
-        <div className='exclusive_use_of_dev'>
-          <Link to='/'>홈</Link>
-          <Link to='/login'>로그인</Link>
-          <Link to='/mypage'>마이페이지</Link>
-          <Link to='/cafeTour'>카페투어</Link>
-          <Link to='/Detail/스타벅스'>디테일</Link>
-          <Link to='/map'>지도</Link>
-          <Link to='/qrcheck/스타벅스/E9OW312GF1Q'>카드추가</Link>
-        </div>
-        */}
+        {
+          <div className='exclusive_use_of_dev'>
+            <Link to='/'>홈</Link>
+            <Link to='/login'>로그인</Link>
+            <Link to='/mypage'>마이페이지</Link>
+            <Link to='/cafeTour'>카페투어</Link>
+            <Link to='/Detail/스타벅스'>디테일</Link>
+            <Link to='/map'>지도</Link>
+            <Link to='/qrcheck/스타벅스/E9OW312GF1Q'>카드추가</Link>
+          </div>
+        }
         {/* --------------------------------------- */}
         <App />
         <GetCurrentLocation />

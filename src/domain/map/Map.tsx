@@ -12,7 +12,7 @@ const Map = () => {
   const isCafeDetailExist = useReactiveVar(isCafeDetailExistVar);
 
   return (
-    <React.Fragment>
+    <>
       <header className='map__header'>
         <MapSearchBar />
         <MapHashTag />
@@ -24,7 +24,7 @@ const Map = () => {
       <footer className='map__footer'>
         <Navbar />
       </footer>
-    </React.Fragment>
+    </>
   );
 };
 
