@@ -23,5 +23,5 @@ export const getDistance = (
     distance = distance * 60 * 1.1515;
     distance = distance * 1.609344;
   }
-  return distance.toFixed(5);
+  return distance.toFixed(2);
 };

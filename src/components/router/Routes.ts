@@ -62,7 +62,7 @@ const AppRoutes: IRoutes[] = [
     component: PostReview,
   },
   {
-    path: '/map',
+    path: '/map/:type/:id',
     exact: true,
     component: Map,
   },

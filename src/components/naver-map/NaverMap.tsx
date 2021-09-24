@@ -15,17 +15,7 @@ import {
 import { useReactiveVar } from '@apollo/client';
 import { getDistance } from 'components/naver-map/MapFunctions';
 
-const NaverMap = () => {
-  window.addEventListener(
-    'load',
-    () => {
-      setTimeout(() => {
-        window.scrollTo(0, 1);
-      }, 100);
-    },
-    false,
-  );
-
+const NaverMap = (props: any) => {
   /**
    * Load cafe_info
    */
@@ -40,6 +30,7 @@ const NaverMap = () => {
   const [isMapExist, setIsMapExist] = useState<boolean>(false);
   const clickedHashTag = useReactiveVar(clickedHashTagVar);
   const currentLocation = useReactiveVar(currentLocationVar);
+  const {type, id} = props.props;
 
   useEffect(() => {
     if (!loading && data && !cafeInfo.length && currentLocation.latitude) {
@@ -96,7 +87,9 @@ const NaverMap = () => {
       `${geolocation.latitude}, ${geolocation.longitude}, ${geolocation.timestamp}, hook`,
     );*/
     if (!isMapExist && cafeInfo.length && currentLocation.latitude) {
-      initMap();
+      console.log('지도 : ', type);
+      console.log('지도 : ', id);
+      initMap(type, id);
       setIsMapExist(true);
     } else if (isMapExist) {
       const currentMarker = currentMarkerVar();

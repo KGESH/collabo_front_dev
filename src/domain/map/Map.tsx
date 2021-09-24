@@ -8,7 +8,7 @@ import MapCafeDetail from 'components/map-cafe-detail/MapCafeDetail';
 import { isCafeDetailExistVar } from 'services/apollo-client/LocalState';
 import { useReactiveVar } from '@apollo/client';
 
-const Map = () => {
+const Map = (props: any) => {
   const isCafeDetailExist = useReactiveVar(isCafeDetailExistVar);
 
   return (
@@ -18,7 +18,7 @@ const Map = () => {
         <MapHashTag />
       </header>
       <section className='map__section'>
-        <NaverMap />
+        <NaverMap props={props.match.params} />
         {isCafeDetailExist ? <MapCafeDetail /> : null}
       </section>
       <footer className='map__footer'>
