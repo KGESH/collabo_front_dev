@@ -64,7 +64,6 @@ const NaverMap = (props: any) => {
           phone: phone,
         });
         cafeInfoVar(cafeInfo);
-        //console.log(name, latitude, longitude, `info`);
       });
     }
   }, [currentLocation, loading]);
