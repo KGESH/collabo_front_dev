@@ -24,7 +24,6 @@
     list-style: none;
     justify-content: space-between;
     overflow-x: scroll;
-    padding-left: 0vw;
 }
 .hash_tag_filter::-webkit-scrollbar {
     display: none;
@@ -33,24 +32,13 @@
     flex: none;
     visibility: hidden;
 }
+
+
 .border {
     background-color: gray;
 }
-
-.main_img {
-    width: 100vw;
-    height: 40vh;
-    background-color: #e7e7e7;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.thingthing {
-    width: 100vw;
-    height: 9vh;
-    background-color: #9a9a9a;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.add_filter_btn {
+    width: 3vh;
+    height: 3vh;
+    background-color: green;
 }

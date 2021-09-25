@@ -3,7 +3,7 @@ export interface IReview {
   user_name: string;
   content: string;
   location: string;
-  star: IStar;
+  star?: IStar;
   image_list: string[];
   like_count?: number;
   comment_list?: IComment[];
@@ -21,7 +21,7 @@ export interface IStar {
 export interface IComment {
   user_name: string;
   content: string;
-  post_date: Date;
+  post_date: number;
 }
 
 export interface ICafeList {

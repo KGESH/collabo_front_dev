@@ -1,0 +1,44 @@
+/* Need Size Fix */
+
+.item_header {
+  display: flex;
+}
+.item_owner_container {
+  display: flex;
+  flex-direction: column;
+}
+
+.item_button {
+  width: 33px;
+  height: 33px;
+  border: hidden;
+  background-repeat: no-repeat;
+}
+.button_like {
+  background-image: url(/src/resources/images/home/like_btn.png);
+}
+.button_comment {
+  background-image: url(/src/resources/images/home/comment_btn.png);
+}
+.button_location {
+  background-image: url(/src/resources/images/home/location_btn.png);
+}
+.item_image_slide {
+  padding-bottom: 10px;
+}
+.item_image {
+  width: 100%;
+}
+
+.item_tag_list {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.item_tag {
+  background-color: grey;
+}
+
+.item_comment_container {
+  background-color: lightgray;
+}
