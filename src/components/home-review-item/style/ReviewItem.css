@@ -1,8 +1,8 @@
 /* Need Size Fix */
 
-.item_header {
+/*.item_header {
   display: flex;
-}
+}*/
 .item_owner_container {
   display: flex;
   flex-direction: column;

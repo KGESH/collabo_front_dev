@@ -18,8 +18,8 @@ const ReviewItem = ({
   const [isToggled, setIsToggled] = useState(false);
 
   return (
-    <section className='review__item'>
-      <div className='item_header'>
+    <section className='flex-col'>
+      <div className='flex'>
         <img className='item_owner_img' src={mockUser} />
         <div className='item_owner_container'>
           <span className='item_owner'>{user_name}</span>

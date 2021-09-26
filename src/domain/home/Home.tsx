@@ -4,7 +4,7 @@ import { useReactiveVar, gql, useMutation } from '@apollo/client';
 import { currentUserVar, homeTagListVar } from 'services/apollo-client/LocalState';
 import { ReactComponent as PostReviewIcon } from 'resources/images/PostReview.svg';
 import { ReactComponent as HeaderLogo } from 'resources/images/home/CaLogo.svg';
-import { ReactComponent as AddFilterBtn } from 'resources/images/home/add_filter_btn.svg';
+import { ReactComponent as FilterAddButton } from 'resources/images/home/add_filter_btn.svg';
 import { Link } from 'react-router-dom';
 import Navbar from 'components/navbar/Navbar';
 import ReviewItem from 'components/home-review-item/ReviewItem';
@@ -55,35 +55,25 @@ const Home = () => {
   return (
     <>
       <header className='home__header'>
-        <HeaderLogo className='mx-auto' />
-        <Link to='/PostReview' className='flex mr-2 justify-center items-center'>
+        <HeaderLogo className='header_logo' />
+        <Link to='/PostReview' className='header_post_btn'>
           <PostReviewIcon />
         </Link>
       </header>
-      <section className='flex flex-auto flex-wrap border-b border-gray-100'>
-        <ul className='flex mx-auto my-auto items-center overflow-x-scroll'>
+      <section className='filter_container'>
+        <ul className='filter_list'>
           {filtertagList?.map((tag: string, index: number) => {
             return (
-              <li className='mt-6' key={index}>
+              <li key={index}>
                 <label htmlFor={tag}>
-                  <input
-                    type='checkbox'
-                    className='filter'
-                    id={tag}
-                    onClick={() => console.log(`clicked filter:${index}`)}
-                  />
-                  <div
-                    id={tag}
-                    className='flex-1 mx-5 my-3 px-3 py-1 border rounded-full text-xs text-gray-600;'
-                  >
-                    {tag}
-                  </div>
+                  <input type='checkbox' className='filter' id={tag} />
+                  <div id={tag}>{tag}</div>
                 </label>
               </li>
             );
           })}
         </ul>
-        <AddFilterBtn className=' my-auto mx-auto w-6 h-6 rounded-full border-2 text-gray-600' />
+        <FilterAddButton className='filter_add_btn' />
       </section>
       {/* Mock */}
       <ReviewItem
