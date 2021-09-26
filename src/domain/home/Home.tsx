@@ -25,17 +25,18 @@ export const GET_KAKAO_USER = gql`
 `;
 
 const Home = () => {
+  const MOCK: number[] = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
   const user = useReactiveVar(currentUserVar);
   const filtertagList = useReactiveVar(homeTagListVar);
   const isFilterModalOpen = useState(false);
-  const mockContent =
-    'Mock Data Start\n This second Line\nThis 3 Line\nThis 4 Line\nThis 5 Line\nEND';
+  const mockContent = 'Mock Data Start This second Line This 3 Line\nThis 4 Line\nThis 5 Line\nEND';
   const mockComent: IComment = {
     user_name: 'mockUser',
     content: 'mock Comment',
     post_date: Date.now(),
   };
   const [getUser, { loading, data, error }] = useMutation(GET_KAKAO_USER);
+
   useEffect(() => {
     getUser();
   }, []);
@@ -55,7 +56,8 @@ const Home = () => {
   return (
     <>
       <header className='home__header'>
-        <HeaderLogo className='header_logo' />
+        {/* <HeaderLogo className='header_logo' /> */}
+        <span className='header_logo'>Ca</span>
         <Link to='/PostReview' className='header_post_btn'>
           <PostReviewIcon />
         </Link>
@@ -76,12 +78,14 @@ const Home = () => {
         <FilterAddButton className='filter_add_btn' />
       </section>
       {/* Mock */}
-      <ReviewItem
-        user_name={'user'}
-        content={mockContent}
-        hash_tag_list={['mock', 'data', 'list']}
-        comment_list={[mockComent, mockComent, mockComent]}
-      />
+      {MOCK.map((e: any, i: any) => (
+        <ReviewItem
+          user_name={'user'}
+          content={mockContent}
+          hash_tag_list={['mock', 'data', 'llll']}
+          comment_list={[mockComent, mockComent, mockComent]}
+        />
+      ))}
 
       <Navbar />
     </>

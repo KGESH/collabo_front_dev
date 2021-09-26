@@ -18,30 +18,29 @@ const ReviewItem = ({
   const [isToggled, setIsToggled] = useState(false);
 
   return (
-    <section className='flex-col'>
-      <div className='flex'>
-        <img className='item_owner_img' src={mockUser} />
+    <section className='item_header'>
+      <div className='flex mb-2'>
+        <img className='mx-2 my-auto' src={mockUser} />
         <div className='item_owner_container'>
-          <span className='item_owner'>{user_name}</span>
-          <span className='item_average_star'>별점</span>
+          <span className='item_owner text-lg'>{user_name}</span>
+          <span className='item_average_star text-xs'>평균 ★★★☆☆</span>
         </div>
       </div>
       <div className='item_image_slide'>
-        <div>
-          <img className='item_image' src={mockImg} />
-        </div>
+        <img className='item_image' src={mockImg} />
       </div>
       <div className='item_content_container'>
-        <div className='item_button_list'>
-          <button type='button' className='item_button button_like' />
-          <button type='button' className='item_button button_comment' />
-          <button type='button' className='item_button button_location' />
+        <div className='flex '>
+          <button type='button' className='item_btn like_btn' />
+          <button type='button' className='item_btn comment_btn' />
+          <button type='button' className='item_btn location_btn' />
         </div>
-        <>
-          <span className='item_content_onwer'>{user_name} </span>
-          {/** 줄바꿈 해결해야 함 */}
-          <span className='mock_content'>{text} </span>
+        {/** 줄바꿈 해결해야 함 */}
+        <div className='flex break-words whitespace-pre-wrap'>
+          <span className='item_content_onwer mx-1'>{user_name} </span>
+          <span className='mock_content mx-2'>{text} </span>
           <span
+            className='text-sm my-auto'
             onClick={() => {
               toggleShowMore();
               setIsToggled(!isToggled);
@@ -49,7 +48,7 @@ const ReviewItem = ({
           >
             {isToggled ? undefined : '...더보기'}
           </span>
-        </>
+        </div>
         <div className='item_tag_list'>
           {hash_tag_list.map((tag: string, index: number) => (
             <div className='item_tag'>{tag}</div>
@@ -60,9 +59,9 @@ const ReviewItem = ({
         {comment_list.map((comment: IComment, index: number) => {
           return (
             <div className='item_comment'>
-              <span>{comment.user_name} - </span>
-              <span>{comment.content} </span>
-              <span>{index}</span>
+              <span className='text-sm'>{comment.user_name} - </span>
+              <span className='text-xs'>{comment.content} </span>
+              <span className='text-xs'>{index}</span>
             </div>
           );
         })}

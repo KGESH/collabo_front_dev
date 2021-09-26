@@ -1,8 +1,9 @@
 .home__header {
-    @apply flex shadow-sm;
+    @apply flex shadow-sm ;
 }
 .header_logo {
-    @apply mx-auto;
+    /* 로고 새 이미지로 교체 예정 (21-09-26:지성현) */
+    @apply mx-auto font-extralight text-3xl;
 }
 .header_post_btn {
     @apply flex mr-3 justify-center items-center;

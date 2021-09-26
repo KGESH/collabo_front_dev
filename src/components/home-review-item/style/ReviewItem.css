@@ -1,49 +1,47 @@
 /* Need Size Fix */
 
-/*.item_header {
-  display: flex;
-}*/
+.item_header {
+  @apply flex flex-col;
+}
 .item_owner_container {
-  display: flex;
-  flex-direction: column;
+  @apply flex flex-col;
+}
+/* 작업 예정 (21-09-26:지성현) */
+
+.item_image_slide {
+  @apply w-screen h-full;
 }
 
-.item_button {
-  width: 33px;
-  height: 33px;
-  border: hidden;
-  background-repeat: no-repeat;
+.item_image {
+  @apply w-full h-full;
 }
-.button_like {
+
+.item_btn {
+  @apply w-8 h-8 mx-3 my-2 bg-no-repeat;
+  
+}
+.like_btn {
   background-image: url(/src/resources/images/home/like_btn.png);
 }
-.button_comment {
+.comment_btn {
   background-image: url(/src/resources/images/home/comment_btn.png);
 }
-.button_location {
+.location_btn {
   background-image: url(/src/resources/images/home/location_btn.png);
-}
-.item_image_slide {
-  padding-bottom: 10px;
-}
-.item_image {
-  width: 100%;
 }
 
 .item_tag_list {
-  display: flex;
-  justify-content: space-evenly;
+  @apply flex justify-center items-center;
 }
 
 .item_tag {
-  background-color: grey;
+  @apply w-max mx-2 my-3 px-3 py-1 border rounded-full text-xs text-center bg-gray-200 text-gray-600;
+  min-width: 50px;
 }
-
-.item_comment_container {
-  background-color: lightgray;
-}
-
 .item_content_container {
-  word-wrap: break-word;
-  white-space: pre-wrap;
+  @apply shadow-2xl rounded-t-lg rounded-b-2xl;
+}
+.item_comment_container {
+  @apply shadow-md;
+  background-color: #ECEBEB
 }
