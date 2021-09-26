@@ -42,3 +42,8 @@
 .item_comment_container {
   background-color: lightgray;
 }
+
+.item_content_container {
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}

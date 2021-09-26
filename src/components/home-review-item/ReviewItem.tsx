@@ -16,6 +16,7 @@ const ReviewItem = ({
 }: any) => {
   const { text, toggleShowMore } = useShowMoreText(content, 30);
   const [isToggled, setIsToggled] = useState(false);
+
   return (
     <section className='review__item'>
       <div className='item_header'>
@@ -32,11 +33,7 @@ const ReviewItem = ({
       </div>
       <div className='item_content_container'>
         <div className='item_button_list'>
-          <button
-            type='button'
-            className='item_button button_like'
-            onClick={() => console.log('test btn clicked!!')}
-          />
+          <button type='button' className='item_button button_like' />
           <button type='button' className='item_button button_comment' />
           <button type='button' className='item_button button_location' />
         </div>

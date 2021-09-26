@@ -1,14 +1,16 @@
 .home__header {
-    display: flex;
-    align-items: center;
+    @apply flex shadow-sm
+    
+    
 }
 .header_logo {
-    margin:0 auto;
-    width: 3vh;
 
 }
 .header_review_icon {
-    width: 3vh;
+
+}
+.home__content {
+
 }
 .hash_tag {
     width: 100vw;
@@ -18,27 +20,25 @@
     justify-content: center;
     align-items: center;
 }
-.hash_tag_filter {
-    background-color: red;
+/*.hash_tag_filter {
     display: flex;
     list-style: none;
     justify-content: space-between;
     overflow-x: scroll;
-}
+}*/
 .hash_tag_filter::-webkit-scrollbar {
     display: none;
 }
+.filter_item {
+    
+}
 .filter {
-    flex: none;
-    visibility: hidden;
+    @apply hidden;
+    
 }
 
 
-.border {
-    background-color: gray;
+.filter:checked + .border {
+    background-color: #ECEBEB;
 }
-.add_filter_btn {
-    width: 3vh;
-    height: 3vh;
-    background-color: green;
-}
+

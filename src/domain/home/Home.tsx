@@ -29,7 +29,7 @@ const Home = () => {
   const filtertagList = useReactiveVar(homeTagListVar);
   const isFilterModalOpen = useState(false);
   const mockContent =
-    'mock data start fasf asdhdfa sbhfas dj bh fasdjdfsbhbhfasdjdfsbhbhfasdjdfsbhbhfasdjdfsbhbhfasdjdfsbhbhfasdjdfsbhbhfasdjdfsbhbhfasdjdfsbhbhfasdjdfsbhbhfasdjdfsbhbhfasdjdfsbhbhfasdjdfsbhbhfasdjdfsbhbhfasdjdfsbhbhfasdjdfsbhbhfasdjdfsbhbhfasdjdfsbhbhfasdjdfsbhbhfasdjdfsbhbhfasdjdfsbhbhfasdjdfsbhbhfasdjdfsbhbhfasdjdfsbhbhfasdjdfsbhbhfasdjdfsbhbhfasdjdfsbhbhfasdjdfsbhbhfasdjdfsbhbhfasdjdfsbhfasdjdfsbhbhfasdjdfsbhbhfasdjdfsbhbhfasdjdfsbhfasdjdfsbhbhfasdjdfsbhbhfasdjdfsbhbhfasdjdfsbhfasdjdfsbhbhfasdjdfsbhbhfasdjdfsbhbhfasdjdfsbhfasdjdfsbhbhfasdjdfsbhbhfasdjdfsbhbhfasdjdfsbhfasdjdfsbhbhfasdjdfsbhbhfasdjdfsbhbhfasdjdfsbhfasdjdfsbhbhfasdjdfsbhbhfasdjdfsbhbhfasdjdfsbhbhfasdjdfsbhdfsbhfdbhjdfbasdfbshdfbjabsdfhdfbasasdfbhfasdbhjfasbhjdfafhjabhjfbdasjfbasdhjbsdajfbasdfhjsdbfjhbasdfhasdfbhjasdbhjasdbhjsdjasdfdfjasbasdfbasdfasdfbhasdfbhasdfbhjsdfajhfasdhdfasbhfasdjdfsbhfdbhjdfbasdfbshdfbjabsdfhdfbasasdfbhfasdbhjfasbhjdfafhjabhjfbdasjfbasdhjbsdajfbasdfhjsdbfjhbasdfhasdfbhjasdbhjasdbhjsdjasdfdfjasbasdfbasdfasdfbhasdfbhasdfbhjsdfajhfasdhdfasbhfasdjdfsbhfdbhjdfbasdfbshdfbjabsdfhdfbasasdfbhfasdbhjfasbhjdfafhjabhjfbdasjfbasdhjbsdajfbasdfhjsdbfjhbasdfhasdfbhjasdbhjasdbhjsdjasdfdfjasbasdfbasdfasdfbhasdfbhasdfbhjsdfajhfasdhdfasbhfasdjdfsbhfdbhjdfbasdfbshdfbjabsdfhdfbasasdfbhfasdbhjfasbhjdfafhjabhjfbdasjfbasdhjbsdajfbasdfhjsdbfjhbasdfhasdfbhjasdbhjasdbhjsdjasdfdfjasbasdfbasdfasdfbhasdfbhasdfbhjsdfajhfasdhdfasbhfasdjdfsbhfdbhjdfbasdfbshdfbjabsdfhdfbasasdfbhfasdbhjfasbhjdfafhjabhjfbdasjfbasdhjbsdajfbasdfhjsdbfjhbasdfhasdfbhjasdbhjasdbhjsdjasdfdfjasbasdfbasdfasdfbhasdfbhasdfbhjsdfajhfasdhdfasbhfasdjdfsbhfdbhjdfbasdfbshdfbjabsdfhdfbasasdfbhfasdbhjfasbhjdfafhjabhjfbdasjfbasdhjbsdajfbasdfhjsdbfjhbasdfhasdfbhjasdbhjasdbhjsdjasdfdfjasbasdfbasdfasdfbhasdfbhasdfbhjsdfajhfasdhdfasbhfasdjdfsbhfdbhjdfbasdfbshdfbjabsdfhdfbasasdfbhfasdbhjfasbhjdfafhjabhjfbdasjfbasdhjbsdajfbasdfhjsdbfjhbasdfhasdfbhjasdbhjasdbhjsdjasdfdfjasbasdfbasdfasdfbhasdfbhasdfbhjsdfajhfasdhdfasbhfasdjdfsbhfdbhjdfbasdfbshdfbjabsdfhdfbasasdfbhfasdbhjfasbhjdfafhjabhjfbdasjfbasdhjbsdajfbasdfhjsdbfjhbasdfhasdfbhjasdbhjasdbhjsdjasdfdfjasbasdfbasdfasdfbhasdfbhasdfbhjsdfajhfasdhdfasbhfasdjdfsbhfdbhjdfbasdfbshdfbjabsdfhdfbasasdfbhfasdbhjfasbhjdfafhjabhjfbdasjfbasdhjbsdajfbasdfhjsdbfjhbasdfhasdfbhjasdbhjasdbhjsdjasdfdfjasbasdfbasdfasdfbhasdfbhasdfbhjsdfajhfasdhdfasbhfasdjdfsbhfdbhjdfbasdfbshdfbjabsdfhdfbasasdfbhfasdbhjfasbhjdfafhjabhjfbdasjfbasdhjbsdajfbasdfhjsdbfjhbasdfhasdfbhjasdbhjasdbhjsdjasdfdfjasbasdfbasdfasdfbhasdfbhasdfbhjsdfajhfasdhdfasbhfasdjdfsbhfdbhjdfbasdfbshdfbjabsdfhdfbasasdfbhfasdbhjfasbhjdfafhjabhjfbdasjfbasdhjbsdajfbasdfhjsdbfjhbasdfhasdfbhjasdbhjasdbhjsdjasdfdfjasbasdfbasdfasdfbhasdfbhasdfbhjsdfajhfasdhdfasbhfasdjdfsbhfdbhjdfbasdfbshdfbjabsdfhdfbasasdfbhfasdbhjfasbhjdfafhjabhjfbdasjfbasdhjbsdajfbasdfhjsdbfjhbasdfhasdfbhjasdbhjasdbhjsdjasdfdfjasbasdfbasdfasdfbhasdfbhasdfbhjsdfajhfasdhdfasbhfasdjdfsbhfdbhjdfbasdfbshdfbjabsdfhdfbasasdfbhfasdbhjfasbhjdfafhjabhjfbdasjfbasdhjbsdajfbasdfhjsdbfjhbasdfhasdfbhjasdbhjasdbhjsdjasdfdfjasbasdfbasdfasdfbhasdfbhasdfbhjsdfajhfasdhdfasbhfasdjdfsbhfdbhjdfbasdfbshdfbjabsdfhdfbasasdfbhfasdbhjfasbhjdfafhjabhjfbdasjfbasdhjbsdajfbasdfhjsdbfjhbasdfhasdfbhjasdbhjasdbhjsdjasdfdfjasbasdfbasdfasdfbhasdfbhasdfbhjsdfajhfasdhdfasbhfasdjdfsbhfdbhjdfbasdfbshdfbjabsdfhdfbasasdfbhfasdbhjfasbhjdfafhjabhjfbdasjfbasdhjbsdajfbasdfhjsdbfjhbasdfhasdfbhjasdbhjasdbhjsdjasdfdfjasbasdfbasdfasdfbhasdfbhasdfbhjsdfajhfasdhdfasbhfasdjdfsbhfdbhjdfbasdfbshdfbjabsdfhdfbasasdfbhfasdbhjfasbhjdfafhjabhjfbdasjfbasdhjbsdajfbasdfhjsdbfjhbasdfhasdfbhjasdbhjasdbhjsdjasdfdfjasbasdfbasdfasdfbhasdfbhasdfbhjsdfajhfasdhdfasbhfasdjdfsbhfdbhjdfbasdfbshdfbjabsdfhdfbasasdfbhfasdbhjfasbhjdfafhjabhjfbdasjfbasdhjbsdajfbasdfhjsdbfjhbasdfhasdfbhjasdbhjasdbhjsdjasdfdfjasbasdfbasdfasdfbhasdfbhasdfbhjsdfajhfasdhdfasbhfasdjdfsbhfdbhjdfbasdfbshdfbjabsdfhdfbasasdfbhfasdbhjfasbhjdfafhjabhjfbdasjfbasdhjbsdajfbasdfhjsdbfjhbasdfhasdfbhjasdbhjasdbhjsdjasdfdfjasbasdfbasdfasdfbhasdfbhasdfbhjsdfajhfasdhdfasbhfasdjdfsbhfdbhjdfbasdfbshdfbjabsdfhdfbasasdfbhfasdbhjfasbhjdfafhjabhjfbdasjfbasdhjbsdajfbasdfhjsdbfjhbasdfhasdfbhjasdbhjasdbhjsdjasdfdfjasbasdfbasdfasdfbhasdfbhasdfbhjsdfajhfasdhdfasbhfasdjdfsbhfdbhjdfbasdfbshdfbjabsdfhdfbasasdfbhfasdbhjfasbhjdfafhjabhjfbdasjfbasdhjbsdajfbasdfhjsdbfjhbasdfhasdfbhjasdbhjasdbhjsdjasdfdfjasbasdfbasdfasdfbhasdfbhasdfbhjsdfajhfasdhdfasbhfasdjdfsbhfdbhjdfbasdfbshdfbjabsdfhdfbasasdfbhfasdbhjfasbhjdfafhjabhjfbdasjfbasdhjbsdajfbasdfhjsdbfjhbasdfhasdfbhjasdbhjasdbhjsdjasdfdfjasbasdfbasdfasdfbhasdfbhasdfbhjsdfajhfasdhdfasbhfasdjdfsbhfdbhjdfbasdfbshdfbjabsdfhdfbasasdfbhfasdbhjfasbhjdfafhjabhjfbdasjfbasdhjbsdajfbasdfhjsdbfjhbasdfhasdfbhjasdbhjasdbhjsdjasdfdfjasbasdfbasdfasdfbhasdfbhasdfbhjsdfajhfasdhdfasbhfasdjdfsbhfdbhjdfbasdfbshdfbjabsdfhdfbasasdfbhfasdbhjfasbhjdfafhjabhjfbdasjfbasdhjbsdajfbasdfhjsdbfjhbasdfhasdfbhjasdbhjasdbhjsdjasdfdfjasbasdfbasdfasdfbhasdfbhasdfbhjsdfajhfasdhdfasbhfasdjdfsbhfdbhjdfbasdfbshdfbjabsdfhdfbasasdfbhfasdbhjfasbhjdfafhjabhjfbdasjfbasdhjbsdajfbasdfhjsdbfjhbasdfhasdfbhjasdbhjasdbhjsdjasdfdfjasbasdfbasdfasdfbhasdfbhasdfbhjsdfajhfasdhdfasbhfasdjdfsbhfdbhjdfbasdfbshdfbjabsdfhdfbasasdfbhfasdbhjfasbhjdfafhjabhjfbdasjfbasdhjbsdajfbasdfhjsdbfjhbasdfhasdfbhjasdbhjasdbhjsdjasdfdfjasbasdfbasdfasdfbhasdfbhasdfbhjsdfajhfasdhdfasbhfasdjdfsbhfdbhjdfbasdfbshdfbjabsdfhdfbasasdfbhfasdbhjfasbhjdfafhjabhjfbdasjfbasdhjbsdajfbasdfhjsdbfjhbasdfhasdfbhjasdbhjasdbhjsdjasdfdfjasbasdfbasdfasdfbhasdfbhasdfbhjsdfajhfasdhdfasbhfasdjdfsbhfdbhjdfbasdfbshdfbjabsdfhdfbasasdfbhfasdbhjfasbhjdfafhjabhjfbdasjfbasdhjbsdajfbasdfhjsdbfjhbasdfhasdfbhjasdbhjasdbhjsdjasdfdfjasbasdfbasdfasdfbhasdfbhasdfbhjsdfajhfasdhdfasbhfasdjdfsbhfdbhjdfbasdfbshdfbjabsdfhdfbasasdfbhfasdbhjfasbhjdfafhjabhjfbdasjfbasdhjbsdajfbasdfhjsdbfjhbasdfhasdfbhjasdbhjasdbhjsdjasdfdfjasbasdfbasdfasdfbhasdfbhasdfbhjsdfajhfasdhdfasbhfasdjdfsbhfdbhjdfbasdfbshdfbjabsdfhdfbasasdfbhfasdbhjfasbhjdfafhjabhjfbdasjfbasdhjbsdajfbasdfhjsdbfjhbasdfhasdfbhjasdbhjasdbhjsdjasdfdfjasbasdfbasdfasdfbhasdfbhasdfbhjsdfajhfasdhdfasbhfasdjdfsbhfdbhjdfbasdfbshdfbjabsdfhdfbasasdfbhfasdbhjfasbhjdfafhjabhjfbdasjfbasdhjbsdajfbasdfhjsdbfjhbasdfhasdfbhjasdbhjasdbhjsdjasdfdfjasbasdfbasdfasdfbhasdfbhasdfbhjsdfajhdhdfasbhfasdjdfsbhfdbhjdfbasdfbshdfbjabsdfhdfbasasdfbhfasdbhjfasbhjdfafhjabhjfbdasjfbasdhjbsdajfbasdfhjsdbfjhbasdfhasdfbhjasdbhjasdbhjsdjasdfdfjasbasdfbasdfasdfbhasdfbhasdfbhjsdfajhfasdhdfasbhfasdjdfsbhfdbhjdfbasdfbshdfbjabsdfhdfbasasdfbhfasdbhjfasbhjdfafhjabhjfbdasjfbasdhjbsdajfbasdfhjsdbfjhbasdfhasdfbhjasdbhjasdbhjsdjasdfdfjasbasdfbasdfasdfbhasdfbhasdfbhjsdfajhfasdhdfasbhfasdjdfsbhfdbhjdfbasdfbshdfbjabsdfhdfbasasdfbhfasdbhjfasbhjdfafhjabhjfbdasjfbasdhjbsdajfbasdfhjsdbfjhbasdfhasdfbhjasdbhjasdbhjsdjasdfdfjasbasdfbasdfasdfbhasdfbhasdfbhjsdfajh END';
+    'Mock Data Start\n This second Line\nThis 3 Line\nThis 4 Line\nThis 5 Line\nEND';
   const mockComent: IComment = {
     user_name: 'mockUser',
     content: 'mock Comment',
@@ -55,32 +55,35 @@ const Home = () => {
   return (
     <>
       <header className='home__header'>
-        <HeaderLogo className='header_logo' />
-        <Link to='/PostReview'>
-          <PostReviewIcon className='header_review_icon' />
+        <HeaderLogo className='mx-auto' />
+        <Link to='/PostReview' className='flex mr-2 justify-center items-center'>
+          <PostReviewIcon />
         </Link>
       </header>
-      <section className='home__content'>
-        <ul className='hash_tag_filter'>
+      <section className='flex flex-auto flex-wrap border-b border-gray-100'>
+        <ul className='flex mx-auto my-auto items-center overflow-x-scroll'>
           {filtertagList?.map((tag: string, index: number) => {
             return (
-              <li className='filter_item' key={index}>
-                <input
-                  className='filter'
-                  type='radio'
-                  id={tag}
-                  onClick={() => console.log(`clicked filter:${index}`)}
-                />
+              <li className='mt-6' key={index}>
                 <label htmlFor={tag}>
-                  <div id={tag} className='border'>
+                  <input
+                    type='checkbox'
+                    className='filter'
+                    id={tag}
+                    onClick={() => console.log(`clicked filter:${index}`)}
+                  />
+                  <div
+                    id={tag}
+                    className='flex-1 mx-5 my-3 px-3 py-1 border rounded-full text-xs text-gray-600;'
+                  >
                     {tag}
                   </div>
                 </label>
               </li>
             );
           })}
-          <AddFilterBtn className='add_filter_btn' />
         </ul>
+        <AddFilterBtn className=' my-auto mx-auto w-6 h-6 rounded-full border-2 text-gray-600' />
       </section>
       {/* Mock */}
       <ReviewItem
