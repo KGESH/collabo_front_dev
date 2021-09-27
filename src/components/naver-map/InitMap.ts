@@ -168,7 +168,10 @@ const initMap = (type: string, id: string) => {
       kakaoSchemeVar(
         `kakaomap://route?sp=${location.latitude},${location.longitude}&ep=${cafeInfo.latitude},${cafeInfo.longitude}&by=CAR`,
       );
-      map.setCenter(new naver.maps.LatLng(+cafeInfo.latitude, +cafeInfo.longitude));
+      map.setCenter(
+        new naver.maps.LatLng(+cafeInfo.latitude, +cafeInfo.longitude),
+      );
+      map.setZoom(19);
     }
   });
 
