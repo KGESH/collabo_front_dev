@@ -2,10 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Modal from 'components/modal-frame/Modal';
 import { IModalFrameProps } from 'types/Props';
 import { useInput } from 'hooks/useInput';
-import {
-  hashTagListVar,
-  hashTagQueryVar,
-} from 'services/apollo-client/LocalState';
+import { hashTagListVar, hashTagQueryVar } from 'services/apollo-client/LocalState';
 import { useReactiveVar } from '@apollo/client';
 import {
   handleRemoveTagListItem,
@@ -32,9 +29,7 @@ const HashTagModal = (props: IModalFrameProps) => {
     const regex = createFuzzyMatcher(hashTagInput.value);
     const regexMinusOne = createFuzzyMatcher(
       hashTagInput.value.length > 1
-        ? hashTagInput.value
-            .trim()
-            .substr(0, hashTagInput.value.trim().length - 1)
+        ? hashTagInput.value.trim().substr(0, hashTagInput.value.trim().length - 1)
         : hashTagInput.value,
     );
     const regexRemoveSpace = createFuzzyMatcher(hashTagInput.value.trim());
@@ -58,10 +53,7 @@ const HashTagModal = (props: IModalFrameProps) => {
         value={hashTagInput.value}
         onChange={hashTagInput.onChange}
       />
-      <button
-        className='modal_hash_tag_add_button'
-        onClick={() => handleAddTag(hashTagInput)}
-      >
+      <button className='modal_hash_tag_add_button' onClick={() => handleAddTag(hashTagInput)}>
         +
       </button>
       <ul className='modal_hash_tag_ul'>

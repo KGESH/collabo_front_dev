@@ -1,4 +1,15 @@
-.login__container {
-  display: flex;
-  justify-content: space-around;
+.login_page {
+  @apply flex flex-col;
+}
+
+.login_logo {
+  @apply text-6xl mb-8 text-center;
+}
+
+.login_title {
+  @apply text-3xl m-3;
+}
+
+.login_sub_title {
+  @apply text-3xl mx-3 my-1;
 }

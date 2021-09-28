@@ -26,6 +26,7 @@ export const GET_KAKAO_USER = gql`
 
 const Home = () => {
   const MOCK: number[] = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
+
   const user = useReactiveVar(currentUserVar);
   const filtertagList = useReactiveVar(homeTagListVar);
   const isFilterModalOpen = useState(false);

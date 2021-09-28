@@ -1,22 +1,20 @@
 import React from 'react';
-import LoginForm from 'components/login-form/LoginForm';
 import 'domain/login/style/Login.css';
 import KakaoLoginButton from 'components/kakao-login-button/KakaoLoginButton';
-import { useReactiveVar } from '@apollo/client';
-import { currentUserVar } from 'services/apollo-client/LocalState';
+import Navbar from 'components/navbar/Navbar';
 
 const Login = () => {
-  const user = useReactiveVar(currentUserVar);
-
-  console.log(user);
   return (
-    <div className='login'>
-      <h1 className='login__title'>로그인</h1>
-      <div className='login__container'>
-        <LoginForm />
+    <>
+      <section className='login_page'>
+        <h1 className='login_logo'>Ca</h1>
+        <p className='login_title'>로그인 및 회원가입을</p>
+        <p className='login_sub_title'>시작합니다.</p>
+
         <KakaoLoginButton />
-      </div>
-    </div>
+      </section>
+      <Navbar />
+    </>
   );
 };
 

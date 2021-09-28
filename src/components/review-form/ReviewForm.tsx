@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useReactiveVar } from '@apollo/client';
 import {
   currentUserVar,
@@ -71,14 +71,8 @@ const ReviewForm = () => {
         })}
       </ul>
 
-      <HashTagModal
-        isOpen={isHashTagModalOpen}
-        handleClose={closeHashTagModal}
-      />
-      <VisitCafeModal
-        isOpen={isVisitCafeModalOpen}
-        handleClose={closeVisitCafeModal}
-      />
+      <HashTagModal isOpen={isHashTagModalOpen} handleClose={closeHashTagModal} />
+      <VisitCafeModal isOpen={isVisitCafeModalOpen} handleClose={closeVisitCafeModal} />
     </>
   );
 };
