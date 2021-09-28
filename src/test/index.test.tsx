@@ -10,7 +10,7 @@ import '@testing-library/jest-dom/extend-expect';
  * first.tsx의 <h1>Loading...</h1>의 값과 일치해야 테스트 통과
  * 즉, 해당 페이지에 Loading... 스트링이 렌더링 되어야 통과
  */
-test('PingPong renders loading while fetching data...', () => {
+test('PingPong renders loading while fetching data... 로딩 테스트중...', () => {
   const { getByText } = render(
     <MockedProvider>
       <PingPong />
@@ -36,7 +36,7 @@ test('PingPong renders error when error is responded', async () => {
   await waitFor(() => expect(getByText('Error!!@')).toBeInTheDocument());
 });
 
-test('PingPong renders data when data is responded', async () => {
+test('PingPong renders data when data is responded, 데이터 받는 코드..', async () => {
   const mocks = [
     {
       request: {

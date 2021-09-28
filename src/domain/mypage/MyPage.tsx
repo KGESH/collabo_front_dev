@@ -1,41 +1,53 @@
-import React, { useEffect, useState } from 'react';
-import { gql } from '@apollo/client';
-import { useQuery } from '@apollo/client';
+import React, { useEffect } from 'react';
+import { gql, useMutation } from '@apollo/client';
 import 'domain/mypage/style/MyPage.css';
 import Navbar from 'components/navbar/Navbar';
 import QRCode from 'qrcode.react';
 import Header from 'components/header/Header';
 import { useReactiveVar } from '@apollo/client';
-import { isInitVar, currentUserVar } from 'services/apollo-client/LocalState';
+import {
+  currentUserVar,
+  currentJwtVar,
+} from 'services/apollo-client/LocalState';
 
 const GET_USER = gql`
-  mutation GET_KAKAO_USER_BY_JWT($id: Int!) {
-    getKakaoUserByJwt(jwt: $id) {
+  mutation GET_KAKAO_USER_BY_JWT($jwt: String!) {
+    getKakaoUserByJwt(jwt: $jwt) {
       user {
         cafe_list {
           cafe_name
           code
           card_img
         }
-        point
       }
+      jwt
     }
   }
 `;
 
 const MyPage = () => {
   const user = useReactiveVar(currentUserVar);
-
+  const jwt = useReactiveVar(currentJwtVar);
   console.log(user);
-
-  const { loading, data, error } = useQuery(GET_USER, {
-    variables: { id: user?.id /* 불러올 아이디 */ },
-  });
+  console.log(jwt);
+  const [getUser, { loading, data, error }] = useMutation(GET_USER);
   const cardClick = (index: number) => {
     document
       .getElementsByClassName('my_qr_box')
       [index].classList.toggle('hidden');
   };
+
+  useEffect(() => {
+    console.log(`in useEffect jwt : ${jwt}`);
+    getUser({ variables: { jwt } });
+  }, [jwt]);
+
+  if (!loading) {
+    console.log(data);
+  }
+  if (error) {
+    console.log(error);
+  }
 
   return (
     <>
@@ -46,16 +58,14 @@ const MyPage = () => {
             <em>
               <strong id='point_value'>
                 {/* 현재 소지하고 있는 포인트 */}
-                {data?.getUserById?.point?.toLocaleString()}
               </strong>
             </em>
           </div>
         </div>
         <div className='my_wallet_group'>
           <div className='my_wallet_inner'>
-            {!loading &&
-              data &&
-              data.getUserById.cafe_list.map((w: any, index: number) => (
+            {data?.getKakaoUserByJwt?.user?.cafe_list?.map(
+              (w: any, index: number) => (
                 <div
                   className='my_wallet__card'
                   onClick={() => cardClick(index)}
@@ -72,11 +82,11 @@ const MyPage = () => {
                     </div>
                   </div>
                 </div>
-              ))}
+              ),
+            )}
           </div>
         </div>
       </div>
-
       <Navbar />
     </>
   );

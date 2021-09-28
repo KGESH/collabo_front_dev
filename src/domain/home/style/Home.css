@@ -1,26 +1,32 @@
-.hash_tag {
-    width: 100vw;
-    height: 10vh;
-    background-color: beige;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.home__header {
+    @apply flex shadow-sm ;
+}
+.header_logo {
+    /* 로고 새 이미지로 교체 예정 (21-09-26:지성현) */
+    @apply mx-auto font-extralight text-3xl;
+}
+.header_post_btn {
+    @apply flex mr-3 justify-center items-center;
 }
 
-.main_img {
-    width: 100vw;
-    height: 40vh;
-    background-color: #e7e7e7;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.filter_container {
+    @apply flex border-b border-gray-100;
+}
+.filter_list {
+    @apply flex mx-auto my-auto items-center overflow-x-scroll;
+}
+.filter {
+    @apply hidden;
 }
 
-.thingthing {
-    width: 100vw;
-    height: 9vh;
-    background-color: #9a9a9a;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.filter + div {
+    @apply w-max mx-5 my-3 px-3 py-1 border rounded-full text-xs text-gray-600;
+}
+
+.filter:checked + div {
+    background-color: #ECEBEB;
+}
+
+.filter_add_btn {
+    @apply my-auto mx-3 w-6 h-6 rounded-full border text-gray-500;
 }

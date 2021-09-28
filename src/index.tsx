@@ -7,7 +7,6 @@ import App from './App';
 import './index.css';
 import GetCurrentLocation from 'components/get-current-location/GetCurrentLocation';
 import GetHashTag from 'components/get-hash-tag/GetHashTag';
-import { mapVar } from 'services/apollo-client/LocalState';
 
 ReactDOM.render(
   <React.StrictMode>

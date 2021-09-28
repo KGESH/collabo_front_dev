@@ -1,0 +1,47 @@
+/* Need Size Fix */
+
+.item_header {
+  @apply flex flex-col;
+}
+.item_owner_container {
+  @apply flex flex-col;
+}
+/* 작업 예정 (21-09-26:지성현) */
+
+.item_image_slide {
+  @apply w-screen h-full;
+}
+
+.item_image {
+  @apply w-full h-full;
+}
+
+.item_btn {
+  @apply w-8 h-8 mx-3 my-2 bg-no-repeat;
+  
+}
+.like_btn {
+  background-image: url(/src/resources/images/home/like_btn.png);
+}
+.comment_btn {
+  background-image: url(/src/resources/images/home/comment_btn.png);
+}
+.location_btn {
+  background-image: url(/src/resources/images/home/location_btn.png);
+}
+
+.item_tag_list {
+  @apply flex justify-center items-center;
+}
+
+.item_tag {
+  @apply w-max mx-2 my-3 px-3 py-1 border rounded-full text-xs text-center bg-gray-200 text-gray-600;
+  min-width: 50px;
+}
+.item_content_container {
+  @apply shadow-2xl rounded-t-lg rounded-b-2xl;
+}
+.item_comment_container {
+  @apply shadow-md;
+  background-color: #ECEBEB
+}
