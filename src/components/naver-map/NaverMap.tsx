@@ -81,13 +81,7 @@ const NaverMap = (props: any) => {
    *
    */
   useEffect(() => {
-    //console.log(geolocation);
-    /*console.log(
-      `${geolocation.latitude}, ${geolocation.longitude}, ${geolocation.timestamp}, hook`,
-    );*/
     if (!isMapExist && cafeInfo.length && currentLocation.latitude) {
-      console.log('지도 : ', type);
-      console.log('지도 : ', id);
       initMap(type, id);
       setIsMapExist(true);
     } else if (isMapExist) {

@@ -171,7 +171,7 @@ const initMap = (type: string, id: string) => {
       map.setCenter(
         new naver.maps.LatLng(+cafeInfo.latitude, +cafeInfo.longitude),
       );
-      map.setZoom(19);
+      map.setZoom(20);
     }
   });
 

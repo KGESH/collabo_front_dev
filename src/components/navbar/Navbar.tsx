@@ -24,7 +24,7 @@ const Navbar = () => {
         </div>
       </Link>
 
-      <Link to='/map'>
+      <Link to='/map/user/0'>
         <div className='nav_item'>
           <img src='nav/map.png' alt='' className='nav_img' />
         </div>
