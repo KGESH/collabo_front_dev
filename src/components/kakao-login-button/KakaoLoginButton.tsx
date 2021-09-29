@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import KakaoSdkInit from 'services/kakao/KakaoSdkInit';
+import kakao_login_btn from 'resources/images/login/kakao_button.png';
 
 const KakaoLoginButton = () => {
   const redirectUri = `http://localhost:4010/auth/kakao/KakaoCallback`;
@@ -7,7 +8,7 @@ const KakaoLoginButton = () => {
 
   return (
     <button
-      className='kakao__login_button'
+      className='mx-5 my-12'
       onClick={() => {
         window.Kakao.Auth.authorize({
           redirectUri,
@@ -15,7 +16,7 @@ const KakaoLoginButton = () => {
         });
       }}
     >
-      카카오로 로그인
+      <img className='w-full h-full' src={kakao_login_btn} />
     </button>
   );
 };

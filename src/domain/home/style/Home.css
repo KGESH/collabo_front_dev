@@ -1,5 +1,5 @@
 .home__header {
-    @apply flex shadow-sm ;
+    @apply flex shadow-sm;
 }
 .header_logo {
     /* 로고 새 이미지로 교체 예정 (21-09-26:지성현) */
@@ -12,9 +12,15 @@
 .filter_container {
     @apply flex border-b border-gray-100;
 }
+
+
 .filter_list {
     @apply flex mx-auto my-auto items-center overflow-x-scroll;
 }
+.filter_list::-webkit-scrollbar {
+  display:none;
+}
+
 .filter {
     @apply hidden;
 }

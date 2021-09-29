@@ -10,7 +10,6 @@ import { useReactiveVar } from '@apollo/client';
 
 const Map = (props: any) => {
   const isCafeDetailExist = useReactiveVar(isCafeDetailExistVar);
-
   return (
     <>
       <header className='map__header'>

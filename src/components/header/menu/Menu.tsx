@@ -1,10 +1,10 @@
 import React from 'react';
 import 'components/header/menu/style/Menu.css';
 import Menu_list from 'components/header/menu/MenuList';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 const Menu = () => {
-
+  const history = useHistory();
   const trigger = (event: any) => {
     const list: any = document.getElementById('menu_list');
     list.classList.toggle('open');
@@ -31,7 +31,11 @@ const Menu = () => {
             </Link>
           </div>
           <div className='menu__content'>
-            {Menu_list.map(w => (
+            <a className='menu__p' onClick={() => localStorage.removeItem('jwt')} href='/'>
+              로그아웃
+            </a>
+
+            {Menu_list.map((w) => (
               <Link to={w.path}>
                 <div className='menu__p'>{w.label}</div>
               </Link>
