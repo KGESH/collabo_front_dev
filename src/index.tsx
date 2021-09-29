@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Link } from 'react-router-dom';
 import { client } from 'services/apollo-client/apollo';
 import { ApolloProvider } from '@apollo/client';
 import App from './App';
@@ -13,17 +13,18 @@ ReactDOM.render(
     <ApolloProvider client={client}>
       <BrowserRouter>
         {/* 개발용 NavBar. 배포 전 제거 (추가 21-08-12:유성현) */}
-        {/*
-          <div className='exclusive_use_of_dev'>
-            <Link to='/'>홈</Link>
-            <Link to='/login'>로그인</Link>
-            <Link to='/mypage'>마이페이지</Link>
-            <Link to='/cafeTour'>카페투어</Link>
-            <Link to='/Detail/스타벅스'>디테일</Link>
-            <Link to='/map'>지도</Link>
-            <Link to='/qrcheck/스타벅스/E9OW312GF1Q'>카드추가</Link>
-          </div>
-        */}
+        <div className='exclusive_use_of_dev'>
+          <Link to='/'>홈 </Link>
+          <Link to='/login'>로그인 </Link>
+          <Link to='/mypage'>마이페이지 </Link>
+          <Link to='/cafeTour'>카페투어 </Link>
+          <Link to='/Detail/스타벅스'>디테일 </Link>
+          <a onClick={()=>{window.location.replace("/map/user/0")}}>지도 </a>
+          <Link to='/map/user/0'>지도 </Link>
+          <Link to='/qrcheck/스타벅스/E9OW312GF1Q'>카드추가 </Link>
+          <a onClick={()=>{window.location.replace("/map/cafe/142090")}}>지도TEST </a>
+          <Link to='/map/cafe/142090'>지도TEST</Link>
+        </div>
         {/* --------------------------------------- */}
         <App />
         <GetCurrentLocation />
