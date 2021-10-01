@@ -47,44 +47,46 @@ const HashTagModal = (props: IModalFrameProps) => {
 
   return (
     <Modal isOpen={isOpen} handleClose={handleClose} header='해시태그 추가'>
-      <input
-        className='modal_hash_tag_input'
-        placeholder='태그 입력'
-        value={hashTagInput.value}
-        onChange={hashTagInput.onChange}
-      />
-      <button className='modal_hash_tag_add_button' onClick={() => handleAddTag(hashTagInput)}>
-        +
-      </button>
-      <ul className='modal_hash_tag_ul'>
-        {hashTagSearchList.map((matchedHashTag: IHashTag, index: number) => {
-          return (
-            <li
-              key={index}
-              onClick={() => {
-                handleAddTagByQuery(matchedHashTag.name);
-                hashTagInput.clear();
-              }}
-            >
-              <span className='modal_hash_tag_mathched_hash_tag'>
-                {matchedHashTag.name + '   '}
-              </span>
-              <br />
-            </li>
-          );
-        })}
-      </ul>
-      <ul className='modal_hash_tag_ul'>
-        {hashTagList.map((tag: string, index: number) => {
-          return (
-            <li key={index}>
-              <span>{tag}</span>
-              <button onClick={() => handleRemoveTagListItem(index)}>-</button>
-              <br />
-            </li>
-          );
-        })}
-      </ul>
+      <section className=''>
+        <input
+          className='modal_hash_tag_input'
+          placeholder='태그 입력'
+          value={hashTagInput.value}
+          onChange={hashTagInput.onChange}
+        />
+        <button className='modal_hash_tag_add_button' onClick={() => handleAddTag(hashTagInput)}>
+          +
+        </button>
+        <ul className='modal_hash_tag_ul'>
+          {hashTagSearchList.map((matchedHashTag: IHashTag, index: number) => {
+            return (
+              <li
+                key={index}
+                onClick={() => {
+                  handleAddTagByQuery(matchedHashTag.name);
+                  hashTagInput.clear();
+                }}
+              >
+                <span className='modal_hash_tag_mathched_hash_tag'>
+                  {matchedHashTag.name + '   '}
+                </span>
+                <br />
+              </li>
+            );
+          })}
+        </ul>
+        <ul className='modal_hash_tag_ul'>
+          {hashTagList.map((tag: string, index: number) => {
+            return (
+              <li key={index}>
+                <span>{tag}</span>
+                <button onClick={() => handleRemoveTagListItem(index)}>-</button>
+                <br />
+              </li>
+            );
+          })}
+        </ul>
+      </section>
     </Modal>
   );
 };

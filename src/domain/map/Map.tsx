@@ -11,7 +11,7 @@ import { useReactiveVar } from '@apollo/client';
 const Map = (props: any) => {
   const isCafeDetailExist = useReactiveVar(isCafeDetailExistVar);
   return (
-    <>
+    <div>
       <header className='map__header'>
         <MapSearchBar />
         <MapHashTag />
@@ -23,7 +23,7 @@ const Map = (props: any) => {
       <footer className='map__footer'>
         <Navbar />
       </footer>
-    </>
+    </div>
   );
 };
 

@@ -11,7 +11,7 @@ import PlusIcon from 'resources/images/PostReview.svg';
 import TextareaAutosize from 'react-textarea-autosize';
 import HashTagModal from 'components/review-form/HashTagModal';
 import { handleRemoveTagListItem } from 'components/review-form/HandleTagList';
-import { handleChangeFile } from 'components/review-form/HandleChangeFile';
+import { handleChangeFile } from 'components/upload/HandleChangeFile';
 import VisitCafeModal from './VisitCafeModal';
 
 const ReviewForm = () => {

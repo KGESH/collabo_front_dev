@@ -5,39 +5,7 @@ import type { IMenuList } from 'types/Routes';
 
 const Menu_list: IMenuList[] = [
   {
-    path: '/mypage',
-    label: '프로필 편집',
-  },
-  {
-    path: '/mypage',
-    label: '설정',
-  },
-  {
-    path: '/mypage',
-    label: '프로필 편집',
-  },
-  {
-    path: '/mypage',
-    label: '설정',
-  },
-  {
-    path: '/mypage',
-    label: '프로필 편집',
-  },
-  {
-    path: '/mypage',
-    label: '설정',
-  },
-  {
-    path: '/mypage',
-    label: '프로필 편집',
-  },
-  {
-    path: '/mypage',
-    label: '설정',
-  },
-  {
-    path: '/mypage',
+    path: '/ProfileEdit',
     label: '프로필 편집',
   },
   {

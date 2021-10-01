@@ -11,7 +11,7 @@ const Modal = (props: IModalFrameProps) => {
         <div className='modal' onClick={handleClose}>
           <section onClick={(e) => e.stopPropagation()} className='modal_content'>
             <header>{header}</header>
-            <main>{children}</main>
+            <main className='modal_main'>{children}</main>
           </section>
         </div>
       ) : null}

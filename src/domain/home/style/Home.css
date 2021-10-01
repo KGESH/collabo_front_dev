@@ -10,7 +10,7 @@
 }
 
 .filter_container {
-    @apply flex border-b border-gray-100;
+    @apply flex border-b items-center border-gray-100;
 }
 
 
@@ -34,5 +34,5 @@
 }
 
 .filter_add_btn {
-    @apply my-auto mx-3 w-6 h-6 rounded-full border text-gray-500;
+    @apply my-auto mx-3 w-6 h-6 border rounded-full text-gray-500;
 }

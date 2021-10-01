@@ -7,7 +7,7 @@ import { IRoutes } from 'types/Routes';
 const AppRouter = () => (
   <>
     <Switch>
-      {AppRoutes.map((route, key) => (
+      {AppRoutes.map((route: IRoutes, key: number) => (
         <Route path={route.path} exact={route.exact} component={route.component} key={key} />
       ))}
       <Route component={Error404} />
