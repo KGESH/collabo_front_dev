@@ -12,6 +12,7 @@ import {
   cafeInfoSortByNameVar,
   sortTypeVar,
   mapMenuExistVar,
+  currentUserVar,
 } from 'services/apollo-client/LocalState';
 import {
   compareByDistance,
@@ -29,6 +30,7 @@ import { useReactiveVar } from '@apollo/client';
 import { ICafeInfo } from 'types/Map';
 import { useEffect } from 'react';
 import { createFuzzyMatcher } from 'components/auto-complete-search/CreateFuzzyMatcher';
+import MockUserIcon from 'resources/images/navbar/mock_user.gif';
 
 const MapSearchBar = () => {
   const cafeInfo = useReactiveVar(cafeInfoVar);
@@ -39,6 +41,7 @@ const MapSearchBar = () => {
   const cafeInfoSortByName = useReactiveVar(cafeInfoSortByNameVar);
   const sortType = useReactiveVar(sortTypeVar);
   const mapMenuExist = useReactiveVar(mapMenuExistVar);
+  const currentUser = useReactiveVar(currentUserVar);
 
   useEffect(() => {
     const cafeInfoDistance: ICafeInfo[] = [...cafeInfo].sort(compareByDistance);
@@ -133,8 +136,22 @@ const MapSearchBar = () => {
         <div id='map_menu__container'>
           {mapMenuExist ? (
             <>
-              <div className='container__user_info'></div>
-              <div className='container__menu'></div>
+              <div className='container__user_info'>
+                <img src={MockUserIcon} alt='userIcon' />
+                <div className=''>{currentUser?.name}</div>
+              </div>
+              <div className='container__menu'>
+                <div className='text-2xl'>카페찾기</div>
+                <div className='text-2xl'>가까운 매장</div>
+                <div className='text-2xl'>즐겨찾기</div>
+                <div className='text-2xl'>MY플레이스</div>
+
+                <div className='text-sm'>공지사항</div>
+                <div className='text-sm'>고객센터</div>
+                <div className='text-sm'>마이페이지</div>
+                <div className='text-sm'>정보 수정 제안</div>
+                <div className='text-sm'>설정</div>
+              </div>
             </>
           ) : null}
         </div>

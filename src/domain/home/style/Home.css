@@ -12,9 +12,15 @@
 .filter_container {
     @apply flex border-b items-center border-gray-100;
 }
+
+
 .filter_list {
     @apply flex mx-auto my-auto items-center overflow-x-scroll;
 }
+.filter_list::-webkit-scrollbar {
+  display:none;
+}
+
 .filter {
     @apply hidden;
 }

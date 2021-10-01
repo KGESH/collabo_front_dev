@@ -3,6 +3,7 @@ import mockImg from 'resources/images/home/mockImg.png';
 import mockUser from 'resources/images/home/mockUser.png';
 import { useShowMoreText } from 'hooks/useShowMoreText';
 import 'components/home-review-item/style/ReviewItem.css';
+import { BrowserRouter, Link, useHistory } from 'react-router-dom';
 /** IReview Props 예정 */
 import { IReview, IComment } from 'types/Review';
 const ReviewItem = ({
@@ -16,6 +17,7 @@ const ReviewItem = ({
 }: any) => {
   const { text, toggleShowMore } = useShowMoreText(content, 30);
   const [isToggled, setIsToggled] = useState(false);
+  const history = useHistory();
 
   return (
     <section className='item_header'>
@@ -33,10 +35,16 @@ const ReviewItem = ({
         <div className='flex '>
           <button type='button' className='item_btn like_btn' />
           <button type='button' className='item_btn comment_btn' />
-          <button type='button' className='item_btn location_btn' />
+          <button
+            type='button'
+            className='item_btn location_btn'
+            onClick={() => {
+              history.push('/map/cafe/142090');
+            }}
+          />
         </div>
         {/** 줄바꿈 해결해야 함 */}
-        <div className='flex break-words whitespace-pre-wrap'>
+        <div className='flex break-words whitespace-pre-wrap '>
           <span className='item_content_onwer mx-1'>{user_name} </span>
           <span className='mock_content mx-2'>{text} </span>
           <span

@@ -92,6 +92,7 @@ const Home = () => {
           content={mockContent}
           hash_tag_list={['mock', 'data', 'llll']}
           comment_list={[mockComent, mockComent, mockComent]}
+          key={i}
         />
       ))}
 
