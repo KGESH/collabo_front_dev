@@ -43,7 +43,7 @@ const GetCurrentLocation = () => {
             +cafeInfo.latitude,
             +cafeInfo.longitude,
           );
-          console.log(cafeInfo.name, distaceString);
+          //console.log(cafeInfo.name, distaceString);
           const cafeInfoRenewByDistance: ICafeInfo = {
             id: cafeInfo.id,
             name: cafeInfo.name,

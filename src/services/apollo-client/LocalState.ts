@@ -10,9 +10,7 @@ import { IHashTag } from 'types/HashTag';
  * (21-8-16:지성현)
  */
 export const currentUserVar = makeVar<IUser | null>(null);
-export const currentJwtVar = makeVar<String | null>(
-  localStorage.getItem('jwt'),
-);
+export const currentJwtVar = makeVar<String | null>(localStorage.getItem('jwt'));
 export const isLoggedInVar = makeVar<boolean>(false);
 export const isInitVar = makeVar<boolean>(false);
 
@@ -32,6 +30,13 @@ export const clickedCafeDetailVar = makeVar<ICafeInfo | null>(null);
 export const isCafeDetailExistVar = makeVar<boolean>(false);
 export const cafeDetailHeightVar = makeVar<string>('down');
 export const kakaoSchemeVar = makeVar<string>('');
+export const searchInputVar = makeVar<string>('');
+export const searchBoardExistVar = makeVar<boolean>(false);
+export const searchResultListVar = makeVar<ICafeInfo[]>([]);
+export const cafeInfoSortByDistanceVar = makeVar<ICafeInfo[]>([]);
+export const cafeInfoSortByNameVar = makeVar<ICafeInfo[]>([]);
+export const sortTypeVar = makeVar<string>('distance');
+export const mapMenuExistVar = makeVar<boolean>(false);
 
 /**
  * 리뷰 작성 상태

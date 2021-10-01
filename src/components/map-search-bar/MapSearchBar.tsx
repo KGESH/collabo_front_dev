@@ -3,55 +3,57 @@ import 'components/map-search-bar/style/MapSearchBar.css';
 import SearchBarMenuImg from 'resources/images/searchBarImg.png';
 import SearchBarBackImg from 'resources/images/back_arrow.png';
 import {
+  mapVar,
   cafeInfoVar,
-  cafeDetailHeightVar,
-  isCafeDetailExistVar,
-  clickedCafeDetailVar,
+  searchInputVar,
+  searchBoardExistVar,
+  searchResultListVar,
+  cafeInfoSortByDistanceVar,
+  cafeInfoSortByNameVar,
+  sortTypeVar,
+  mapMenuExistVar,
 } from 'services/apollo-client/LocalState';
+import {
+  compareByDistance,
+  compareByName,
+  onSearchBarSubmit,
+  onSearchBarImgClick,
+  onSearchBarInputChange,
+  onSearchBarInputClick,
+  onSearchBarDeleteButtonClick,
+  onSearchBarSearchButtonClick,
+  onSearchListClick,
+  onMenuSpaceClick,
+} from 'components/map-search-bar/MapSearchBarFunction';
 import { useReactiveVar } from '@apollo/client';
 import { ICafeInfo } from 'types/Map';
-import { mapVar } from 'services/apollo-client/LocalState';
 import { useEffect } from 'react';
 import { createFuzzyMatcher } from 'components/auto-complete-search/CreateFuzzyMatcher';
 
 const MapSearchBar = () => {
-  const [searchInput, setSearchInput] = useState<string>('');
-  const [searchBoardExist, setSearchBoardExist] = useState<boolean>(false);
   const cafeInfo = useReactiveVar(cafeInfoVar);
-  const [searchResultList, setSearchResultList] = useState<ICafeInfo[]>([]);
-  const [cafeInfoSortByDistance, setCafeInfoSortByDistance] = useState<
-    ICafeInfo[]
-  >([]);
-  const [cafeInfoSortByname, setCafeInfoSortByname] = useState<ICafeInfo[]>([]);
-  const [sortType, setSortType] = useState('distance');
-
-  const compareByDistance = (a: ICafeInfo, b: ICafeInfo) => {
-    return a.distance > b.distance ? 1 : b.distance > a.distance ? -1 : 0;
-  };
-
-  const compareByName = (a: ICafeInfo, b: ICafeInfo) => {
-    return a.name > b.name ? 1 : b.name > a.name ? -1 : 0;
-  };
+  const searchInput = useReactiveVar(searchInputVar);
+  const searchBoardExist = useReactiveVar(searchBoardExistVar);
+  const searchResultList = useReactiveVar(searchResultListVar);
+  const cafeInfoSortByDistance = useReactiveVar(cafeInfoSortByDistanceVar);
+  const cafeInfoSortByName = useReactiveVar(cafeInfoSortByNameVar);
+  const sortType = useReactiveVar(sortTypeVar);
+  const mapMenuExist = useReactiveVar(mapMenuExistVar);
 
   useEffect(() => {
-    const cafeInfoDistance: ICafeInfo[] = [...cafeInfo];
-    const cafeInfoName: ICafeInfo[] = [...cafeInfo];
-    setSearchResultList(cafeInfoDistance.sort(compareByDistance));
-    setCafeInfoSortByDistance(cafeInfoDistance.sort(compareByDistance));
-    setCafeInfoSortByname(cafeInfoName.sort(compareByName));
+    const cafeInfoDistance: ICafeInfo[] = [...cafeInfo].sort(compareByDistance);
+    const cafeInfoName: ICafeInfo[] = [...cafeInfo].sort(compareByName);
+    searchResultListVar(sortType === 'distance' ? cafeInfoDistance : cafeInfoName);
+    cafeInfoSortByDistanceVar(cafeInfoDistance);
+    cafeInfoSortByNameVar(cafeInfoName);
   }, [cafeInfo]);
 
   useEffect(() => {
     const regex = createFuzzyMatcher(searchInput);
-    const regexMinusOne = createFuzzyMatcher(
-      searchInput.trim().substr(0, searchInput.length - 1),
-    );
+    const regexMinusOne = createFuzzyMatcher(searchInput.trim().substr(0, searchInput.length - 1));
     const regexRemoveSpace = createFuzzyMatcher(searchInput.trim());
-    setSearchResultList(
-      (sortType === 'distance'
-        ? cafeInfoSortByDistance
-        : cafeInfoSortByname
-      ).filter(
+    searchResultListVar(
+      (sortType === 'distance' ? cafeInfoSortByDistance : cafeInfoSortByName).filter(
         (cafe: ICafeInfo, index: number) =>
           regex.test(cafe.name.toLowerCase()) ||
           regexMinusOne.test(cafe.name.toLowerCase()) ||
@@ -60,86 +62,19 @@ const MapSearchBar = () => {
     );
   }, [sortType]);
 
-  const onSearchBarSubmit = (event: any) => {
-    event.preventDefault();
-    if (searchInput) {
-      setSearchBoardExist(true);
+  useEffect(() => {
+    const mapMenu: HTMLElement | null = document.getElementById('header__map_menu');
+    const mapMenuContainer: HTMLElement | null = document.getElementById('map_menu__container');
+    if (mapMenu && mapMenuContainer && mapMenuExist) {
+      mapMenu.style.animation = 'fadein 0.3s';
+      mapMenu.style.width = '100vw';
+      mapMenuContainer.style.width = '60vw';
+    } else if (mapMenu && mapMenuContainer && !mapMenuExist) {
+      mapMenu.style.animation = 'fadeout 0.3s';
+      mapMenu.style.width = '0vw';
+      mapMenuContainer.style.width = '0vw';
     }
-  };
-
-  const onSearchBarImgClick = () => {
-    if (searchBoardExist) {
-      setSearchBoardExist(false);
-    } else {
-    }
-  };
-
-  const onSearchBarInputChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    const value: string = event.target.value;
-    setSearchInput(value);
-    const regex = createFuzzyMatcher(value);
-    const regexMinusOne = createFuzzyMatcher(
-      value.trim().substr(0, value.trim().length - 1),
-    );
-    const regexRemoveSpace = createFuzzyMatcher(value.trim());
-    setSearchResultList(
-      (sortType === 'distance'
-        ? cafeInfoSortByDistance
-        : cafeInfoSortByname
-      ).filter(
-        (cafe: ICafeInfo, index: number) =>
-          regex.test(cafe.name.toLowerCase()) ||
-          regexMinusOne.test(cafe.name.toLowerCase()) ||
-          regexRemoveSpace.test(cafe.name.toLowerCase()),
-      ),
-    );
-    console.log(searchResultList);
-  };
-
-  const onSearchBarInputClick = () => {
-    setSearchBoardExist(true);
-  };
-
-  const onSearchBarDeleteButtonClick = () => {
-    setSearchInput('');
-    setSearchResultList(
-      sortType === 'distance' ? cafeInfoSortByDistance : cafeInfoSortByname,
-    );
-    //setSearchBoardExist(false);
-  };
-
-  const onSearchBarSearchButtonClick = () => {
-    if (searchBoardExist) {
-    } else {
-      setSearchBoardExist(true);
-    }
-  };
-
-  const onSearchListClick = (event: any) => {
-    const cafeId: number = +event.currentTarget.id;
-    console.log(cafeId);
-    const target: ICafeInfo | undefined = searchResultList?.find(
-      (cafe: ICafeInfo) => {
-        if (cafe.id === cafeId) {
-          return true;
-        }
-      },
-    );
-    if (target) {
-      console.log(target);
-      setSearchBoardExist(false);
-      const map = mapVar();
-      if (map) {
-        map.setCenter(target.mapPos);
-        map.setZoom(19);
-      }
-      cafeDetailHeightVar('down');
-      isCafeDetailExistVar(true);
-      clickedCafeDetailVar(target);
-    }
-  };
+  }, [mapMenuExist]);
 
   return (
     <>
@@ -151,7 +86,7 @@ const MapSearchBar = () => {
                 htmlFor='distance'
                 id='distance'
                 onClick={(event: any) => {
-                  setSortType(event.target.id);
+                  sortTypeVar(event.target.id);
                   console.log(sortType);
                 }}
               >
@@ -163,7 +98,7 @@ const MapSearchBar = () => {
                 htmlFor='name'
                 id='name'
                 onClick={(event: any) => {
-                  setSortType(event.target.id);
+                  sortTypeVar(event.target.id);
                   console.log(sortType);
                 }}
               >
@@ -185,12 +120,8 @@ const MapSearchBar = () => {
                     onClick={onSearchListClick}
                   >
                     <div className='cafe_info__cafe_name'>{cafe.name}</div>
-                    <div className='cafe_info__cafe_distance'>
-                      {cafe.distance + 'km'}
-                    </div>
-                    <div className='cafe_info__cafe__address'>
-                      {cafe.address}
-                    </div>
+                    <div className='cafe_info__cafe_distance'>{cafe.distance + 'km'}</div>
+                    <div className='cafe_info__cafe__address'>{cafe.address}</div>
                   </li>
                 );
               })}
@@ -198,11 +129,19 @@ const MapSearchBar = () => {
           </div>
         </div>
       ) : null}
+      <div id='header__map_menu' onClick={onMenuSpaceClick}>
+        <div id='map_menu__container'>
+          {mapMenuExist ? (
+            <>
+              <div className='container__user_info'></div>
+              <div className='container__menu'></div>
+            </>
+          ) : null}
+        </div>
+      </div>
       <form className='header__search_bar' onSubmit={onSearchBarSubmit}>
         <img
-          className={
-            searchBoardExist ? 'search_bar__img return' : 'search_bar__img menu'
-          }
+          className={searchBoardExist ? 'search_bar__img return' : 'search_bar__img menu'}
           src={searchBoardExist ? SearchBarBackImg : SearchBarMenuImg}
           alt='검색'
           onClick={onSearchBarImgClick}

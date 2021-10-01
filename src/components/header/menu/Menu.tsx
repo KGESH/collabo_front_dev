@@ -22,14 +22,14 @@ const Menu = () => {
       <div className='menu_list' id='menu_list'>
         <div className='menu_list_inner'>
           <div className='menu__logo'>collabo</div>
-          <div className='menu__member'>
+          {/* <div className='menu__member'>
             <Link to='/login'>
               <div className='menu__sign_in'>로그인</div>
             </Link>
             <Link to='/signup'>
               <div className='menu__sign_up'>회원가입</div>
             </Link>
-          </div>
+          </div> */}
           <div className='menu__content'>
             <a className='menu__p' onClick={() => localStorage.removeItem('jwt')} href='/'>
               로그아웃

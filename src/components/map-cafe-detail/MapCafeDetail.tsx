@@ -30,7 +30,7 @@ const MapCafeDetail = () => {
       'map_cafe_detail_container',
     );
     if (detailContainer && cafeDetailHeight === 'down') {
-      detailContainer.style.height = '17vh';
+      detailContainer.style.height = '20vh';
     } else if (detailContainer && cafeDetailHeight === 'up') {
       detailContainer.style.height = '40vh';
     }

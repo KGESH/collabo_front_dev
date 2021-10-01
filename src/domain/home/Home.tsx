@@ -59,25 +59,32 @@ const Home = () => {
       <header className='home__header'>
         {/* <HeaderLogo className='header_logo' /> */}
         <span className='header_logo'>Ca</span>
-        <Link to='/PostReview' className='header_post_btn'>
-          <PostReviewIcon />
-        </Link>
+        {user ? (
+          <Link to='/PostReview' className='header_post_btn'>
+            <PostReviewIcon />
+          </Link>
+        ) : null}
       </header>
-      <section className='filter_container'>
-        <ul className='filter_list'>
-          {filtertagList?.map((tag: string, index: number) => {
-            return (
-              <li key={index}>
-                <label htmlFor={tag}>
-                  <input type='checkbox' className='filter' id={tag} />
-                  <div id={tag}>{tag}</div>
-                </label>
-              </li>
-            );
-          })}
-        </ul>
-        <FilterAddButton className='filter_add_btn' />
-      </section>
+      {user ? (
+        <section className='filter_container'>
+          <ul className='filter_list'>
+            {filtertagList?.map((tag: string, index: number) => {
+              return (
+                <li key={index}>
+                  <label htmlFor={tag}>
+                    <input type='checkbox' className='filter' id={tag} />
+                    <div id={tag}>{tag}</div>
+                  </label>
+                </li>
+              );
+            })}
+          </ul>
+          <div className='rounded-full'>
+            <FilterAddButton className='filter_add_btn' />
+          </div>
+        </section>
+      ) : null}
+
       {/* Mock */}
       {MOCK.map((e: any, i: any) => (
         <ReviewItem

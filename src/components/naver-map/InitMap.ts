@@ -13,7 +13,7 @@ import {
 import { getDistance } from 'components/naver-map/MapFunctions';
 import img from 'resources/images/currentPosition/currentPosition.png';
 
-const initMap = () => {
+const initMap = (type: string, id: string) => {
   /**
    * 지도 생성
    * 현재 위치 받아서 가운데 놓기
@@ -25,11 +25,13 @@ const initMap = () => {
 
   const map = new naver.maps.Map('map', {
     useStyleMap: true,
-    center: new naver.maps.LatLng(
-      currentLocation.latitude,
-      currentLocation.longitude,
-    ), //지도의 초기 중심 좌표
-    zoom: 19, //지도의 초기 줌 레벨
+    center: mapVar()
+      ? mapVar()?.getCenter()
+      : new naver.maps.LatLng(
+          currentLocation.latitude,
+          currentLocation.longitude,
+        ), //지도의 초기 중심 좌표
+    zoom: mapVar() ? mapVar()?.getZoom() : 19, //지도의 초기 줌 레벨
     disableKineticPan: false,
   });
 
@@ -37,7 +39,7 @@ const initMap = () => {
    * 현재 위치로 지도를 옮기는 버튼 생성
    */
   const locationBtnHtml =
-    '<a href="#" class="btn_mylct" style="pointer-events: auto;"><img class="currentImg" src="currentPosition.png" alt="현재위치"/></span></a>';
+    '<a href="#" class="btn_mylct" style="pointer-events: auto;"><img class="currentImg" src="../../currentPosition.png" alt="현재위치"/></span></a>';
 
   naver.maps.Event.once(map, 'init_stylemap', () => {
     //customControl 객체 이용하기
@@ -74,7 +76,7 @@ const initMap = () => {
     ),
     map: map,
     icon: {
-      url: './currentPositionIcon.png',
+      url: '../../currentPositionIcon.png',
       size: new naver.maps.Size(40, 40),
       scaledSize: new naver.maps.Size(40, 40),
       origin: new naver.maps.Point(0, 0),
@@ -99,7 +101,7 @@ const initMap = () => {
         position: cafe.mapPos,
         map: map,
         icon: {
-          url: './cafeIcon.png',
+          url: '../../cafeIcon.png',
           size: new naver.maps.Size(25, 25),
           scaledSize: new naver.maps.Size(25, 25),
           origin: new naver.maps.Point(0, 0),
@@ -140,6 +142,37 @@ const initMap = () => {
         `kakaomap://route?sp=${location.latitude},${location.longitude}&ep=${cafeInfo.latitude},${cafeInfo.longitude}&by=CAR`,
       );
     });
+    if (type === 'cafe' && +id === cafe.id) {
+      const cafeInfo: ICafeInfo = cafe;
+      const location: ILocation = currentLocationVar();
+      cafeDetailHeightVar('down');
+      isCafeDetailExistVar(true);
+      console.log(isCafeDetailExistVar());
+      const distaceString: string = getDistance(
+        location.latitude,
+        location.longitude,
+        +cafeInfo.latitude,
+        +cafeInfo.longitude,
+      );
+      clickedCafeDetailVar({
+        id: cafeInfo.id,
+        name: cafeInfo.name,
+        mapPos: cafeInfo.mapPos,
+        latitude: cafeInfo.latitude,
+        longitude: cafeInfo.longitude,
+        distance: +distaceString,
+        address: cafeInfo.address,
+        beans: cafeInfo.beans,
+        phone: cafeInfo.phone,
+      });
+      kakaoSchemeVar(
+        `kakaomap://route?sp=${location.latitude},${location.longitude}&ep=${cafeInfo.latitude},${cafeInfo.longitude}&by=CAR`,
+      );
+      map.setCenter(
+        new naver.maps.LatLng(+cafeInfo.latitude, +cafeInfo.longitude),
+      );
+      map.setZoom(20);
+    }
   });
 
   /**

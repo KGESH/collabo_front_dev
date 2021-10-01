@@ -33,7 +33,13 @@ const MapHashTag = () => {
           );
         })}
       </ul>
-      <button>추가</button>
+      <button
+        onClick={() => {
+          window.location.reload();
+        }}
+      >
+        추가
+      </button>
     </div>
   );
 };

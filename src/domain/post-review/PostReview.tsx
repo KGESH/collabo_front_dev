@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
 import ReviewForm from 'components/review-form/ReviewForm';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import {
   hashTagListVar,
   uploadImgListVar,
   reviewContentVar,
-  uploadImgBase64ListVar,
   currentUserVar,
 } from 'services/apollo-client/LocalState';
 import 'domain/post-review/style/PostReview.css';
@@ -27,28 +26,27 @@ const PostReview = () => {
   const content = useReactiveVar(reviewContentVar);
   const tagList = useReactiveVar(hashTagListVar);
   const imgList = useReactiveVar(uploadImgListVar);
-  const base64Img = useReactiveVar(uploadImgBase64ListVar);
-  const [upload, { loading, data, error }] = useMutation(POST_REVIEW);
+  const [upload, { error }] = useMutation(POST_REVIEW);
+  const history = useHistory();
 
   const handleSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
-    console.log(`imgList list`);
-    console.log(imgList);
+    if (!imgList || !content || !tagList) {
+      return;
+    }
+
     upload({
       variables: {
         review: { content, hash_tag_list: tagList, files: imgList },
       },
     });
+
+    history.push('/');
   };
 
   if (error) {
     console.log(`post error!`);
     console.log(error);
   }
-  useEffect(() => {
-    if (!loading && data) {
-      console.log(data);
-    }
-  }, [data]);
 
   return (
     <>
