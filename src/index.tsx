@@ -19,10 +19,8 @@ ReactDOM.render(
           <Link to='/mypage'>마이페이지 </Link>
           <Link to='/cafeTour'>카페투어 </Link>
           <Link to='/Detail/스타벅스'>디테일 </Link>
-          <a onClick={()=>{window.location.replace("/map/user/0")}}>지도 </a>
           <Link to='/map/user/0'>지도 </Link>
           <Link to='/qrcheck/스타벅스/E9OW312GF1Q'>카드추가 </Link>
-          <a onClick={()=>{window.location.replace("/map/cafe/142090")}}>지도TEST </a>
           <Link to='/map/cafe/142090'>지도TEST</Link>
         </div>
         {/* --------------------------------------- */}
