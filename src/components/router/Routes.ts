@@ -10,6 +10,7 @@ import MypageDetail from 'domain/mypage-detail/MypageDetail';
 import PostReview from 'domain/post-review/PostReview';
 import test from 'domain/test-page/Test';
 import Map from 'domain/map/Map';
+import ProfileEdit from 'domain/profile-edit/ProfileEdit';
 /**
  * 새로운 페이지를 라우터에 연결할 때
  * 이곳에 추가
@@ -70,6 +71,11 @@ const AppRoutes: IRoutes[] = [
     path: '/test',
     exact: true,
     component: test,
+  },
+  {
+    path: '/ProfileEdit',
+    exact: true,
+    component: ProfileEdit,
   },
 ];
 

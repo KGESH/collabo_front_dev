@@ -5,7 +5,12 @@
 }
 
 .modal_content {
-  @apply flex flex-col w-3/4 h-1/5 p-3 rounded-2xl bg-white;
+  @apply flex flex-col w-3/4 h-1/3 p-3 rounded-2xl bg-white;
+}
+.modal_main {
+  @apply flex flex-col;
+  height: 90%;
+
 }
 
 

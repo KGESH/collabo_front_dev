@@ -23,9 +23,7 @@ export const GET_KAKAO_USER_BY_JWT = gql`
 const VisitCafeModal = (props: IModalFrameProps) => {
   const { isOpen, handleClose } = props;
   const jwt = localStorage.getItem('jwt');
-  const [getCafeList, { loading, data, error }] = useMutation(
-    GET_KAKAO_USER_BY_JWT,
-  );
+  const [getCafeList, { loading, data, error }] = useMutation(GET_KAKAO_USER_BY_JWT);
   const cafeList = useReactiveVar(cafeListVar);
 
   if (error) {
@@ -38,10 +36,7 @@ const VisitCafeModal = (props: IModalFrameProps) => {
       //console.log(data?.getKakaoUserByJwt);
       console.log(data.getKakaoUserByJwt.user.cafe_list[0]);
       const res: ICafeList[] = data.getKakaoUserByJwt.user.cafe_list;
-      cafeListVar([
-        ...cafeList,
-        ...res.map((elemelt: ICafeList, index: number) => elemelt),
-      ]);
+      cafeListVar([...cafeList, ...res.map((elemelt: ICafeList, index: number) => elemelt)]);
     }
   }, [loading, data]);
 
@@ -55,14 +50,36 @@ const VisitCafeModal = (props: IModalFrameProps) => {
 
   return (
     <Modal isOpen={isOpen} handleClose={handleClose} header='방문 카페'>
-      {cafeList.map((cafe: ICafeList, index: number) => (
-        <>
-          <div>{cafe.cafe_name}</div>
-          <div>{cafe.visit_times}</div>
-          <div>{cafe.card_img}</div>
-          <div>등등 데이터들</div>
-        </>
-      ))}
+      <ul className=' flex flex-col overflow-y-scroll items-center '>
+        {cafeList.map((cafe: ICafeList, index: number) => (
+          <li key={index}>
+            <div className='w-full h-auto border'>{cafe.cafe_name}</div>
+            <div className='w-full h-auto'>{cafe.visit_times}</div>
+            <div className='w-full h-auto'>{1} </div>
+            <div className='w-full h-auto border'>{cafe.cafe_name}</div>
+            <div className='w-full h-auto'>{cafe.visit_times}</div>
+            <div className='w-full h-auto'>{2} </div>
+            <div className='w-full h-auto border'>{cafe.cafe_name}</div>
+            <div className='w-full h-auto'>{cafe.visit_times}</div>
+            <div className='w-full h-auto'>{3} </div>
+            <div className='w-full h-auto border'>{cafe.cafe_name}</div>
+            <div className='w-full h-auto'>{cafe.visit_times}</div>
+            <div className='w-full h-auto'>{4} </div>
+            <div className='w-full h-auto border'>{cafe.cafe_name}</div>
+            <div className='w-full h-auto'>{cafe.visit_times}</div>
+            <div className='w-full h-auto'>{5} </div>
+            <div className='w-full h-auto border'>{cafe.cafe_name}</div>
+            <div className='w-full h-auto'>{cafe.visit_times}</div>
+            <div className='w-full h-auto'>{6} </div>
+            <div className='w-full h-auto border'>{cafe.cafe_name}</div>
+            <div className='w-full h-auto'>{cafe.visit_times}</div>
+            <div className='w-full h-auto'>{7} </div>
+            <div className='w-full h-auto border'>{cafe.cafe_name}</div>
+            <div className='w-full h-auto'>{cafe.visit_times}</div>
+            <div className='w-full h-auto'>{8} </div>
+          </li>
+        ))}
+      </ul>
     </Modal>
   );
 };
