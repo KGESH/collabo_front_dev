@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { gql, useMutation, useReactiveVar } from '@apollo/client';
-import Loading from 'components/loading-page/LoadingPage';
 import {
   currentUserVar,
   uploadImgBase64ListVar,
@@ -11,6 +10,7 @@ import { useInput } from 'hooks/useInput';
 import { tagValidator } from 'components/review-form/HandleTagList';
 import defaultThumbnail from 'resources/images/navbar/mock_user.gif';
 import { handleChangeFile } from 'components/upload/HandleChangeFile';
+import { IUser } from 'types/User';
 
 const UPDATE_PROFILE = gql`
   mutation UPDATE_PROFILE($profile: Profile) {
@@ -37,9 +37,9 @@ const EditProfile = () => {
   const profileImg = useReactiveVar(uploadImgBase64ListVar);
   const uploadImgList = useReactiveVar(uploadImgListVar);
   const history = useHistory();
-  const [updateProfile] = useMutation(UPDATE_PROFILE);
-  const [updateNickname] = useMutation(UPDATE_NICKNAME_ONLY);
-  const [updateProfileImage] = useMutation(UPDATE_PROFILE_IMAGE_ONLY);
+  const [updateProfile, profileResult] = useMutation(UPDATE_PROFILE);
+  const [updateNickname, nicknameResult] = useMutation(UPDATE_NICKNAME_ONLY);
+  const [updateProfileImage, imageResult] = useMutation(UPDATE_PROFILE_IMAGE_ONLY);
 
   const handleUpdateProfile = () => {
     if (!nameInput.value.trim()) {
@@ -54,21 +54,26 @@ const EditProfile = () => {
       history.push('/mypage');
     }
 
-    /**
-     * 서버에서 연산하기 싫어서 발악해봤는데
-     * 좋은 방법 떠오른 거 적어주시면 참고하겠습니다.
-     * (21-10-07:지성현)
-     */
     if (uploadImgList) {
+      /** 닉네임, 프로필사진 둘 다 바꾸는 경우 */
       if (nameInput.value !== user?.nickname) {
         updateProfile({
           variables: { profile: { nickname: nameInput.value, file: uploadImgList[0] } },
         });
+        currentUserVar({
+          ...(user as IUser),
+          nickname: nameInput.value,
+          profile_img: profileImg[0],
+        });
+        /** 프로필 사진만 바꾸는 경우 */
       } else {
         updateProfileImage({ variables: { file: uploadImgList[0] } });
+        currentUserVar({ ...(user as IUser), profile_img: profileImg[0] });
       }
+      /** 닉네임만 바꾸는 경우 */
     } else {
       updateNickname({ variables: { nickname: nameInput.value } });
+      currentUserVar({ ...(user as IUser), nickname: nameInput.value });
     }
 
     history.push('/mypage');
@@ -118,7 +123,7 @@ const EditProfile = () => {
         <p className='m-3'>프로필 사진 변경</p>
         <input
           className='border-b'
-          placeholder='이름'
+          placeholder='닉네임'
           value={nameInput.value}
           onChange={nameInput.onChange}
         />

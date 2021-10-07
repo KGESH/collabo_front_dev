@@ -3,7 +3,6 @@ import 'domain/home/style/Home.css';
 import { useReactiveVar, gql, useMutation } from '@apollo/client';
 import { currentUserVar, homeTagListVar } from 'services/apollo-client/LocalState';
 import { ReactComponent as PostReviewIcon } from 'resources/images/PostReview.svg';
-import { ReactComponent as HeaderLogo } from 'resources/images/home/CaLogo.svg';
 import { ReactComponent as FilterAddButton } from 'resources/images/home/add_filter_btn.svg';
 import { Link } from 'react-router-dom';
 import Navbar from 'components/navbar/Navbar';
@@ -27,7 +26,6 @@ const GET_KAKAO_USER = gql`
 
 const Home = () => {
   const MOCK: number[] = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
-
   const user = useReactiveVar(currentUserVar);
   const filtertagList = useReactiveVar(homeTagListVar);
   const isFilterModalOpen = useState(false);
