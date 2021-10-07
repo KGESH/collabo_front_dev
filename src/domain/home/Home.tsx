@@ -10,13 +10,14 @@ import Navbar from 'components/navbar/Navbar';
 import ReviewItem from 'components/home-review-item/ReviewItem';
 import { IComment } from 'types/Review';
 
-export const GET_KAKAO_USER = gql`
+const GET_KAKAO_USER = gql`
   mutation {
     authUser {
       user {
         id
         name
         email
+        nickname
         home_tag_list
       }
       jwt

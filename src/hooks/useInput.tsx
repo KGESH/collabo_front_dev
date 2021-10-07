@@ -6,10 +6,7 @@ import React, { useState } from 'react';
  * 유효한 값이면 해당 값과 이벤트 핸들러를 반환
  */
 
-const useInput = (
-  initialValue: string,
-  validator: (value: string) => boolean,
-) => {
+const useInput = (initialValue: string, validator: (value: string) => boolean) => {
   const [value, setValue] = useState(initialValue);
   const clear = () => setValue('');
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,7 +21,7 @@ const useInput = (
     }
   };
 
-  return { value, onChange, clear };
+  return { value, onChange, clear, setValue };
 };
 
 export { useInput };

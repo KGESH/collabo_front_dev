@@ -5,7 +5,7 @@ import type { IMenuList } from 'types/Routes';
 
 const Menu_list: IMenuList[] = [
   {
-    path: '/ProfileEdit',
+    path: '/EditProfile',
     label: '프로필 편집',
   },
   {

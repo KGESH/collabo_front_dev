@@ -2,11 +2,7 @@ import React, { useEffect } from 'react';
 import AppRouter from 'components/router/AppRouter';
 import Loading from 'components/loading-page/LoadingPage';
 import KakaoSdkInit from 'services/kakao/KakaoSdkInit';
-import {
-  currentUserVar,
-  isLoggedInVar,
-  isInitVar,
-} from 'services/apollo-client/LocalState';
+import { currentUserVar, isLoggedInVar, isInitVar } from 'services/apollo-client/LocalState';
 import { useMutation } from '@apollo/client';
 import { useReactiveVar } from '@apollo/client';
 import { GET_KAKAO_USER } from 'services/apollo-client/GetKaKaoUserInfo';
@@ -41,6 +37,7 @@ const App = () => {
       const me: IUser = {
         id: data.authUser.user.id,
         name: data.authUser.user.name,
+        nickname: data.authUser.user.nickname,
         email: data.authUser.user.email,
         point: data.authUser.user.point,
         profile_img: data.authUser.user.profile_img,
@@ -52,7 +49,6 @@ const App = () => {
       isLoggedInVar(true);
     }
     isInitVar(true);
-    console.log(`call App useEffect / loading`);
   }, [loading]);
 
   return <>{isInit ? <AppRouter /> : <Loading />}</>;

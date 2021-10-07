@@ -6,6 +6,7 @@ export const GET_KAKAO_USER_BY_JWT = gql`
       user {
         id
         name
+        nickname
         email
         point
         profile_img
@@ -21,6 +22,7 @@ export const GET_KAKAO_USER = gql`
       user {
         id
         name
+        nickname
         email
         point
         profile_img
