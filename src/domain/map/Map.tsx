@@ -18,7 +18,7 @@ const Map = (props: any) => {
       </header>
       <section className='map__section'>
         <NaverMap props={props.match.params} />
-        {isCafeDetailExist ? <MapCafeDetail /> : null}
+        <MapCafeDetail />
       </section>
       <footer className='map__footer'>
         <Navbar />

@@ -146,7 +146,6 @@ const initMap = (type: string, id: string) => {
       const cafeInfo: ICafeInfo = cafe;
       const location: ILocation = currentLocationVar();
       cafeDetailHeightVar('down');
-      isCafeDetailExistVar(true);
       console.log(isCafeDetailExistVar());
       const distaceString: string = getDistance(
         location.latitude,
@@ -179,8 +178,7 @@ const initMap = (type: string, id: string) => {
    * 맵을 클릭 시, 카페 세부정보창 사라짐
    */
   naver.maps.Event.addListener(map, 'mousedown', (e) => {
-    isCafeDetailExistVar(false);
-    cafeDetailHeightVar('down');
+    cafeDetailHeightVar('none');
     console.log(isCafeDetailExistVar());
     clickedCafeDetailVar(null);
   });

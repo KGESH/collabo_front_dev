@@ -27,7 +27,7 @@ export const currentLocationVar = makeVar<ILocation>({
 });
 export const cafeInfoVar = makeVar<ICafeInfo[]>([]);
 export const clickedCafeDetailVar = makeVar<ICafeInfo | null>(null);
-export const isCafeDetailExistVar = makeVar<boolean>(false);
+export const isCafeDetailExistVar = makeVar<boolean>(true);
 export const cafeDetailHeightVar = makeVar<string>('down');
 export const kakaoSchemeVar = makeVar<string>('');
 export const searchInputVar = makeVar<string>('');
