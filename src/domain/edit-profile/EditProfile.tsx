@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { gql, useMutation, useReactiveVar } from '@apollo/client';
 import {
@@ -37,9 +37,9 @@ const EditProfile = () => {
   const profileImg = useReactiveVar(uploadImgBase64ListVar);
   const uploadImgList = useReactiveVar(uploadImgListVar);
   const history = useHistory();
-  const [updateProfile, profileResult] = useMutation(UPDATE_PROFILE);
-  const [updateNickname, nicknameResult] = useMutation(UPDATE_NICKNAME_ONLY);
-  const [updateProfileImage, imageResult] = useMutation(UPDATE_PROFILE_IMAGE_ONLY);
+  const [updateProfile] = useMutation(UPDATE_PROFILE);
+  const [updateNickname] = useMutation(UPDATE_NICKNAME_ONLY);
+  const [updateProfileImage] = useMutation(UPDATE_PROFILE_IMAGE_ONLY);
 
   const handleUpdateProfile = () => {
     if (!nameInput.value.trim()) {
@@ -50,6 +50,7 @@ const EditProfile = () => {
       return;
     }
 
+    /** 변경사항 없이 수정 버튼 눌렀을 경우 */
     if (nameInput.value === user?.nickname && !uploadImgList) {
       history.push('/mypage');
     }

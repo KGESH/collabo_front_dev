@@ -56,27 +56,6 @@ const VisitCafeModal = (props: IModalFrameProps) => {
             <div className='w-full h-auto border'>{cafe.cafe_name}</div>
             <div className='w-full h-auto'>{cafe.visit_times}</div>
             <div className='w-full h-auto'>{1} </div>
-            <div className='w-full h-auto border'>{cafe.cafe_name}</div>
-            <div className='w-full h-auto'>{cafe.visit_times}</div>
-            <div className='w-full h-auto'>{2} </div>
-            <div className='w-full h-auto border'>{cafe.cafe_name}</div>
-            <div className='w-full h-auto'>{cafe.visit_times}</div>
-            <div className='w-full h-auto'>{3} </div>
-            <div className='w-full h-auto border'>{cafe.cafe_name}</div>
-            <div className='w-full h-auto'>{cafe.visit_times}</div>
-            <div className='w-full h-auto'>{4} </div>
-            <div className='w-full h-auto border'>{cafe.cafe_name}</div>
-            <div className='w-full h-auto'>{cafe.visit_times}</div>
-            <div className='w-full h-auto'>{5} </div>
-            <div className='w-full h-auto border'>{cafe.cafe_name}</div>
-            <div className='w-full h-auto'>{cafe.visit_times}</div>
-            <div className='w-full h-auto'>{6} </div>
-            <div className='w-full h-auto border'>{cafe.cafe_name}</div>
-            <div className='w-full h-auto'>{cafe.visit_times}</div>
-            <div className='w-full h-auto'>{7} </div>
-            <div className='w-full h-auto border'>{cafe.cafe_name}</div>
-            <div className='w-full h-auto'>{cafe.visit_times}</div>
-            <div className='w-full h-auto'>{8} </div>
           </li>
         ))}
       </ul>
