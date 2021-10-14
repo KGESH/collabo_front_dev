@@ -1,5 +1,5 @@
 import {
-  cafeDetailHeightVar,
+  cafeDetailVar,
   isCafeDetailExistVar,
   clickedCafeDetailVar,
   searchInputVar,
@@ -90,7 +90,7 @@ const onSearchListClick = (event: any) => {
       map.setCenter(target.mapPos);
       map.setZoom(19);
     }
-    cafeDetailHeightVar('down');
+    cafeDetailVar({ height: 'down', count: cafeDetailVar().count + 1 });
     isCafeDetailExistVar(true);
     clickedCafeDetailVar(target);
   }

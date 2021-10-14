@@ -1,12 +1,11 @@
-import {
-  mapVar,
-  cafeDetailHeightVar,
-  clickedCafeDetailVar,
-} from 'services/apollo-client/LocalState';
+import { mapVar, cafeDetailVar, clickedCafeDetailVar } from 'services/apollo-client/LocalState';
 
 export const onAdjustHeightButtonClick = (event: any) => {
-  const cafeDetailHeight = cafeDetailHeightVar();
-  cafeDetailHeightVar(cafeDetailHeight === 'down' ? 'up' : 'down');
+  const cafeDetail = cafeDetailVar();
+  cafeDetailVar({
+    height: cafeDetail.height === 'down' ? 'up' : 'down',
+    count: cafeDetail.count + 1,
+  });
 };
 
 export const onDetailImgClick = () => {
@@ -61,3 +60,108 @@ function dragElement(elmnt: any) {
     console.log('현재 요소의 위치 y는 ' + elmnt.top + ', x는' + elmnt.left + '입니다.');
   }
 }
+
+/*
+
+  const isTouched = useReactiveVar(isTouchedVar);
+  const [isDragged, setIsDragged] = useState<boolean>(false);
+  const [touchedPosY, setTouchedPosY] = useState<number>(0);
+  const [draggedPosY, setDraggedPosY] = useState<number>(0);
+  const [isEventAdded, setIsEventAdded] = useState<boolean>(false);
+
+  useEffect(() => {
+    const detailContainer: HTMLElement | null = document.getElementById(
+      'map_cafe_detail_container',
+    );
+    if (!isTouched || cafeDetail.height === 'none') return;
+    const differencePosY: number = touchedPosY - draggedPosY;
+    const startPosY: number = cafeDetail.height === 'down' ? 25 : 75;
+    const fixedPosY: number = startPosY + differencePosY <= 75 ? startPosY + differencePosY : 75;
+    if (detailContainer) {
+      detailContainer.style.height = `${fixedPosY}vh`;
+    }
+  }, [draggedPosY]);
+
+  useEffect(() => {
+    const detailContainer: HTMLElement | null = document.getElementById(
+      'map_cafe_detail_container',
+    );
+    if (isEventAdded || !detailContainer) {
+      return;
+    }
+    console.log(`evnet added!`);
+
+     * 터치 시작
+     detailContainer?.addEventListener(
+      'touchstart',
+      (event: any) => {
+        console.log(`touch start`);
+        isTouchedVar(true);
+        const touches = event.changedTouches;
+        const clientPos = {
+          posX: touches[0].clientX,
+          posY: touches[0].clientY,
+        };
+        setTouchedPosY(pxToVh(clientPos.posY).height);
+      },
+      false,
+    );
+
+     * 터치 움직임
+    document.addEventListener(
+      'touchmove',
+      (event: any) => {
+        if (isTouched) {
+          console.log(`touch move`);
+          setIsDragged(true);
+          const touches = event.changedTouches;
+          const clientPos = {
+            posX: touches[0].clientX,
+            posY: touches[0].clientY,
+          };
+          setDraggedPosY(pxToVh(clientPos.posY).height);
+        }
+      },
+      false,
+    );
+
+
+     * 터치 종료
+    document.addEventListener(
+      'touchend',
+      (event: any) => {
+        if (isTouched && isDragged) {
+          console.log(`touch end`);
+          const fixedPosY: number = +detailContainer.style.height.slice(0, -2);
+          if (cafeDetail.height === 'down') {
+            if (fixedPosY < 25) {
+              cafeDetailVar({ height: 'none', count: cafeDetailVar().count + 1 });
+            } else {
+              cafeDetailVar({ height: 'up', count: cafeDetailVar().count + 1 });
+            }
+          } else if (cafeDetail.height === 'up') {
+            if (fixedPosY >= 25) {
+              cafeDetailVar({ height: 'down', count: cafeDetailVar().count + 1 });
+            } else {
+              cafeDetailVar({ height: 'none', count: cafeDetailVar().count + 1 });
+            }
+          }
+        }
+        console.log(`end isTouched : ${isTouched}`);
+        setIsDragged(false);
+        isTouchedVar(false);
+      },
+      false,
+    );
+
+    setIsEventAdded(true);
+  }, []);
+
+  useEffect(() => {
+    console.log(`event added : true!`);
+  }, [isEventAdded]);
+
+  useEffect(() => {
+    console.log(`isTouched : ${isTouched}!`);
+  }, [isTouched]);
+*/

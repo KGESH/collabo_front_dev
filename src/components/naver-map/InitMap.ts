@@ -7,7 +7,7 @@ import {
   cafeInfoVar,
   clickedCafeDetailVar,
   isCafeDetailExistVar,
-  cafeDetailHeightVar,
+  cafeDetailVar,
   kakaoSchemeVar,
 } from 'services/apollo-client/LocalState';
 import { getDistance } from 'components/naver-map/MapFunctions';
@@ -27,10 +27,7 @@ const initMap = (type: string, id: string) => {
     useStyleMap: true,
     center: mapVar()
       ? mapVar()?.getCenter()
-      : new naver.maps.LatLng(
-          currentLocation.latitude,
-          currentLocation.longitude,
-        ), //지도의 초기 중심 좌표
+      : new naver.maps.LatLng(currentLocation.latitude, currentLocation.longitude), //지도의 초기 중심 좌표
     zoom: mapVar() ? mapVar()?.getZoom() : 19, //지도의 초기 줌 레벨
     disableKineticPan: false,
   });
@@ -54,12 +51,7 @@ const initMap = (type: string, id: string) => {
         const map = mapVar();
         const currentLocation = currentLocationVar();
         if (map) {
-          map.setCenter(
-            new naver.maps.LatLng(
-              currentLocation.latitude,
-              currentLocation.longitude,
-            ),
-          );
+          map.setCenter(new naver.maps.LatLng(currentLocation.latitude, currentLocation.longitude));
         }
       },
     );
@@ -70,10 +62,7 @@ const initMap = (type: string, id: string) => {
    * 전역 변수에 저장
    */
   const currentMarker = new naver.maps.Marker({
-    position: new naver.maps.LatLng(
-      currentLocation.latitude,
-      currentLocation.longitude,
-    ),
+    position: new naver.maps.LatLng(currentLocation.latitude, currentLocation.longitude),
     map: map,
     icon: {
       url: '../../currentPositionIcon.png',
@@ -118,7 +107,7 @@ const initMap = (type: string, id: string) => {
     naver.maps.Event.addListener(cafeMarkers[i], 'click', () => {
       const cafeInfo: ICafeInfo = cafe;
       const location: ILocation = currentLocationVar();
-      cafeDetailHeightVar('down');
+      cafeDetailVar({ height: 'down', count: cafeDetailVar().count + 1 });
       isCafeDetailExistVar(true);
       console.log(isCafeDetailExistVar());
       const distaceString: string = getDistance(
@@ -145,8 +134,7 @@ const initMap = (type: string, id: string) => {
     if (type === 'cafe' && +id === cafe.id) {
       const cafeInfo: ICafeInfo = cafe;
       const location: ILocation = currentLocationVar();
-      cafeDetailHeightVar('down');
-      console.log(isCafeDetailExistVar());
+      cafeDetailVar({ height: 'down', count: cafeDetailVar().count + 1 });
       const distaceString: string = getDistance(
         location.latitude,
         location.longitude,
@@ -167,9 +155,7 @@ const initMap = (type: string, id: string) => {
       kakaoSchemeVar(
         `kakaomap://route?sp=${location.latitude},${location.longitude}&ep=${cafeInfo.latitude},${cafeInfo.longitude}&by=CAR`,
       );
-      map.setCenter(
-        new naver.maps.LatLng(+cafeInfo.latitude, +cafeInfo.longitude),
-      );
+      map.setCenter(new naver.maps.LatLng(+cafeInfo.latitude, +cafeInfo.longitude));
       map.setZoom(20);
     }
   });
@@ -178,7 +164,7 @@ const initMap = (type: string, id: string) => {
    * 맵을 클릭 시, 카페 세부정보창 사라짐
    */
   naver.maps.Event.addListener(map, 'mousedown', (e) => {
-    cafeDetailHeightVar('none');
+    cafeDetailVar({ height: 'none', count: cafeDetailVar().count + 1 });
     console.log(isCafeDetailExistVar());
     clickedCafeDetailVar(null);
   });

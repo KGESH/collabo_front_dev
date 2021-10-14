@@ -1,8 +1,9 @@
 import { makeVar } from '@apollo/client';
 import { IUser } from 'types/User';
 import { ICafeList } from 'types/Review';
-import { ILocation, ICafeInfo } from 'types/Map';
+import { ILocation, ICafeInfo, ICafeDetail } from 'types/Map';
 import { IHashTag } from 'types/HashTag';
+import { count } from 'console';
 
 /**
  * 이곳에서 전역 상태를 관리
@@ -28,7 +29,8 @@ export const currentLocationVar = makeVar<ILocation>({
 export const cafeInfoVar = makeVar<ICafeInfo[]>([]);
 export const clickedCafeDetailVar = makeVar<ICafeInfo | null>(null);
 export const isCafeDetailExistVar = makeVar<boolean>(true);
-export const cafeDetailHeightVar = makeVar<string>('down');
+export const cafeDetailVar = makeVar<ICafeDetail>({ height: 'down', count: 0 });
+export const isTouchedVar = makeVar<boolean>(false);
 export const kakaoSchemeVar = makeVar<string>('');
 export const searchInputVar = makeVar<string>('');
 export const searchBoardExistVar = makeVar<boolean>(false);

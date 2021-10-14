@@ -1,4 +1,12 @@
 import React, { useEffect, useState } from 'react';
+
+const Swiper = require('swiper');
+
+
+import 'components/map-cafe-detail/style/style.css';
+
+
+
 import 'components/map-cafe-detail/style/MapCafeDetail.css';
 import { ICafeInfo } from 'types/Map';
 import { IHashTag } from 'types/HashTag';
@@ -6,8 +14,9 @@ import {
   mapVar,
   currentMarkerVar,
   isCafeDetailExistVar,
+  isTouchedVar,
   clickedCafeDetailVar,
-  cafeDetailHeightVar,
+  cafeDetailVar,
   kakaoSchemeVar,
 } from 'services/apollo-client/LocalState';
 import { useReactiveVar } from '@apollo/client';
@@ -20,97 +29,25 @@ import {
 
 const MapCafeDetail = () => {
   const clickedCafeDetail = useReactiveVar(clickedCafeDetailVar);
-  const cafeDetailHeight = useReactiveVar(cafeDetailHeightVar);
+  const cafeDetail = useReactiveVar(cafeDetailVar);
   const kakaoScheme = useReactiveVar(kakaoSchemeVar);
-  const detailContainer: HTMLElement | null = document.getElementById('map_cafe_detail_container');
-  const [isDragged, setIsDragged] = useState<boolean>(false);
-  const [isTouched, setIsTouched] = useState<boolean>(false);
-  const [touchedPosY, setTouchedPosY] = useState<number>(0);
-  const [draggedPosY, setDraggedPosY] = useState<number>(0);
 
   useEffect(() => {
-    if (detailContainer && cafeDetailHeight === 'none') {
+    const detailContainer: HTMLElement | null = document.getElementById(
+      'map_cafe_detail_container',
+    );
+    if (detailContainer && cafeDetail.height === 'none') {
       detailContainer.style.height = '0vh';
-    } else if (detailContainer && cafeDetailHeight === 'down') {
+    } else if (detailContainer && cafeDetail.height === 'down') {
       detailContainer.style.height = '25vh';
-    } else if (detailContainer && cafeDetailHeight === 'up') {
+    } else if (detailContainer && cafeDetail.height === 'up') {
       detailContainer.style.height = '75vh';
     }
-  }, [cafeDetailHeight]);
-
-  useEffect(() => {
-    if (!isTouched || cafeDetailHeight === 'none') return;
-    const differencePosY: number = touchedPosY - draggedPosY;
-    const startPosY: number = cafeDetailHeight === 'down' ? 25 : 75;
-    const fixedPosY: number = startPosY + differencePosY <= 75 ? startPosY + differencePosY : 75;
-    if (detailContainer) {
-      detailContainer.style.height = `${fixedPosY}vh`;
-    }
-  }, [draggedPosY]);
-
-  useEffect(() => {
-    detailContainer?.addEventListener(
-      'touchstart',
-      (event: any) => {
-        event.preventDefault();
-        setIsTouched(true);
-        const touches = event.changedTouches;
-        const clientPos = {
-          posX: touches[0].clientX,
-          posY: touches[0].clientY,
-        };
-        setTouchedPosY(pxToVh(clientPos.posY).height);
-      },
-      false,
-    );
-
-    detailContainer?.addEventListener(
-      'touchend',
-      (event: any) => {
-        event.preventDefault();
-        const fixedPosY: number = +detailContainer.style.height.slice(0,-2);
-        if (isTouched && isDragged) {
-          if (cafeDetailHeight === 'down') {
-            if (fixedPosY < 25) {
-              cafeDetailHeightVar('none');
-            } else {
-              cafeDetailHeightVar('up');
-            }
-          } else if (cafeDetailHeight === 'up') {
-            if (fixedPosY >= 25) {
-              cafeDetailHeightVar('down');
-            } else {
-              cafeDetailHeightVar('none');
-            }
-          }
-        }
-        setIsTouched(false);
-        setIsDragged(false);
-      },
-      false,
-    );
-
-    document.addEventListener(
-      'touchmove',
-      (event: any) => {
-        event.preventDefault();
-        if (isTouched) {
-          setIsDragged(true);
-          const touches = event.changedTouches;
-          const clientPos = {
-            posX: touches[0].clientX,
-            posY: touches[0].clientY,
-          };
-          setDraggedPosY(pxToVh(clientPos.posY).height);
-        }
-      },
-      false,
-    );
-  });
+  }, [cafeDetail]);
 
   return (
     <>
-      {cafeDetailHeight === 'down' || cafeDetailHeight === 'up' ? (
+      {cafeDetail.height === 'down' || cafeDetail.height === 'up' ? (
         <div id='map_cafe_detail_container'>
           <div className='container__adjust_height_box'>
             <div className='adjust_height_box__bar' onClick={onAdjustHeightButtonClick}></div>
@@ -138,7 +75,7 @@ const MapCafeDetail = () => {
               </div>
             </div>
           </div>
-          {cafeDetailHeight === 'up' ? (
+          {cafeDetail.height === 'up' ? (
             <div className='de_vi__content_group1'>
               <div className='de_vi_first_block'>
                 <div className='de_vi_first__check_img'>
@@ -162,6 +99,17 @@ const MapCafeDetail = () => {
                 <div className='de_vi_third__atmosphere'>분위기 7.2</div>
                 <div className='de_vi_third__price'>가격 4.4</div>
               </div>
+              <Swiper
+                spaceBetween={50}
+                slidesPerView={3}
+                onSlideChange={() => console.log('slide change')}
+                onSwiper={(swiper) => console.log(swiper)}
+              >
+                <SwiperSlide>Slide 1</SwiperSlide>
+                <SwiperSlide>Slide 2</SwiperSlide>
+                <SwiperSlide>Slide 3</SwiperSlide>
+                <SwiperSlide>Slide 4</SwiperSlide>
+              </Swiper>
             </div>
           ) : null}
         </div>

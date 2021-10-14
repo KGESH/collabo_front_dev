@@ -14,3 +14,8 @@ export interface ICafeInfo {
   beans: string;
   phone: string;
 }
+
+export interface ICafeDetail{
+  height : string;
+  count : number;
+}
