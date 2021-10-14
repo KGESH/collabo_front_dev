@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react';
 
-const Swiper = require('swiper');
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/swiper-bundle.min.css';
+import 'swiper/swiper.min.css';
 
+// import Swiper core and required modules
+import SwiperCore, { Pagination, Navigation } from 'swiper';
+
+// install Swiper modules
+SwiperCore.use([Pagination, Navigation]);
 
 import 'components/map-cafe-detail/style/style.css';
-
-
-
 import 'components/map-cafe-detail/style/MapCafeDetail.css';
 import { ICafeInfo } from 'types/Map';
 import { IHashTag } from 'types/HashTag';
@@ -31,6 +35,7 @@ const MapCafeDetail = () => {
   const clickedCafeDetail = useReactiveVar(clickedCafeDetailVar);
   const cafeDetail = useReactiveVar(cafeDetailVar);
   const kakaoScheme = useReactiveVar(kakaoSchemeVar);
+  const test: number[] = [1, 2, 3, 4, 5];
 
   useEffect(() => {
     const detailContainer: HTMLElement | null = document.getElementById(
@@ -99,16 +104,30 @@ const MapCafeDetail = () => {
                 <div className='de_vi_third__atmosphere'>분위기 7.2</div>
                 <div className='de_vi_third__price'>가격 4.4</div>
               </div>
+
               <Swiper
-                spaceBetween={50}
-                slidesPerView={3}
-                onSlideChange={() => console.log('slide change')}
-                onSwiper={(swiper) => console.log(swiper)}
+                slidesPerView={1}
+                spaceBetween={30}
+                loop={true}
+                pagination={{
+                  dynamicBullets: true,
+                }}
+                className='mySwiper'
               >
-                <SwiperSlide>Slide 1</SwiperSlide>
-                <SwiperSlide>Slide 2</SwiperSlide>
-                <SwiperSlide>Slide 3</SwiperSlide>
-                <SwiperSlide>Slide 4</SwiperSlide>
+                {test.map((num: number, index: number) => {
+                  return (
+                    <SwiperSlide key={index}>
+                      {`${num}번 째 사진`}
+                      <img
+                        src={cafeImg}
+                        alt='123'
+                        onClick={() => {
+                          console.log(`${num} : image clicked!`);
+                        }}
+                      ></img>
+                    </SwiperSlide>
+                  );
+                })}
               </Swiper>
             </div>
           ) : null}

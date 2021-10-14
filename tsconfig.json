@@ -19,11 +19,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "baseUrl": "src",
-    "paths": {
-      "swiper": ["node_modules", "node_modules/swiper.esm.js"],
-      "swiper/*": ["node_modules/*"]
-    }
+    "baseUrl": "src"
   },
   "include": [
     "src"
