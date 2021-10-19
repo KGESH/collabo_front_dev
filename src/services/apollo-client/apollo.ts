@@ -3,7 +3,8 @@ import { createUploadLink } from 'apollo-upload-client';
 import { setContext } from '@apollo/client/link/context';
 import { cache } from 'services/apollo-client/Cache';
 
-const GRAPHQL_SERVER_URL = `http://localhost:4010`;
+export const GCP_IP = `34.64.157.141`;
+const GRAPHQL_SERVER_URL = `http://${GCP_IP}:4010`;
 const uploadLink = createUploadLink({
   uri: `${GRAPHQL_SERVER_URL}/graphql`,
 });

@@ -6,6 +6,7 @@ import QRCode from 'qrcode.react';
 import Header from 'components/header/Header';
 import { useReactiveVar } from '@apollo/client';
 import { currentUserVar, currentJwtVar } from 'services/apollo-client/LocalState';
+import { GCP_IP } from 'services/apollo-client/apollo';
 
 const GET_USER = gql`
   mutation GET_KAKAO_USER_BY_JWT($jwt: String!) {
@@ -58,7 +59,7 @@ const MyPage = () => {
                   <div className='my_qr_code'>
                     {/* user정보에 있는 '카페이름'과 해당 카페의 'Code'를 가져와서 아래 링크로 가는 QR코드를 생성한다. */}
                     <QRCode
-                      value={`localhost:3000/qrcheck/${w.cafe_name}/${w.code}`}
+                      value={`${GCP_IP}:3000/qrcheck/${w.cafe_name}/${w.code}`}
                       size={100}
                       level={'L'}
                     />

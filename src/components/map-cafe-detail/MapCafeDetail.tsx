@@ -52,7 +52,6 @@ const MapCafeDetail = () => {
     detailContainer?.addEventListener(
       'touchstart',
       (event: any) => {
-        event.preventDefault();
         setIsTouched(true);
         const touches = event.changedTouches;
         const clientPos = {
@@ -67,8 +66,7 @@ const MapCafeDetail = () => {
     detailContainer?.addEventListener(
       'touchend',
       (event: any) => {
-        event.preventDefault();
-        const fixedPosY: number = +detailContainer.style.height.slice(0,-2);
+        const fixedPosY: number = +detailContainer.style.height.slice(0, -2);
         if (isTouched && isDragged) {
           if (cafeDetailHeight === 'down') {
             if (fixedPosY < 25) {
@@ -93,7 +91,6 @@ const MapCafeDetail = () => {
     document.addEventListener(
       'touchmove',
       (event: any) => {
-        event.preventDefault();
         if (isTouched) {
           setIsDragged(true);
           const touches = event.changedTouches;

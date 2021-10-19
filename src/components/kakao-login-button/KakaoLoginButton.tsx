@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import KakaoSdkInit from 'services/kakao/KakaoSdkInit';
 import kakao_login_btn from 'resources/images/login/kakao_button.png';
+import { GCP_IP } from 'services/apollo-client/apollo';
 
 const KakaoLoginButton = () => {
-  const redirectUri = `http://localhost:4010/auth/kakao/KakaoCallback`;
+  const redirectUri = `http://${GCP_IP}:4010/auth/kakao/KakaoCallback`;
   const state = 'KakaoAuth';
 
   return (
