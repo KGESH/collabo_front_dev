@@ -1,11 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import 'components/map-cafe-detail/style/MapCafeDetail.css';
-import { ICafeInfo } from 'types/Map';
-import { IHashTag } from 'types/HashTag';
 import {
-  mapVar,
-  currentMarkerVar,
-  isCafeDetailExistVar,
   clickedCafeDetailVar,
   cafeDetailHeightVar,
   kakaoSchemeVar,
