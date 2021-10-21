@@ -25,6 +25,7 @@ COPY --from=builder /collabo_front/build .
 
 ENV PORT 8080
 ENV HOST 0.0.0.0
+ENV NODE_ENV production
 EXPOSE 8080
 
 CMD sh -c "envsubst '\$PORT' < /etc/nginx/conf.d/configfile.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
