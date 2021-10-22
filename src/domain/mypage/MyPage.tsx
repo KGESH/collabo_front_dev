@@ -6,7 +6,7 @@ import QRCode from 'qrcode.react';
 import Header from 'components/header/Header';
 import { useReactiveVar } from '@apollo/client';
 import { currentUserVar, currentJwtVar } from 'services/apollo-client/LocalState';
-//import { GCP_IP } from 'services/apollo-client/apollo';
+import RoasteryCard from 'resources/images/mypage/roastery_card.png';
 
 const GET_USER = gql`
   mutation GET_KAKAO_USER_BY_JWT($jwt: String!) {
@@ -51,9 +51,9 @@ const MyPage = () => {
           </div>
         </div>
         <div className='my_wallet_group'>
-          <div className='my_wallet_inner'>
+          <div className='my_wallet_inner bg-gray-500'>
             {data?.getKakaoUserByJwt?.user?.cafe_list?.map((w: any, index: number) => (
-              <div className='my_wallet__card' onClick={() => cardClick(index)}>
+              <div className=' my_wallet__card' onClick={() => cardClick(index)}>
                 <img src={w.card_img} alt='' />
                 <div className='my_qr_box hidden'>
                   <div className='my_qr_code'>
@@ -70,6 +70,9 @@ const MyPage = () => {
             ))}
           </div>
         </div>
+      </div>
+      <div className='bg-green-200 w-1/2'>
+        <img className='w-full h-full' src={RoasteryCard} />
       </div>
       <Navbar />
     </>
