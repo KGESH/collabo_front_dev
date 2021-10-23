@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { gql, useMutation } from '@apollo/client';
 import 'domain/mypage/style/MyPage.css';
 import Navbar from 'components/navbar/Navbar';
@@ -29,52 +29,17 @@ const GET_USER = gql`
 const MyPage = () => {
   const user = useReactiveVar(currentUserVar);
   const jwt = useReactiveVar(currentJwtVar);
-  console.log(user);
-  console.log(jwt);
   const [getUser, { loading, data, error }] = useMutation(GET_USER);
   const cardClick = (index: number) => {
     document.getElementsByClassName('my_qr_box')[index].classList.toggle('hidden');
   };
+  const reqRef = useRef<number>(0);
 
   useEffect(() => {
     if (jwt) {
       getUser({ variables: { jwt } });
     }
   }, [jwt]);
-
-  useEffect(() => {
-    requestAnimationFrame(() => {
-      const boxes: any = document.querySelectorAll('.box');
-
-      function getIntersectionRatio(i: number) {
-        const a = [window.scrollY, window.scrollY + window.innerHeight];
-        const b = [boxes[i].offsetTop, boxes[i].offsetTop + boxes[i].clientHeight];
-
-        const max = Math.max(a[0], b[0]);
-        const min = Math.min(a[1], b[1]);
-
-        return Math.max(0, (min - max) / (b[1] - b[0]));
-      }
-
-      function onScroll() {
-        const boxes: any = document.querySelectorAll('.box');
-        for (let i = 0; i < boxes.length; i += 1) {
-          const intersection = getIntersectionRatio(i);
-          const top = boxes[i].offsetTop - window.pageYOffset < 0;
-          if (boxes[i]?.firstChild?.style) {
-            boxes[i].firstChild.style.cssText = `
-            transform-origin: ${top ? 'center center' : 'top center'};
-            position: ${top ? 'fixed' : 'absolute'};
-            transform: scale(${intersection});
-            opacity: ${intersection};
-          `;
-          }
-        }
-        requestAnimationFrame(onScroll);
-      }
-      onScroll();
-    });
-  });
 
   return (
     <>
@@ -87,7 +52,7 @@ const MyPage = () => {
             </em>
           </div>
         </div>
-        <div className=' flex flex-col bg-gray-500 h-1/2 items-center overflow-y-scroll'>
+        <div className='box_wrapper flex flex-col bg-gray-500 h-1/2 '>
           <img className='w-full h-auto box' src={MockCard1} />
           <img className='w-full h-auto box' src={MockCard1} />
           <img className='w-full h-auto box' src={MockCard2} />

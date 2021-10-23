@@ -33,7 +33,6 @@ const App = () => {
 
   useEffect(() => {
     if (!loading && data?.authUser) {
-      console.log(data);
       const me: IUser = {
         id: data.authUser.user.id,
         name: data.authUser.user.name,
@@ -43,8 +42,6 @@ const App = () => {
         profile_img: data.authUser.user.profile_img,
       };
       localStorage.setItem('jwt', data.authUser.jwt);
-      console.log(data.authUser.jwt);
-      console.log(me);
       currentUserVar(me);
       isLoggedInVar(true);
     }
