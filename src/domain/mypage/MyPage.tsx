@@ -7,6 +7,9 @@ import Header from 'components/header/Header';
 import { useReactiveVar } from '@apollo/client';
 import { currentUserVar, currentJwtVar } from 'services/apollo-client/LocalState';
 import RoasteryCard from 'resources/images/mypage/roastery_card.png';
+import MockCard1 from 'resources/images/mypage/card1.png';
+import MockCard2 from 'resources/images/mypage/card2.png';
+import MockCard3 from 'resources/images/mypage/card3.png';
 
 const GET_USER = gql`
   mutation GET_KAKAO_USER_BY_JWT($jwt: String!) {
@@ -39,41 +42,68 @@ const MyPage = () => {
     }
   }, [jwt]);
 
+  useEffect(() => {
+    requestAnimationFrame(() => {
+      const boxes: any = document.querySelectorAll('.box');
+
+      function getIntersectionRatio(i: number) {
+        const a = [window.scrollY, window.scrollY + window.innerHeight];
+        const b = [boxes[i].offsetTop, boxes[i].offsetTop + boxes[i].clientHeight];
+
+        const max = Math.max(a[0], b[0]);
+        const min = Math.min(a[1], b[1]);
+
+        return Math.max(0, (min - max) / (b[1] - b[0]));
+      }
+
+      function onScroll() {
+        const boxes: any = document.querySelectorAll('.box');
+        for (let i = 0; i < boxes.length; i += 1) {
+          const intersection = getIntersectionRatio(i);
+          const top = boxes[i].offsetTop - window.pageYOffset < 0;
+          if (boxes[i]?.firstChild?.style) {
+            boxes[i].firstChild.style.cssText = `
+            transform-origin: ${top ? 'center center' : 'top center'};
+            position: ${top ? 'fixed' : 'absolute'};
+            transform: scale(${intersection});
+            opacity: ${intersection};
+          `;
+          }
+        }
+        requestAnimationFrame(onScroll);
+      }
+      onScroll();
+    });
+  });
+
   return (
     <>
-      <div className='my_group'>
+      <div className='flex flex-col items-center w-screen h-screen'>
         <Header menu={true} />
         <div>
           <div className='my_point_group'>
             <em>
-              <strong id='point_value'>{user?.point}</strong>
+              <strong className='text-5xl font-serif'>{user?.point}</strong>
             </em>
           </div>
         </div>
-        <div className='my_wallet_group'>
-          <div className='my_wallet_inner bg-gray-500'>
-            {data?.getKakaoUserByJwt?.user?.cafe_list?.map((w: any, index: number) => (
-              <div className=' my_wallet__card' onClick={() => cardClick(index)}>
-                <img src={w.card_img} alt='' />
-                <div className='my_qr_box hidden'>
-                  <div className='my_qr_code'>
-                    {/* user정보에 있는 '카페이름'과 해당 카페의 'Code'를 가져와서 아래 링크로 가는 QR코드를 생성한다. */}
-                    <QRCode
-                      //value={`${GCP_IP}:3000/qrcheck/${w.cafe_name}/${w.code}`}
-                      value={`127.0.0.1/qrcheck/${w.cafe_name}/${w.code}`}
-                      size={100}
-                      level={'L'}
-                    />
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+        <div className=' flex flex-col bg-gray-500 h-1/2 items-center overflow-y-scroll'>
+          <img className='w-full h-auto box' src={MockCard1} />
+          <img className='w-full h-auto box' src={MockCard1} />
+          <img className='w-full h-auto box' src={MockCard2} />
+          <img className='w-full h-auto box' src={MockCard2} />
+          <img className='w-full h-auto box' src={MockCard2} />
+          <img className='w-full h-auto box' src={MockCard2} />
+          <img className='w-full h-auto box' src={MockCard3} />
+          <img className='w-full h-auto box' src={MockCard3} />
+          <img className='w-full h-auto box' src={MockCard3} />
+          <img className='w-full h-auto box' src={MockCard3} />
+          <img className='w-full h-auto box' src={MockCard3} />
         </div>
       </div>
-      <div className='bg-green-200 w-1/2'>
+      {/* <div className='bg-green-200 w-full relative'>
         <img className='w-full h-full' src={RoasteryCard} />
-      </div>
+      </div> */}
       <Navbar />
     </>
   );
