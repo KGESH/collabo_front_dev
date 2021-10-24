@@ -7,6 +7,7 @@ export const useScroll = () => {
   const onScroll = (e: any) => {
     requestAnimationFrame(() => {
       setScrollTop(e.target.scrollTop);
+      console.log(e.target.scrollTop);
     });
   };
   useEffect(() => {

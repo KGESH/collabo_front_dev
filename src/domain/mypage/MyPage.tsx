@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { cloneElement, useEffect, useRef, useState } from 'react';
 import { gql, useMutation } from '@apollo/client';
 import 'domain/mypage/style/MyPage.css';
 import Navbar from 'components/navbar/Navbar';
@@ -11,7 +11,7 @@ import MockCard1 from 'resources/images/mypage/card1.png';
 import MockCard2 from 'resources/images/mypage/card2.png';
 import MockCard3 from 'resources/images/mypage/card3.png';
 import { useScroll } from 'hooks/useScroll';
-import styled from 'styled-components';
+import { useInView } from 'react-intersection-observer';
 
 const GET_USER = gql`
   mutation GET_KAKAO_USER_BY_JWT($jwt: String!) {
@@ -35,13 +35,44 @@ const MyPage = () => {
   const cardClick = (index: number) => {
     document.getElementsByClassName('my_qr_box')[index].classList.toggle('hidden');
   };
-  const { scrollTop, ref } = useScroll();
+  const viewPort = document.getElementsByClassName('boxes')[0];
+  //const { scrollTop, ref } = useScroll();
+  const elementRef = useRef<Element>(null);
+  const { ref, inView, entry } = useInView({
+    threshold: 0.5,
+    root: viewPort,
+  });
+  const mockCards = [
+    <div className='box'>
+      <img className=' w-full relative' src={MockCard1} />
+    </div>,
+    <div className='box'>
+      <img className=' w-full relative' src={MockCard2} />
+    </div>,
+    <div className='box'>
+      <img className=' w-full relative' src={MockCard3} />
+    </div>,
+    <div className='box'>
+      <img className=' w-full relative' src={MockCard2} />
+    </div>,
+    <div className='box'>
+      <img className=' w-full relative' src={MockCard1} />
+    </div>,
+  ];
 
   useEffect(() => {
     if (jwt) {
       getUser({ variables: { jwt } });
     }
   }, [jwt]);
+
+  console.log(inView);
+  console.log(entry);
+  useEffect(() => {
+    const element = entry?.target;
+    if (entry?.isIntersecting) {
+    }
+  });
 
   return (
     <>
@@ -54,15 +85,16 @@ const MyPage = () => {
             </em>
           </div>
         </div>
-        <div
-          ref={ref}
-          className='boxes grid grid-cols-1 grid-rows-5 relative overflow-y-scroll  bg-gray-500'
-        >
-          <img className='box w-full relative' src={MockCard1} />
-          <img className='box w-full relative' src={MockCard2} />
-          <img className='box z-50 w-full relative' src={MockCard3} />
-          <img className='box z-30 w-full  relative' src={MockCard1} />
-          <img className='box z-20  w-full relative' src={MockCard2} />
+        <div className='boxes relative overflow-y-scroll  bg-gray-500'>
+          <div className='wrapper'>
+            {mockCards.map((item, index) => {
+              if (index === 4) {
+                return cloneElement(item, { ref, key: index });
+              } else {
+                return item;
+              }
+            })}
+          </div>
         </div>
       </div>
       {/* <div className='bg-green-200 w-full relative'>
