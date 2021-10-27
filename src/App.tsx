@@ -7,8 +7,18 @@ import { useMutation } from '@apollo/client';
 import { useReactiveVar } from '@apollo/client';
 import { GET_KAKAO_USER } from 'services/apollo-client/GetKaKaoUserInfo';
 import { IUser } from 'types/User';
-
+import { isMobile } from 'react-device-detect';
+import PcHome from 'domain/pc-home/PcHome';
 const App = () => {
+  /**
+   * PC 브라우저에서 접속하면
+   * 앱 다운로드 페이지로 고정시킴
+   * 개발 할때 비활성화 시켜주세요.
+   */
+  if (!isMobile) {
+    return <PcHome />;
+  }
+
   /**
    * 앱의 전역에서 사용할 수 있는 상태
    * Apollo Client - Reactive Variables 참조

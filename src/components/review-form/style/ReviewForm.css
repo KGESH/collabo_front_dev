@@ -8,8 +8,10 @@
   padding-bottom: 5px;
 }
 .review__profile_img {
+  @apply rounded-full;
   width: 50px;
   height: 50px;
+  
 }
 .review__selected_img {
   width: 50px;
