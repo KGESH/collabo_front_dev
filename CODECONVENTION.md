@@ -5,5 +5,4 @@
 #### use camelCase
 <pre>
 const firstExample = 10;
-const 
 </pre>

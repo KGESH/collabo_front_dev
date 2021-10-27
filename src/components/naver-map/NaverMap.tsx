@@ -4,9 +4,7 @@ import initMap from 'components/naver-map/InitMap';
 import { ICafeInfo } from 'types/Map';
 import { GET_CAFES } from 'components/naver-map/MapGql';
 import { useQuery } from '@apollo/client';
-import useGeolocation from 'react-hook-geolocation';
 import {
-  mapVar,
   currentMarkerVar,
   currentLocationVar,
   cafeInfoVar,
@@ -30,7 +28,7 @@ const NaverMap = (props: any) => {
   const [isMapExist, setIsMapExist] = useState<boolean>(false);
   const clickedHashTag = useReactiveVar(clickedHashTagVar);
   const currentLocation = useReactiveVar(currentLocationVar);
-  const {type, id} = props.props;
+  const { type, id } = props.props;
 
   useEffect(() => {
     if (!loading && data && !cafeInfo.length && currentLocation.latitude) {
@@ -40,12 +38,8 @@ const NaverMap = (props: any) => {
         const address: string = cafe.cafe_info.address;
         const beans: string = cafe.cafe_info.beans;
         const phone: string = cafe.cafe_info.phone;
-        const [latitude, longitude]: string[] =
-          cafe.cafe_info.location.split(',');
-        const mapPos: naver.maps.LatLng = new naver.maps.LatLng(
-          +latitude,
-          +longitude,
-        );
+        const [latitude, longitude]: string[] = cafe.cafe_info.location.split(',');
+        const mapPos: naver.maps.LatLng = new naver.maps.LatLng(+latitude, +longitude);
         const distaceString: string = getDistance(
           +currentLocation.latitude,
           +currentLocation.longitude,
@@ -88,10 +82,7 @@ const NaverMap = (props: any) => {
       const currentMarker = currentMarkerVar();
       if (currentMarker) {
         currentMarker.setOptions({
-          position: new naver.maps.LatLng(
-            currentLocation.latitude,
-            currentLocation.longitude,
-          ),
+          position: new naver.maps.LatLng(currentLocation.latitude, currentLocation.longitude),
         });
       }
     }
