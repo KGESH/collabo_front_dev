@@ -86,20 +86,10 @@ const MyPage = () => {
           </div>
         </div>
         <div className='boxes relative overflow-y-scroll  bg-gray-500'>
-          <div className='wrapper'>
-            {mockCards.map((item, index) => {
-              if (index === 4) {
-                return cloneElement(item, { ref, key: index });
-              } else {
-                return item;
-              }
-            })}
-          </div>
+          <div className='wrapper'></div>
         </div>
       </div>
-      {/* <div className='bg-green-200 w-full relative'>
-        <img className='w-full h-full' src={RoasteryCard} />
-      </div> */}
+
       <Navbar />
     </>
   );
