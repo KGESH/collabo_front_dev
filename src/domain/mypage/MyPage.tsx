@@ -12,6 +12,7 @@ import MockCard2 from 'resources/images/mypage/card2.png';
 import MockCard3 from 'resources/images/mypage/card3.png';
 import { useScroll } from 'hooks/useScroll';
 import { useInView } from 'react-intersection-observer';
+import MyPageDetail from 'components/mypage-detail/MyPageDetail';
 
 const GET_USER = gql`
   mutation GET_KAKAO_USER_BY_JWT($jwt: String!) {
@@ -75,23 +76,21 @@ const MyPage = () => {
   });
 
   return (
-    <>
-      <div className='flex flex-col items-center'>
-        <Header menu={true} />
-        <div>
-          <div className='my_point_group'>
-            <em>
-              <strong className='text-5xl font-serif'>{user?.point}</strong>
-            </em>
-          </div>
-        </div>
-        <div className='boxes relative overflow-y-scroll  bg-gray-500'>
-          <div className='wrapper'></div>
+    <div className='flex flex-col items-center'>
+      <Header menu={true} />
+      <div>
+        <div className='my_point_group'>
+          <em>
+            <strong className='text-5xl font-serif'>{user?.point}</strong>
+          </em>
         </div>
       </div>
-
+      <div className='boxes relative overflow-y-scroll  bg-gray-500'>
+        <div className='wrapper'></div>
+      </div>
+      <MyPageDetail></MyPageDetail>
       <Navbar />
-    </>
+    </div>
   );
 };
 

@@ -37,7 +37,7 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build",
-    "test": "jest ./src/test/*",
+    "test": "jest",
     "eject": "craco eject",
     "lint": "eslint './src/**/*.{ts,tsx}'",
     "lint:fix": "eslint --fix './src/**/*.{ts,tsx}'"
