@@ -1,0 +1,8 @@
+.radio {
+  visibility: hidden;
+}
+
+
+.radio:checked + label div {
+  background-color: royalblue;
+}

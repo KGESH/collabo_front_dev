@@ -14,6 +14,12 @@ import { useScroll } from 'hooks/useScroll';
 import { useInView } from 'react-intersection-observer';
 import MyPageDetail from 'components/mypage-detail/MyPageDetail';
 
+export enum SECTION {
+  VISIT = 'visit',
+  REVIEW = 'review',
+  BEANS = 'beans',
+}
+
 const GET_USER = gql`
   mutation GET_KAKAO_USER_BY_JWT($jwt: String!) {
     getKakaoUserByJwt(jwt: $jwt) {
@@ -33,47 +39,18 @@ const MyPage = () => {
   const user = useReactiveVar(currentUserVar);
   const jwt = useReactiveVar(currentJwtVar);
   const [getUser, { loading, data, error }] = useMutation(GET_USER);
+  const [section, setSection] = useState(SECTION.VISIT);
+  const changeSection = (e: React.MouseEvent<HTMLInputElement>) =>
+    setSection(e.currentTarget.id as SECTION);
   const cardClick = (index: number) => {
     document.getElementsByClassName('my_qr_box')[index].classList.toggle('hidden');
   };
-  const viewPort = document.getElementsByClassName('boxes')[0];
-  //const { scrollTop, ref } = useScroll();
-  const elementRef = useRef<Element>(null);
-  const { ref, inView, entry } = useInView({
-    threshold: 0.5,
-    root: viewPort,
-  });
-  const mockCards = [
-    <div className='box'>
-      <img className=' w-full relative' src={MockCard1} />
-    </div>,
-    <div className='box'>
-      <img className=' w-full relative' src={MockCard2} />
-    </div>,
-    <div className='box'>
-      <img className=' w-full relative' src={MockCard3} />
-    </div>,
-    <div className='box'>
-      <img className=' w-full relative' src={MockCard2} />
-    </div>,
-    <div className='box'>
-      <img className=' w-full relative' src={MockCard1} />
-    </div>,
-  ];
 
   useEffect(() => {
     if (jwt) {
       getUser({ variables: { jwt } });
     }
   }, [jwt]);
-
-  console.log(inView);
-  console.log(entry);
-  useEffect(() => {
-    const element = entry?.target;
-    if (entry?.isIntersecting) {
-    }
-  });
 
   return (
     <div className='flex flex-col items-center'>
@@ -88,7 +65,12 @@ const MyPage = () => {
       <div className='boxes relative overflow-y-scroll  bg-gray-500'>
         <div className='wrapper'></div>
       </div>
-      <MyPageDetail></MyPageDetail>
+      <MyPageDetail
+        cafeName='mock'
+        cafeCardUrl='mockurl'
+        section={section}
+        changeSection={changeSection}
+      />
       <Navbar />
     </div>
   );
