@@ -40,15 +40,13 @@ export default () => {
         <div className='de_vi_second__visit_times'>3번째 방문</div>
         <div className='de_vi_second__data_group'>
           <div className='de_vi_second__menu'>{log_data?.menu_name}</div>
-          <div className='de_vi_second__price'>
-            {log_data?.price?.toLocaleString()}원
-          </div>
+          <div className='de_vi_second__price'>{log_data?.price?.toLocaleString()}원</div>
         </div>
       </div>
       <div className='de_vi_third_block'>
-        <div className='de_vi_third__flavour'>맛 5.6</div>
-        <div className='de_vi_third__atmosphere'>분위기 7.2</div>
-        <div className='de_vi_third__price'>가격 4.4</div>
+        <div className='de_vi_third__flavour'>맛 </div>
+        <div className='de_vi_third__atmosphere'>분위기 </div>
+        <div className='de_vi_third__price'>가격 </div>
       </div>
     </div>
   );

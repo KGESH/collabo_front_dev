@@ -12,6 +12,13 @@ import MockCard2 from 'resources/images/mypage/card2.png';
 import MockCard3 from 'resources/images/mypage/card3.png';
 import { useScroll } from 'hooks/useScroll';
 import { useInView } from 'react-intersection-observer';
+import MyPageDetail from 'components/mypage-detail/MyPageDetail';
+
+export enum SECTION {
+  VISIT = 'visit',
+  REVIEW = 'review',
+  BEANS = 'beans',
+}
 
 const GET_USER = gql`
   mutation GET_KAKAO_USER_BY_JWT($jwt: String!) {
@@ -32,33 +39,12 @@ const MyPage = () => {
   const user = useReactiveVar(currentUserVar);
   const jwt = useReactiveVar(currentJwtVar);
   const [getUser, { loading, data, error }] = useMutation(GET_USER);
+  const [section, setSection] = useState(SECTION.VISIT);
+  const changeSection = (e: React.MouseEvent<HTMLInputElement>) =>
+    setSection(e.currentTarget.id as SECTION);
   const cardClick = (index: number) => {
     document.getElementsByClassName('my_qr_box')[index].classList.toggle('hidden');
   };
-  const viewPort = document.getElementsByClassName('boxes')[0];
-  //const { scrollTop, ref } = useScroll();
-  const elementRef = useRef<Element>(null);
-  const { ref, inView, entry } = useInView({
-    threshold: 0.5,
-    root: viewPort,
-  });
-  const mockCards = [
-    <div className='box'>
-      <img className=' w-full relative' src={MockCard1} />
-    </div>,
-    <div className='box'>
-      <img className=' w-full relative' src={MockCard2} />
-    </div>,
-    <div className='box'>
-      <img className=' w-full relative' src={MockCard3} />
-    </div>,
-    <div className='box'>
-      <img className=' w-full relative' src={MockCard2} />
-    </div>,
-    <div className='box'>
-      <img className=' w-full relative' src={MockCard1} />
-    </div>,
-  ];
 
   useEffect(() => {
     if (jwt) {
@@ -66,32 +52,22 @@ const MyPage = () => {
     }
   }, [jwt]);
 
-  console.log(inView);
-  console.log(entry);
-  useEffect(() => {
-    const element = entry?.target;
-    if (entry?.isIntersecting) {
-    }
-  });
-
   return (
-    <>
-      <div className='flex flex-col items-center'>
-        <Header menu={true} />
-        <div>
-          <div className='my_point_group'>
-            <em>
-              <strong className='text-5xl font-serif'>{user?.point}</strong>
-            </em>
-          </div>
-        </div>
-        <div className='boxes relative overflow-y-scroll  bg-gray-500'>
-          <div className='wrapper'></div>
+    <div className='flex flex-col items-center'>
+      <Header menu={true} />
+      <div>
+        <div className='my_point_group'>
+          <em>
+            <strong className='text-5xl font-serif'>{user?.point}</strong>
+          </em>
         </div>
       </div>
-
+      <div className='boxes relative overflow-y-scroll  bg-gray-500'>
+        <div className='wrapper'></div>
+      </div>
+      <a href='http://localhost:3000/detail/142018'>TEST BUTTON</a>
       <Navbar />
-    </>
+    </div>
   );
 };
 

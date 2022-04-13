@@ -15,9 +15,9 @@ const App = () => {
    * 앱 다운로드 페이지로 고정시킴
    * 개발 할때 비활성화 시켜주세요.
    */
-  if (!isMobile) {
-    return <PcHome />;
-  }
+  // if (!isMobile) {
+  //   return <PcHome />;
+  // }
 
   /**
    * 앱의 전역에서 사용할 수 있는 상태
