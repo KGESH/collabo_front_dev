@@ -65,12 +65,7 @@ const MyPage = () => {
       <div className='boxes relative overflow-y-scroll  bg-gray-500'>
         <div className='wrapper'></div>
       </div>
-      <MyPageDetail
-        cafeName='mock'
-        cafeCardUrl='mockurl'
-        section={section}
-        changeSection={changeSection}
-      />
+      <a href='http://localhost:3000/detail/142018'>TEST BUTTON</a>
       <Navbar />
     </div>
   );

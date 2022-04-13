@@ -4,6 +4,9 @@ import VisitDetail from './DetailVisit';
 import ReviewDetail from './DetailReview';
 import BeansDetail from './DetailBeans';
 import { SECTION } from 'domain/mypage/MyPage';
+import { useReactiveVar } from '@apollo/client';
+import { currentUserVar } from 'services/apollo-client/LocalState';
+
 interface IMyPageProps {
   cafeName: string;
   section: SECTION;
@@ -15,6 +18,8 @@ interface IMyPageProps {
 }
 
 export default ({ cafeName, cafeCardUrl, section, changeSection }: IMyPageProps) => {
+  const user = useReactiveVar(currentUserVar);
+
   return (
     <>
       <div className='flex flex-col items-center'>
@@ -55,7 +60,7 @@ export default ({ cafeName, cafeCardUrl, section, changeSection }: IMyPageProps)
             <div>원두</div>
           </label>
         </div>
-        {/* 주입 하고싶음 ㅠㅠ */}
+        {/* 주입 하고싶음 */}
         {/* <main>{children}</main> */}
         {section === SECTION.VISIT ? <VisitDetail /> : ''}
         {section === SECTION.REVIEW ? <ReviewDetail /> : ''}

@@ -8,8 +8,8 @@ import DetailReview from 'components/mypage-detail-comp/DetailReview';
 import DetailBeans from 'components/mypage-detail-comp/DetailBeans';
 
 const GET_CAFE = gql`
-  query ($cafe_name: String!) {
-    getCafeByName(cafe_name: $cafe_name) {
+  query ($cafe_id: Int!) {
+    getCafeByCafeId(cafe_id: $cafe_id) {
       cafe_info {
         cafe_name
         card_img
@@ -24,8 +24,9 @@ const MypageDetail = () => {
     setClick(e.currentTarget.id);
   };
   const params: any = useParams();
+  const cafe_id = parseInt(params.cafe);
   const { data } = useQuery(GET_CAFE, {
-    variables: { cafe_name: params.cafe },
+    variables: { cafe_id },
   });
 
   return (
@@ -33,7 +34,7 @@ const MypageDetail = () => {
       <div className='detail__first_block'>
         <div className='de_first__card_img'>
           {/* 카드 이미지는 몸고.cafes.cafe_info.card_img에 url 형태로 저장시키고 받아오도록 한다. */}
-          <img src={data?.getCafeByName?.cafe_info?.card_img} alt='' id='detail_card_img' />
+          <img src={data?.getCafeByCafeId?.cafe_info?.card_img} alt='' id='detail_card_img' />
         </div>
         <div className='de_first__cafe_name'>{data?.getCafeByName?.cafe_info?.cafe_name}</div>
       </div>

@@ -3,7 +3,7 @@ import { createUploadLink } from 'apollo-upload-client';
 import { setContext } from '@apollo/client/link/context';
 import { cache } from 'services/apollo-client/Cache';
 
-const GRAPHQL_SERVER_URL = `https://api-server-rstrcjinfq-du.a.run.app`;
+const GRAPHQL_SERVER_URL = `http://localhost:4010`;
 const uploadLink = createUploadLink({
   uri: `${GRAPHQL_SERVER_URL}/graphql`,
 });
